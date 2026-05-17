@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_15.html -->
+<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_17.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -2633,61 +2633,38 @@ body { display:flex; flex-direction:column; }
 <link rel="stylesheet" href="./index_files/flatpickr.min.css">
 <link rel="stylesheet" href="./index_files/dark.css">
 <script src="./index_files/flatpickr"></script>
-<script src="./index_files/supabase.min.js"></script>
-<script>
-// ── SUPABASE CLIENT ─────────────────────────────────────────────────────────
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
 const SUPABASE_URL = 'https://kjuuvusysakeobcsaste.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqdXV2dXN5c2FrZW9iY3Nhc3RlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwOTYzMjUsImV4cCI6MjA5MzY3MjMyNX0.Cr5-bH01CMfwRZhZSmB36HbMr1RD72cBT_st2ae0mZY';
-const { createClient } = window.supabase;
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// ── SESSION STATE ────────────────────────────────────────────────────────────
-var currentUser = null;
+// Session check
+const { data: { session } } = await window.supabase.auth.getSession();
+if (session && session.user) {
+  window.currentUser = session.user;
+  if (typeof updateAuthUI === 'function') updateAuthUI(session.user);
+}
 
-// On page load — check if user is already logged in
-(async function() {
-  const { data: { session } } = await supabase.auth.getSession();
+// Auth state listener
+window.supabase.auth.onAuthStateChange(function(event, session) {
   if (session && session.user) {
-    currentUser = session.user;
-    updateAuthUI(currentUser);
-  }
-})();
-
-// Listen for auth changes (login, logout, token refresh)
-supabase.auth.onAuthStateChange(function(event, session) {
-  if (session && session.user) {
-    currentUser = session.user;
-    updateAuthUI(currentUser);
-    // If we just signed in, go back to home
+    window.currentUser = session.user;
+    if (typeof updateAuthUI === 'function') updateAuthUI(session.user);
     if (event === 'SIGNED_IN') {
-      showToast('Welcome to FrightSpot! 🎃');
-      fsShow('home');
+      if (typeof showToast === 'function') showToast('Welcome to FrightSpot! 🎃');
+      if (typeof fsShow === 'function') fsShow('home');
     }
   } else {
-    currentUser = null;
-    updateAuthUI(null);
+    window.currentUser = null;
+    if (typeof updateAuthUI === 'function') updateAuthUI(null);
   }
 });
-
-// Update the header login button based on auth state
-function updateAuthUI(user) {
-  var lb = document.getElementById('headerLoginBtn');
-  if (!lb) return;
-  if (user) {
-    // Show username or email initial
-    var display = user.user_metadata && user.user_metadata.name
-      ? user.user_metadata.name.split(' ')[0]
-      : user.email.split('@')[0];
-    lb.textContent = '👤 ' + display;
-    lb.onclick = function() { fsShow('profile'); };
-    lb.className = 'btn-login btn-loggedin';
-  } else {
-    lb.textContent = 'Log In';
-    lb.onclick = function() { fsShow('login'); };
-    lb.className = 'btn-login';
-  }
-}
-// ── END SUPABASE CLIENT ──────────────────────────────────────────────────────
+</script>
+<script>
+// ── SUPABASE AUTH UI ─────────────────────────────────────────────────────────
+var currentUser = window.currentUser || null;
 </script>
 
 </head>
@@ -2870,11 +2847,11 @@ function updateAuthUI(user) {
         <div class="countdown-timer" id="countdownTimer">
           <div class="countdown-unit"><div class="countdown-num" id="cdDays">167</div><div class="countdown-lbl">Days</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdHours">03</div><div class="countdown-lbl">Hours</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdHours">02</div><div class="countdown-lbl">Hours</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdMins">04</div><div class="countdown-lbl">Mins</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdMins">17</div><div class="countdown-lbl">Mins</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">35</div><div class="countdown-lbl">Secs</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">55</div><div class="countdown-lbl">Secs</div></div>
         </div>
         <div class="countdown-sub">Until October 31, 2026</div>
       </div>
@@ -3901,7 +3878,7 @@ function updateAuthUI(user) {
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">👥 Meetups</div>
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">☠️ Conventions</div>
             </div>
-            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_15.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_15.html#">Privacy Policy</a>.</div>
+            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_17.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_17.html#">Privacy Policy</a>.</div>
             <button class="auth-submit" onclick="doSignup()">Create My Account →</button>
             <div class="auth-switch">Already have an account? <a onclick="switchTab(&#39;login&#39;)">Log in →</a></div>
           </div>
@@ -3945,7 +3922,7 @@ function updateAuthUI(user) {
             <div style="font-family:&#39;Special Elite&#39;,serif;font-size:10px;color:#e8431a;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">⬡ Founder Member ⬡</div>
             <div style="position:relative;width:100px;height:100px;margin:0 auto 12px;">
               <div style="width:100px;height:100px;border-radius:50%;background:radial-gradient(135deg,#8b0000,#2a0000);display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;z-index:2;overflow:hidden;">
-                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_15.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_17.html" style="width:100%;height:100%;object-fit:cover;display:none;">
                 <span id="avatarEmoji">🎃</span>
               </div>
               <div style="position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(#e8431a,#8b0000,#ff4500,#8b0000,#e8431a);z-index:1;"></div>
@@ -4096,7 +4073,7 @@ function updateAuthUI(user) {
         <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Profile Photo</div>
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#e8431a,#c0392b);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;overflow:hidden;border:2px solid #e8431a;">
-            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_15.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_17.html" style="width:100%;height:100%;object-fit:cover;display:none;">
             <span id="editAvatarEmoji">🎃</span>
           </div>
           <button onclick="triggerPhotoUpload()" style="flex:1;background:#0a0a0a;border:1px dashed #333;border-radius:10px;padding:12px;color:#aaa;font-family:Oswald,sans-serif;font-size:13px;cursor:pointer;letter-spacing:.5px;">📷 Upload Photo</button>
@@ -5233,26 +5210,35 @@ function switchTab(tab) {
   var m = document.getElementById('fs-main');
   if (m) m.scrollTop = 0;
 }
+// Update the header login button based on auth state
+function updateAuthUI(user) {
+  var lb = document.getElementById('headerLoginBtn');
+  if (!lb) return;
+  if (user) {
+    var display = user.user_metadata && user.user_metadata.name
+      ? user.user_metadata.name.split(' ')[0]
+      : user.email.split('@')[0];
+    lb.textContent = '👤 ' + display;
+    lb.onclick = function() { fsShow('profile'); };
+    lb.className = 'btn-login btn-loggedin';
+  } else {
+    lb.textContent = 'Log In';
+    lb.onclick = function() { fsShow('login'); };
+    lb.className = 'btn-login';
+  }
+}
+
 async function doLogin() {
   var e = document.getElementById('loginEmail');
   var p = document.getElementById('loginPassword');
   if (!e || !p || !e.value || !p.value) { showToast('Please fill in all fields 👻'); return; }
-
   var btn = document.querySelector('#panel-login .auth-submit');
   if (btn) { btn.textContent = 'Logging in...'; btn.disabled = true; }
-
-  var { data, error } = await supabase.auth.signInWithPassword({
-    email: e.value.trim(),
-    password: p.value
+  var { data, error } = await window.supabase.auth.signInWithPassword({
+    email: e.value.trim(), password: p.value
   });
-
   if (btn) { btn.textContent = 'Log In →'; btn.disabled = false; }
-
-  if (error) {
-    showToast('❌ ' + (error.message || 'Login failed'));
-  } else {
-    // onAuthStateChange handles UI update and navigation
-  }
+  if (error) { showToast('❌ ' + (error.message || 'Login failed')); }
 }
 
 async function doSignup() {
@@ -5261,39 +5247,24 @@ async function doSignup() {
   var e = document.getElementById('signupEmail');
   var p = document.getElementById('signupPassword');
   if (!n || !e || !p || !n.value || !e.value || !p.value) { showToast('Please fill in all fields 👻'); return; }
-
   if (p.value.length < 6) { showToast('Password must be at least 6 characters 👻'); return; }
-
   var btn = document.querySelector('#panel-signup .auth-submit');
   if (btn) { btn.textContent = 'Creating account...'; btn.disabled = true; }
-
-  var { data, error } = await supabase.auth.signUp({
-    email: e.value.trim(),
-    password: p.value,
-    options: {
-      data: {
-        name: n.value.trim(),
-        username: u ? u.value.trim() : ''
-      }
-    }
+  var { data, error } = await window.supabase.auth.signUp({
+    email: e.value.trim(), password: p.value,
+    options: { data: { name: n.value.trim(), username: u ? u.value.trim() : '' } }
   });
-
   if (btn) { btn.textContent = 'Create My Account →'; btn.disabled = false; }
-
   if (error) {
     showToast('❌ ' + (error.message || 'Signup failed'));
   } else {
-    // Save profile to profiles table
     if (data && data.user) {
-      await supabase.from('profiles').upsert({
-        id: data.user.id,
-        name: n.value.trim(),
-        username: u ? u.value.trim() : '',
-        email: e.value.trim(),
+      await window.supabase.from('profiles').upsert({
+        id: data.user.id, name: n.value.trim(),
+        username: u ? u.value.trim() : '', email: e.value.trim(),
         created_at: new Date().toISOString()
       });
     }
-    // Show success screen
     document.getElementById('authForm').style.display = 'none';
     var ss = document.getElementById('successScreen');
     if (ss) ss.classList.add('show');
@@ -5302,23 +5273,21 @@ async function doSignup() {
 }
 
 async function doGoogleLogin() {
-  var { error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-    options: { redirectTo: window.location.origin }
+  var { error } = await window.supabase.auth.signInWithOAuth({
+    provider: 'google', options: { redirectTo: window.location.origin }
   });
   if (error) showToast('❌ ' + error.message);
 }
 
 async function doAppleLogin() {
-  var { error } = await supabase.auth.signInWithOAuth({
-    provider: 'apple',
-    options: { redirectTo: window.location.origin }
+  var { error } = await window.supabase.auth.signInWithOAuth({
+    provider: 'apple', options: { redirectTo: window.location.origin }
   });
   if (error) showToast('❌ ' + error.message);
 }
 
 async function doLogout() {
-  await supabase.auth.signOut();
+  await window.supabase.auth.signOut();
   showToast('See you next haunt! 🎃');
   fsShow('home');
 }
@@ -5326,14 +5295,11 @@ async function doLogout() {
 async function doForgotPassword() {
   var e = document.getElementById('loginEmail');
   if (!e || !e.value) { showToast('Enter your email first 👻'); return; }
-  var { error } = await supabase.auth.resetPasswordForEmail(e.value.trim(), {
+  var { error } = await window.supabase.auth.resetPasswordForEmail(e.value.trim(), {
     redirectTo: window.location.origin
   });
-  if (error) {
-    showToast('❌ ' + error.message);
-  } else {
-    showToast('Password reset email sent! Check your inbox 📧');
-  }
+  if (error) { showToast('❌ ' + error.message); }
+  else { showToast('Password reset email sent! Check your inbox 📧'); }
 }
 function togglePwd(id, btn) {
   var i = document.getElementById(id);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_17.html -->
+<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_18.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -2763,7 +2763,7 @@ var currentUser = window.currentUser || null;
     <!-- RESULTS + FILTER PANEL (appears after search or category tap) -->
     <div class="results-section" id="resultsSection" style="display:none;">
       <div class="results-bar">
-        <div class="results-count"><span id="resultCount">47</span> frights near <span id="resultLoc">you</span></div>
+        <div class="results-count"><span id="resultCount">0</span> frights near <span id="resultLoc">you</span></div>
         <button class="filter-toggle-btn" id="filterToggle" onclick="toggleFilters()">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M7 12h10M11 18h2"></path></svg>
           Filters
@@ -2773,53 +2773,9 @@ var currentUser = window.currentUser || null;
         <div id="filterContent"></div>
       </div>
       <div class="event-list" id="eventList">
-        <div class="event-card featured" onclick="openEvent()">
-          <div class="event-icon" style="background:#140a06;">🏰</div>
-          <div class="event-info">
-            <div class="event-cat">Commercial Haunt</div>
-            <div class="event-name">Terror Vision Haunted Manor</div>
-            <div class="event-meta"><span>📍 Burbank, CA</span><span>🗓 Fri–Sun · 7pm–midnight</span></div>
-            <div class="event-foot">
-              <div style="display:flex;align-items:center;gap:6px;"><span class="event-dist">1.2 mi</span><span class="event-badge eb-feat">Featured</span></div>
-              <div style="display:flex;align-items:center;gap:8px;"><div class="event-skulls"><span class="esk on">💀</span><span class="esk on">💀</span><span class="esk on">💀</span><span class="esk on">💀</span><span class="esk">💀</span></div><span class="event-price">$30</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="event-card" onclick="openEvent()">
-          <div class="event-icon" style="background:#060a14;">🛸</div>
-          <div class="event-info">
-            <div class="event-cat">Paranormal</div>
-            <div class="event-name">Pacific Coast Paracon 2026</div>
-            <div class="event-meta"><span>📍 Ventura, CA</span><span>🗓 Jun 26–27</span></div>
-            <div class="event-foot"><span class="event-dist">38 mi</span><span class="event-price">$45</span></div>
-          </div>
-        </div>
-        <div class="event-card" onclick="openEvent()">
-          <div class="event-icon" style="background:#060f06;">🎦</div>
-          <div class="event-info">
-            <div class="event-cat">Film &amp; Theater</div>
-            <div class="event-name">Outdoor Horror Night — The Shining</div>
-            <div class="event-meta"><span>📍 Los Angeles, CA</span><span>🗓 Fri · 8:30pm</span></div>
-            <div class="event-foot"><span class="event-dist">4.1 mi</span><span class="event-price">$15</span></div>
-          </div>
-        </div>
-        <div class="event-card" onclick="openEvent()">
-          <div class="event-icon" style="background:#0f060f;">🕯️</div>
-          <div class="event-info">
-            <div class="event-cat">Shop &amp; Markets</div>
-            <div class="event-name">Witch Market LA — Summer Edition</div>
-            <div class="event-meta"><span>📍 Silver Lake, CA</span><span>🗓 Sun · 11am–6pm</span></div>
-            <div class="event-foot"><span class="event-dist">7.3 mi</span><span class="event-price event-price-free">Free</span></div>
-          </div>
-        </div>
-        <div class="event-card" onclick="openEvent()">
-          <div class="event-icon" style="background:#0a0a14;">⚗️</div>
-          <div class="event-info">
-            <div class="event-cat">Classes</div>
-            <div class="event-name">SFX Makeup — Beginner Class</div>
-            <div class="event-meta"><span>📍 North Hollywood, CA</span><span>🗓 Sat · 10am–2pm</span></div>
-            <div class="event-foot"><span class="event-dist">5.8 mi</span><span class="event-price">$85</span></div>
-          </div>
+        <div style="text-align:center;padding:40px 20px;color:#555;font-family:-apple-system,sans-serif;">
+          <div style="font-size:32px;margin-bottom:12px;">🎃</div>
+          <div style="font-size:14px;">Pick a category or search by city to find frights near you</div>
         </div>
       </div>
     </div>
@@ -2845,13 +2801,13 @@ var currentUser = window.currentUser || null;
         <div class="countdown-eyebrow">Not that anyone's counting…</div>
         <div class="countdown-title">Halloween Countdown</div>
         <div class="countdown-timer" id="countdownTimer">
-          <div class="countdown-unit"><div class="countdown-num" id="cdDays">167</div><div class="countdown-lbl">Days</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdDays">--</div><div class="countdown-lbl">Days</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdHours">02</div><div class="countdown-lbl">Hours</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdHours">--</div><div class="countdown-lbl">Hours</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdMins">17</div><div class="countdown-lbl">Mins</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdMins">--</div><div class="countdown-lbl">Mins</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">55</div><div class="countdown-lbl">Secs</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">--</div><div class="countdown-lbl">Secs</div></div>
         </div>
         <div class="countdown-sub">Until October 31, 2026</div>
       </div>
@@ -3878,7 +3834,7 @@ var currentUser = window.currentUser || null;
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">👥 Meetups</div>
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">☠️ Conventions</div>
             </div>
-            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_17.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_17.html#">Privacy Policy</a>.</div>
+            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_18.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_18.html#">Privacy Policy</a>.</div>
             <button class="auth-submit" onclick="doSignup()">Create My Account →</button>
             <div class="auth-switch">Already have an account? <a onclick="switchTab(&#39;login&#39;)">Log in →</a></div>
           </div>
@@ -3922,7 +3878,7 @@ var currentUser = window.currentUser || null;
             <div style="font-family:&#39;Special Elite&#39;,serif;font-size:10px;color:#e8431a;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">⬡ Founder Member ⬡</div>
             <div style="position:relative;width:100px;height:100px;margin:0 auto 12px;">
               <div style="width:100px;height:100px;border-radius:50%;background:radial-gradient(135deg,#8b0000,#2a0000);display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;z-index:2;overflow:hidden;">
-                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_17.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_18.html" style="width:100%;height:100%;object-fit:cover;display:none;">
                 <span id="avatarEmoji">🎃</span>
               </div>
               <div style="position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(#e8431a,#8b0000,#ff4500,#8b0000,#e8431a);z-index:1;"></div>
@@ -4073,7 +4029,7 @@ var currentUser = window.currentUser || null;
         <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Profile Photo</div>
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#e8431a,#c0392b);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;overflow:hidden;border:2px solid #e8431a;">
-            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_17.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_18.html" style="width:100%;height:100%;object-fit:cover;display:none;">
             <span id="editAvatarEmoji">🎃</span>
           </div>
           <button onclick="triggerPhotoUpload()" style="flex:1;background:#0a0a0a;border:1px dashed #333;border-radius:10px;padding:12px;color:#aaa;font-family:Oswald,sans-serif;font-size:13px;cursor:pointer;letter-spacing:.5px;">📷 Upload Photo</button>
@@ -5335,20 +5291,13 @@ function togglePwd(id, btn) {
 // }
 // ── END SUPABASE SNIPPET ────────────────────────────────────────────────────
 
-function doSearch() {
+async function doSearch() {
   var z = document.getElementById('zipSearch');
   if (!z || !z.value.trim()) { showToast('Enter a zip code or city! 🎃'); return; }
-  var rs = document.getElementById('resultsSection');
-  if (rs) {
-    rs.style.display = 'block';
-    var rc = document.getElementById('resultCount');
-    var rl = document.getElementById('resultLoc');
-    if (rc) rc.textContent = '47';
-    if (rl) rl.textContent = z.value.trim();
-    setTimeout(function() { rs.scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
-  }
-  showToast('Finding frights near ' + z.value.trim() + '... 🎃');
+  var searchVal = z.value.trim();
+  await loadEvents(null, searchVal);
 }
+
 function updateRadius(v) { var e=document.getElementById('radiusDisplay'); if(e) e.textContent=v; }
 function setChip(el) { document.querySelectorAll('.chip,.dpill,.dp').forEach(function(c){c.classList.remove('active');}); el.classList.add('active'); }
 function setDP(el) { setChip(el); }
@@ -5458,21 +5407,126 @@ function filterActiveEvents(events) {
 
 // ── END DATE ARCHIVING ──────────────────────────────────────────────────────
 
-function catClick(el, cat, count) {
+async function catClick(el, cat, count) {
   document.querySelectorAll('.cat-card,.catb').forEach(function(c){c.classList.remove('active');});
   el.classList.add('active');
-  var rs = document.getElementById('resultsSection');
-  if (rs) {
-    rs.style.display = 'block';
-    var rc=document.getElementById('resultCount'); var rl=document.getElementById('resultLoc');
-    if(rc) rc.textContent=count;
-    var z=document.getElementById('zipSearch');
-    if(rl) rl.textContent=(z&&z.value)?z.value:'your area';
-    buildFilters(cat);
-    setTimeout(function(){rs.scrollIntoView({behavior:'smooth',block:'start'});},100);
-  }
+  buildFilters(cat);
+  await loadEvents(cat, null);
 }
-function buildFilters(cat) {
+// ── LOAD EVENTS FROM SUPABASE ────────────────────────────────────────────────
+var todayISO = new Date().toISOString().split('T')[0];
+
+async function loadEvents(category, citySearch) {
+  if (!window.supabase) { showToast('Still connecting... try again in a moment 🎃'); return; }
+
+  // Show loading state
+  var el = document.getElementById('eventList');
+  var rs = document.getElementById('resultsSection');
+  if (rs) rs.style.display = 'block';
+  if (el) el.innerHTML = '<div style="text-align:center;padding:40px;color:#555;font-size:13px;font-family:-apple-system,sans-serif;">Loading frights... 🎃</div>';
+
+  // Build query
+  var query = window.supabase
+    .from('events')
+    .select('*')
+    .eq('status', 'active')
+    .or('end_date.gte.' + todayISO + ',end_date.is.null')
+    .order('featured', { ascending: false })
+    .order('start_date', { ascending: true, nullsFirst: true })
+    .limit(50);
+
+  if (category) query = query.eq('category', category);
+  if (citySearch) query = query.ilike('city', '%' + citySearch + '%');
+
+  var { data, error } = await query;
+
+  if (error) {
+    console.error('Supabase error:', error);
+    if (el) el.innerHTML = '<div style="text-align:center;padding:40px;color:#e8431a;font-size:13px;">Error loading events. Please try again.</div>';
+    return;
+  }
+
+  // Update count and location label
+  var rc = document.getElementById('resultCount');
+  var rl = document.getElementById('resultLoc');
+  if (rc) rc.textContent = data.length;
+  if (rl) {
+    var z = document.getElementById('zipSearch');
+    rl.textContent = citySearch || (z && z.value ? z.value : (category || 'your area'));
+  }
+
+  renderEvents(data);
+  setTimeout(function(){ if(rs) rs.scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
+}
+
+// Category emoji map
+var catEmoji = {
+  'Haunts Map': '🎃', 'Paranormal': '👁️', 'Conventions': '☠️',
+  'Festivals': '🌕', 'Shop': '🕯️', 'Meetups': '🦇',
+  'Film': '🎦', 'Classes': '⚗️', 'Bars & Restaurants': '🍸',
+  'Alien & UFO': '🛸'
+};
+
+var catBg = {
+  'Haunts Map': '#140a06', 'Paranormal': '#060a14', 'Conventions': '#0a0606',
+  'Festivals': '#0a0a06', 'Shop': '#0a060a', 'Meetups': '#060a0a',
+  'Film': '#060f06', 'Classes': '#0a0a14', 'Bars & Restaurants': '#0a0606',
+  'Alien & UFO': '#06060a'
+};
+
+function renderEvents(events) {
+  var el = document.getElementById('eventList');
+  if (!el) return;
+
+  if (!events || events.length === 0) {
+    el.innerHTML = '<div style="text-align:center;padding:40px;color:#555;font-size:13px;font-family:-apple-system,sans-serif;">No frights found in that area yet 👻<br><br>Try a different city or category!</div>';
+    return;
+  }
+
+  var html = '';
+  events.forEach(function(e) {
+    var emoji = catEmoji[e.category] || '🎃';
+    var bg = catBg[e.category] || '#0a0a0a';
+    var isFeatured = e.featured === true || e.featured === 'true';
+    var price = e.price || '';
+    var isFree = price.toLowerCase() === 'free' || e.price_type === 'free';
+    var dateStr = '';
+    if (e.start_date) {
+      var d = new Date(e.start_date + 'T00:00:00');
+      dateStr = '🗓 ' + d.toLocaleDateString('en-US', {month:'short', day:'numeric'});
+      if (e.end_date && e.end_date !== e.start_date) {
+        var d2 = new Date(e.end_date + 'T00:00:00');
+        dateStr += ' – ' + d2.toLocaleDateString('en-US', {month:'short', day:'numeric'});
+      }
+    }
+    var city = e.city ? e.city.replace(/ (CA|TX|NY|FL|IL|PA|OH|WA|OR|CO|AZ|NV|GA|TN|NC|VA|MA|MD|NJ|MN|MO|WI|IN|KY|LA|AL|SC|OK|AR|CT|RI|NE|KS|IA|ND|SD|ID|MT|WY|VT|NH|ME|DE|HI|AK|UT|NM|WV|MI|MS)$/, '') : '';
+
+    html += '<div class="event-card' + (isFeatured ? ' featured' : '') + '" onclick="openEventDetail(\'' + (e.id || '') + '\')">';
+    html += '<div class="event-icon" style="background:' + bg + ';">' + emoji + '</div>';
+    html += '<div class="event-info">';
+    html += '<div class="event-cat">' + (e.category || '') + '</div>';
+    html += '<div class="event-name">' + (e.name || '') + '</div>';
+    html += '<div class="event-meta">';
+    if (city) html += '<span>📍 ' + city + '</span>';
+    if (dateStr) html += '<span>' + dateStr + '</span>';
+    html += '</div>';
+    html += '<div class="event-foot">';
+    html += '<div style="display:flex;align-items:center;gap:6px;">';
+    if (isFeatured) html += '<span class="event-badge eb-feat">Featured</span>';
+    html += '</div>';
+    html += '<span class="event-price' + (isFree ? ' event-price-free' : '') + '">' + (isFree ? 'Free' : price) + '</span>';
+    html += '</div>';
+    html += '</div></div>';
+  });
+
+  el.innerHTML = html;
+}
+
+function openEventDetail(id) {
+  // TODO: open event detail page with real data
+  openEvent();
+}
+// ── END LOAD EVENTS ──────────────────────────────────────────────────────────
   var filters=categoryFilters[cat]||[]; var html='';
   filters.forEach(function(g){
     html+='<div class="filter-group"><div class="filter-group-title">'+g.title+'</div><div class="filter-pills">';

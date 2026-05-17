@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_20.html -->
+<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_21.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -2805,9 +2805,9 @@ var currentUser = window.currentUser || null;
           <div class="countdown-colon">:</div>
           <div class="countdown-unit"><div class="countdown-num" id="cdHours">01</div><div class="countdown-lbl">Hours</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdMins">24</div><div class="countdown-lbl">Mins</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdMins">21</div><div class="countdown-lbl">Mins</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">38</div><div class="countdown-lbl">Secs</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">19</div><div class="countdown-lbl">Secs</div></div>
         </div>
         <div class="countdown-sub">Until October 31, 2026</div>
       </div>
@@ -3834,7 +3834,7 @@ var currentUser = window.currentUser || null;
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">👥 Meetups</div>
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">☠️ Conventions</div>
             </div>
-            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_20.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_20.html#">Privacy Policy</a>.</div>
+            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_21.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_21.html#">Privacy Policy</a>.</div>
             <button class="auth-submit" onclick="doSignup()">Create My Account →</button>
             <div class="auth-switch">Already have an account? <a onclick="switchTab(&#39;login&#39;)">Log in →</a></div>
           </div>
@@ -3878,7 +3878,7 @@ var currentUser = window.currentUser || null;
             <div style="font-family:&#39;Special Elite&#39;,serif;font-size:10px;color:#e8431a;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">⬡ Founder Member ⬡</div>
             <div style="position:relative;width:100px;height:100px;margin:0 auto 12px;">
               <div style="width:100px;height:100px;border-radius:50%;background:radial-gradient(135deg,#8b0000,#2a0000);display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;z-index:2;overflow:hidden;">
-                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_20.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_21.html" style="width:100%;height:100%;object-fit:cover;display:none;">
                 <span id="avatarEmoji">🎃</span>
               </div>
               <div style="position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(#e8431a,#8b0000,#ff4500,#8b0000,#e8431a);z-index:1;"></div>
@@ -4029,7 +4029,7 @@ var currentUser = window.currentUser || null;
         <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Profile Photo</div>
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#e8431a,#c0392b);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;overflow:hidden;border:2px solid #e8431a;">
-            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_20.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_21.html" style="width:100%;height:100%;object-fit:cover;display:none;">
             <span id="editAvatarEmoji">🎃</span>
           </div>
           <button onclick="triggerPhotoUpload()" style="flex:1;background:#0a0a0a;border:1px dashed #333;border-radius:10px;padding:12px;color:#aaa;font-family:Oswald,sans-serif;font-size:13px;cursor:pointer;letter-spacing:.5px;">📷 Upload Photo</button>
@@ -5295,6 +5295,83 @@ async function doSearch() {
   var z = document.getElementById('zipSearch');
   if (!z || !z.value.trim()) { showToast('Enter a zip code or city! 🎃'); return; }
   var searchVal = z.value.trim();
+
+  // Map common zip codes to cities for SoCal
+  var zipMap = {
+    '91505': 'Burbank', '91502': 'Burbank', '91506': 'Burbank', '91504': 'Burbank',
+    '90210': 'Beverly Hills', '90028': 'Hollywood', '90046': 'West Hollywood',
+    '90001': 'Los Angeles', '90002': 'Los Angeles', '90003': 'Los Angeles',
+    '90004': 'Los Angeles', '90005': 'Los Angeles', '90006': 'Los Angeles',
+    '90007': 'Los Angeles', '90008': 'Los Angeles', '90010': 'Los Angeles',
+    '90011': 'Los Angeles', '90012': 'Los Angeles', '90013': 'Los Angeles',
+    '90014': 'Los Angeles', '90015': 'Los Angeles', '90016': 'Los Angeles',
+    '90017': 'Los Angeles', '90018': 'Los Angeles', '90019': 'Los Angeles',
+    '90020': 'Los Angeles', '90021': 'Los Angeles', '90022': 'Los Angeles',
+    '90023': 'Los Angeles', '90024': 'Los Angeles', '90025': 'Los Angeles',
+    '90026': 'Los Angeles', '90027': 'Los Angeles', '90029': 'Los Angeles',
+    '90031': 'Los Angeles', '90032': 'Los Angeles', '90033': 'Los Angeles',
+    '90034': 'Los Angeles', '90035': 'Los Angeles', '90036': 'Los Angeles',
+    '90037': 'Los Angeles', '90038': 'Los Angeles', '90039': 'Los Angeles',
+    '90041': 'Los Angeles', '90042': 'Los Angeles', '90043': 'Los Angeles',
+    '90044': 'Los Angeles', '90045': 'Los Angeles', '90047': 'Los Angeles',
+    '90048': 'Los Angeles', '90049': 'Los Angeles', '90056': 'Los Angeles',
+    '90057': 'Los Angeles', '90058': 'Los Angeles', '90059': 'Los Angeles',
+    '90061': 'Los Angeles', '90062': 'Los Angeles', '90063': 'Los Angeles',
+    '90064': 'Los Angeles', '90065': 'Los Angeles', '90066': 'Los Angeles',
+    '90067': 'Los Angeles', '90068': 'Los Angeles', '90069': 'West Hollywood',
+    '90071': 'Los Angeles', '90073': 'Los Angeles', '90077': 'Los Angeles',
+    '90089': 'Los Angeles', '90094': 'Los Angeles', '90095': 'Los Angeles',
+    '91601': 'North Hollywood', '91602': 'North Hollywood', '91606': 'North Hollywood',
+    '91607': 'Valley Village', '91604': 'Studio City', '91608': 'Universal City',
+    '91201': 'Glendale', '91202': 'Glendale', '91203': 'Glendale', '91204': 'Glendale',
+    '91205': 'Glendale', '91206': 'Glendale', '91207': 'Glendale', '91208': 'Glendale',
+    '91101': 'Pasadena', '91102': 'Pasadena', '91103': 'Pasadena', '91104': 'Pasadena',
+    '91105': 'Pasadena', '91106': 'Pasadena', '91107': 'Pasadena',
+    '90401': 'Santa Monica', '90402': 'Santa Monica', '90403': 'Santa Monica',
+    '90404': 'Santa Monica', '90405': 'Santa Monica',
+    '90801': 'Long Beach', '90802': 'Long Beach', '90803': 'Long Beach',
+    '90804': 'Long Beach', '90805': 'Long Beach', '90806': 'Long Beach',
+    '90807': 'Long Beach', '90808': 'Long Beach', '90810': 'Long Beach',
+    '90813': 'Long Beach', '90814': 'Long Beach', '90815': 'Long Beach',
+    '92801': 'Anaheim', '92802': 'Anaheim', '92804': 'Anaheim', '92805': 'Anaheim',
+    '92806': 'Anaheim', '92807': 'Anaheim', '92808': 'Anaheim',
+    '92101': 'San Diego', '92102': 'San Diego', '92103': 'San Diego',
+    '92104': 'San Diego', '92105': 'San Diego', '92106': 'San Diego',
+    '92107': 'San Diego', '92108': 'San Diego', '92109': 'San Diego',
+    '92110': 'San Diego', '92111': 'San Diego', '92115': 'San Diego',
+    '92116': 'San Diego', '92117': 'San Diego', '92119': 'San Diego',
+    '92120': 'San Diego', '92121': 'San Diego', '92122': 'San Diego',
+    '92123': 'San Diego', '92124': 'San Diego', '92126': 'San Diego',
+    '92127': 'San Diego', '92128': 'San Diego', '92129': 'San Diego',
+    '92130': 'San Diego', '92131': 'San Diego', '92037': 'La Jolla',
+    '92691': 'Mission Viejo', '92692': 'Mission Viejo',
+    '92614': 'Irvine', '92618': 'Irvine', '92620': 'Irvine',
+    '92701': 'Santa Ana', '92703': 'Santa Ana', '92704': 'Santa Ana', '92705': 'Santa Ana',
+    '92651': 'Laguna Beach', '92652': 'Laguna Beach', '92653': 'Laguna Hills',
+    '92660': 'Newport Beach', '92661': 'Newport Beach', '92662': 'Newport Beach',
+    '92663': 'Newport Beach', '92625': 'Corona del Mar',
+    '92840': 'Garden Grove', '92841': 'Garden Grove', '92843': 'Garden Grove',
+    '92835': 'Fullerton', '92831': 'Fullerton', '92832': 'Fullerton', '92833': 'Fullerton',
+    '92780': 'Tustin', '92782': 'Tustin',
+    '91010': 'Duarte', '91702': 'Azusa', '91001': 'Altadena',
+    '91750': 'La Verne', '91711': 'Claremont', '91723': 'Covina', '91724': 'Covina',
+    '91790': 'West Covina', '91791': 'West Covina', '91792': 'West Covina',
+    '91730': 'Rancho Cucamonga', '91737': 'Rancho Cucamonga', '91739': 'Rancho Cucamonga',
+    '92501': 'Riverside', '92503': 'Riverside', '92504': 'Riverside', '92505': 'Riverside',
+    '92506': 'Riverside', '92507': 'Riverside', '92508': 'Riverside',
+    '92301': 'Adelanto', '92308': 'Apple Valley', '92307': 'Apple Valley',
+    '92310': 'Barstow', '92311': 'Barstow',
+    '93010': 'Camarillo', '93012': 'Camarillo',
+    '93001': 'Ventura', '93003': 'Ventura', '93004': 'Ventura',
+    '93060': 'Santa Paula', '93065': 'Simi Valley', '93063': 'Simi Valley',
+    '91360': 'Thousand Oaks', '91361': 'Thousand Oaks', '91362': 'Thousand Oaks',
+  };
+
+  // If it looks like a zip code, convert to city
+  if (/^\d{5}$/.test(searchVal) && zipMap[searchVal]) {
+    searchVal = zipMap[searchVal];
+  }
+
   await loadEvents(null, searchVal);
 }
 

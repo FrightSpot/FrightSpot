@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_31.html -->
+<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_32.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -252,6 +252,9 @@ body {
   position: relative;
   overflow: hidden;
 }
+.cat-card.active { border-color:#e8431a !important; background:#1a0a00 !important; }
+.cat-card:active { transform:scale(0.96); }
+
 .cat-card::before {
   content: '';
   position: absolute;
@@ -650,6 +653,13 @@ body { display:flex; flex-direction:column; color:#e0d8cc; }
   cursor:pointer;
   letter-spacing:1px;
   flex-shrink:0;
+  min-width:60px;
+}
+@media (max-width:480px) {
+  .search-box { flex-wrap:wrap; }
+  .s-input { min-width:120px; }
+  .s-date { font-size:11px; padding:10px 6px; }
+  .s-btn { width:100%; padding:12px; border-radius:0 0 12px 12px; }
 }
 
 .date-chips {
@@ -2638,14 +2648,23 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const SUPABASE_URL = 'https://kjuuvusysakeobcsaste.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqdXV2dXN5c2FrZW9iY3Nhc3RlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwOTYzMjUsImV4cCI6MjA5MzY3MjMyNX0.Cr5-bH01CMfwRZhZSmB36HbMr1RD72cBT_st2ae0mZY';
-window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+    storage: window.localStorage
+  }
+});
 
-// Session check
-const { data: { session } } = await window.supabase.auth.getSession();
-if (session && session.user) {
-  window.currentUser = session.user;
-  if (typeof updateAuthUI === 'function') updateAuthUI(session.user);
-}
+// Session check - run after page loads so UI functions are ready
+window.addEventListener('load', async function() {
+  const { data: { session } } = await window.supabase.auth.getSession();
+  if (session && session.user) {
+    window.currentUser = session.user;
+    if (typeof updateAuthUI === 'function') updateAuthUI(session.user);
+  }
+});
 
 // Auth state listener
 window.supabase.auth.onAuthStateChange(function(event, session) {
@@ -2653,7 +2672,7 @@ window.supabase.auth.onAuthStateChange(function(event, session) {
     window.currentUser = session.user;
     if (typeof updateAuthUI === 'function') updateAuthUI(session.user);
     if (event === 'SIGNED_IN') {
-      if (typeof showToast === 'function') showToast('Welcome to FrightSpot! 🎃');
+      // welcome toast removed
       if (typeof fsShow === 'function') fsShow('home');
     }
   } else {
@@ -2692,7 +2711,7 @@ var currentUser = window.currentUser || null;
     <div class="search-block">
       <div class="search-box">
         <div class="s-pin"><img src="data:image/png;base64,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" alt=""></div>
-        <input class="s-input" type="text" placeholder="Zip code or city…" id="zipSearch">
+        <input class="s-input" type="text" placeholder="Zip code or city…" id="zipSearch" value="Burbank">
         <div class="s-div"></div>
         <select class="s-date">
           <option>This Weekend</option>
@@ -2704,8 +2723,8 @@ var currentUser = window.currentUser || null;
         <button class="s-btn" onclick="doSearch()">FIND</button>
       </div>
       <div class="date-chips">
-        <div class="chip active" onclick="setChip(this)">Today</div>
-        <div class="chip" onclick="setChip(this)">This Weekend</div>
+        <div class="chip" onclick="setChip(this)">Today</div>
+        <div class="chip active" onclick="setChip(this)">This Weekend</div>
         <div class="chip" onclick="setChip(this)">This Week</div>
         <div class="chip" onclick="setChip(this)">This Month</div>
         <div class="chip" onclick="setChip(this)">All Upcoming</div>
@@ -2801,13 +2820,13 @@ var currentUser = window.currentUser || null;
         <div class="countdown-eyebrow">Not that anyone's counting…</div>
         <div class="countdown-title">Halloween Countdown</div>
         <div class="countdown-timer" id="countdownTimer">
-          <div class="countdown-unit"><div class="countdown-num" id="cdDays">155</div><div class="countdown-lbl">Days</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdDays">--</div><div class="countdown-lbl">Days</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdHours">07</div><div class="countdown-lbl">Hours</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdHours">--</div><div class="countdown-lbl">Hours</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdMins">57</div><div class="countdown-lbl">Mins</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdMins">--</div><div class="countdown-lbl">Mins</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">05</div><div class="countdown-lbl">Secs</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">--</div><div class="countdown-lbl">Secs</div></div>
         </div>
         <div class="countdown-sub">Until October 31, 2026</div>
       </div>
@@ -2819,7 +2838,7 @@ var currentUser = window.currentUser || null;
     <div class="trending-block">
       <div class="block-head">
         <div class="block-title">Near You</div>
-        <div class="see-all" onclick="showToast(&#39;See all coming soon! 🎃&#39;)">See all →</div>
+        <div class="see-all" onclick="fsShow(&#39;explore&#39;)">See all →</div>
       </div>
       <div class="t-strip">
         <div class="t-card" onclick="openEvent()">
@@ -2863,7 +2882,7 @@ var currentUser = window.currentUser || null;
     <div class="trending-block">
       <div class="block-head">
         <div class="block-title">Trending This Week</div>
-        <div class="see-all" onclick="showToast(&#39;See all coming soon!&#39;)">See all →</div>
+        <div class="see-all" onclick="fsShow(&#39;explore&#39;)">See all →</div>
       </div>
       <div class="t-strip">
         <div class="t-card feat" onclick="openEvent()">
@@ -3834,7 +3853,7 @@ var currentUser = window.currentUser || null;
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">👥 Meetups</div>
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">☠️ Conventions</div>
             </div>
-            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_31.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_31.html#">Privacy Policy</a>.</div>
+            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_32.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_32.html#">Privacy Policy</a>.</div>
             <button class="auth-submit" onclick="doSignup()">Create My Account →</button>
             <div class="auth-switch">Already have an account? <a onclick="switchTab(&#39;login&#39;)">Log in →</a></div>
           </div>
@@ -3878,7 +3897,7 @@ var currentUser = window.currentUser || null;
             <div style="font-family:&#39;Special Elite&#39;,serif;font-size:10px;color:#e8431a;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">⬡ Founder Member ⬡</div>
             <div style="position:relative;width:100px;height:100px;margin:0 auto 12px;">
               <div style="width:100px;height:100px;border-radius:50%;background:radial-gradient(135deg,#8b0000,#2a0000);display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;z-index:2;overflow:hidden;">
-                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_31.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_32.html" style="width:100%;height:100%;object-fit:cover;display:none;">
                 <span id="avatarEmoji">🎃</span>
               </div>
               <div style="position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(#e8431a,#8b0000,#ff4500,#8b0000,#e8431a);z-index:1;"></div>
@@ -4029,7 +4048,7 @@ var currentUser = window.currentUser || null;
         <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Profile Photo</div>
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#e8431a,#c0392b);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;overflow:hidden;border:2px solid #e8431a;">
-            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_31.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_32.html" style="width:100%;height:100%;object-fit:cover;display:none;">
             <span id="editAvatarEmoji">🎃</span>
           </div>
           <button onclick="triggerPhotoUpload()" style="flex:1;background:#0a0a0a;border:1px dashed #333;border-radius:10px;padding:12px;color:#aaa;font-family:Oswald,sans-serif;font-size:13px;cursor:pointer;letter-spacing:.5px;">📷 Upload Photo</button>
@@ -5224,7 +5243,7 @@ async function doSignup() {
     document.getElementById('authForm').style.display = 'none';
     var ss = document.getElementById('successScreen');
     if (ss) ss.classList.add('show');
-    showToast('Welcome to FrightSpot! 🎃');
+    // welcome toast removed
   }
 }
 
@@ -5536,16 +5555,15 @@ async function loadEvents(category, citySearch) {
     return;
   }
 
-  // Filter by city client-side
+  // Filter by city client-side — default to Burbank if no search
   var filtered = data;
-  if (citySearch && citySearch.trim()) {
-    var search = citySearch.trim().toLowerCase();
-    filtered = data.filter(function(e) {
-      var city = (e.city || '').toLowerCase();
-      var location = (e.location || '').toLowerCase();
-      return city.indexOf(search) !== -1 || location.indexOf(search) !== -1;
-    });
-  }
+  var searchTerm = (citySearch && citySearch.trim()) ? citySearch.trim() : 'Burbank';
+  var search = searchTerm.toLowerCase();
+  filtered = data.filter(function(e) {
+    var city = (e.city || '').toLowerCase();
+    var location = (e.location || '').toLowerCase();
+    return city.indexOf(search) !== -1 || location.indexOf(search) !== -1;
+  });
 
   var rc = document.getElementById('resultCount');
   var rl = document.getElementById('resultLoc');
@@ -5623,8 +5641,63 @@ function renderEvents(events) {
 }
 
 function openEventDetail(id) {
-  // TODO: open event detail page with real data
-  openEvent();
+  if (!id || !window.supabase) { openEvent(); return; }
+
+  window.supabase.from('events').select('*').eq('id', id).single()
+    .then(function(result) {
+      var e = result.data;
+      if (!e) { openEvent(); return; }
+      window._currentEvent = e;
+
+      var catEmoji = {'Haunts Map':'🎃','Paranormal':'👁️','Conventions':'☠️','Festivals':'🌕','Shop':'🕯️','Meetups':'🦇','Film':'🎦','Classes':'⚗️','Bars & Restaurants':'🍸','Alien & UFO':'🛸'};
+      var emoji = catEmoji[e.category] || '🎃';
+
+      // Build date string
+      var dateStr = 'See website for dates';
+      if (e.start_date) {
+        var d = new Date(e.start_date + 'T00:00:00');
+        dateStr = d.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'});
+        if (e.end_date && e.end_date !== e.start_date) {
+          var d2 = new Date(e.end_date + 'T00:00:00');
+          dateStr += ' – ' + d2.toLocaleDateString('en-US', {month:'short', day:'numeric'});
+        }
+      }
+
+      var price = e.price || '';
+      var isFree = price.toLowerCase() === 'free' || e.price_type === 'free';
+      var priceStr = isFree ? 'Free' : (price || 'See website');
+      var city = (e.city || '').replace(/ (CA|TX|NY|FL)$/, '');
+      var ticketUrl = e.ticket_url || e.website || '';
+
+      // Rebuild the event detail page with real data
+      var page = document.getElementById('fs-page-event');
+      if (!page) { fsShow('event'); return; }
+
+      page.innerHTML = '<div style="padding-bottom:80px;">' +
+        '<div style="height:220px;background:linear-gradient(135deg,#1a0800,#0a0a0a);display:flex;align-items:center;justify-content:center;font-size:90px;position:relative;overflow:hidden;">' +
+          '<span style="position:relative;z-index:1;">' + emoji + '</span>' +
+          '<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(232,67,26,0.3) 0%,transparent 60%);"></div>' +
+          '<button style="position:absolute;top:16px;left:16px;width:38px;height:38px;background:rgba(0,0,0,0.75);border:1px solid #2a2a2a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;z-index:10;" onclick="history.back();fsShow('explore');">‹</button>' +
+        '</div>' +
+        '<div style="padding:20px 16px;">' +
+          '<div style="font-size:11px;color:#e8431a;text-transform:uppercase;letter-spacing:1.5px;font-family:Oswald,sans-serif;margin-bottom:6px;">' + emoji + ' ' + (e.category || '') + '</div>' +
+          '<div style="font-family:Oswald,sans-serif;font-size:26px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:6px;">' + (e.name || '') + '</div>' +
+          (city ? '<div style="font-size:13px;color:#888;font-family:-apple-system,sans-serif;margin-bottom:16px;">📍 ' + city + '</div>' : '') +
+          '<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;padding:14px;background:#141414;border:1px solid #252525;border-radius:10px;">' +
+            '<span style="font-size:13px;color:#ccc;font-family:-apple-system,sans-serif;">🗓 ' + dateStr + '</span>' +
+            (e.location ? '<span style="font-size:13px;color:#ccc;font-family:-apple-system,sans-serif;">📍 ' + e.location + '</span>' : '') +
+            '<span style="font-size:13px;color:#ccc;font-family:-apple-system,sans-serif;">💰 ' + priceStr + '</span>' +
+          '</div>' +
+          (ticketUrl ? '<div style="display:flex;gap:8px;margin-bottom:22px;">' +
+            '<a href="' + ticketUrl + '" target="_blank" style="display:flex;align-items:center;gap:6px;background:#e8431a;border-radius:20px;padding:10px 18px;font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-decoration:none;">🎟️ Get Tickets / Info</a>' +
+          '</div>' : '') +
+          (e.description ? '<div style="font-family:Oswald,sans-serif;font-size:15px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #1e1e1e;">About This Event</div>' +
+          '<div style="font-size:14px;color:#999;line-height:1.7;font-family:-apple-system,sans-serif;margin-bottom:22px;">' + (e.description || '').replace(/\n/g,'<br>') + '</div>' : '') +
+        '</div>' +
+      '</div>';
+
+      fsShow('event');
+    });
 }
 // ── END LOAD EVENTS ──────────────────────────────────────────────────────────
 

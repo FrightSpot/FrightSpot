@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_46.html -->
+<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_47.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -669,6 +669,23 @@ body { display:flex; flex-direction:column; color:#e0d8cc; }
   scrollbar-width:none;
 }
 .date-chips::-webkit-scrollbar { display:none; }
+.radius-chip {
+  background:#141414;
+  border:1px solid #252525;
+  border-radius:20px;
+  padding:5px 10px;
+  font-size:11px;
+  color:#666;
+  font-family:Oswald,sans-serif;
+  cursor:pointer;
+  white-space:nowrap;
+  letter-spacing:.3px;
+}
+.radius-chip.active {
+  border-color:#e8431a;
+  color:#e8431a;
+  background:rgba(232,67,26,0.08);
+}
 .chip {
   background:#141414;
   border:1px solid #2e2e2e;
@@ -2735,6 +2752,15 @@ var currentUser = window.currentUser || null;
         <div class="chip" onclick="setChip(this)">This Month</div>
         <div class="chip" onclick="setChip(this)">All Upcoming</div>
       </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:6px 2px 2px;">
+        <span style="font-size:11px;color:#666;font-family:-apple-system,sans-serif;white-space:nowrap;">Within</span>
+        <div style="display:flex;gap:6px;">
+          <div class="radius-chip active" onclick="setRadius(this,0)" data-miles="0">City only</div>
+          <div class="radius-chip" onclick="setRadius(this,10)" data-miles="10">10 mi</div>
+          <div class="radius-chip" onclick="setRadius(this,25)" data-miles="25">25 mi</div>
+          <div class="radius-chip" onclick="setRadius(this,50)" data-miles="50">50 mi</div>
+        </div>
+      </div>
     </div>
 
     <!-- CTA CARD -->
@@ -2841,9 +2867,9 @@ var currentUser = window.currentUser || null;
           <div class="countdown-colon">:</div>
           <div class="countdown-unit"><div class="countdown-num" id="cdHours">05</div><div class="countdown-lbl">Hours</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdMins">23</div><div class="countdown-lbl">Mins</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdMins">02</div><div class="countdown-lbl">Mins</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">14</div><div class="countdown-lbl">Secs</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">39</div><div class="countdown-lbl">Secs</div></div>
         </div>
         <div class="countdown-sub">Until October 31, 2026</div>
       </div>
@@ -3712,9 +3738,9 @@ var currentUser = window.currentUser || null;
                 <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#333;font-family:-apple-system,sans-serif;"><span style="color:#333;">✗</span> <span style="color:#555;">Free listings get 1 photo and standard placement</span></div>
               </div>
               <div style="display:flex;gap:8px;">
-                <button onclick="showToast(&#39;Featured upgrade coming soon! 🎃&#39;)" style="flex:1;background:#e8431a;color:#fff;border:none;padding:12px;border-radius:10px;font-family:Oswald,sans-serif;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.3px;">Upgrade to Featured $29 →</button>
+                <button onclick="showToast(&#39;Featured upgrade coming soon! 🎃&#39;)" style="flex:1;background:#e8431a;color:#fff;border:none;padding:12px;border-radius:10px;font-family:Oswald,sans-serif;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.3px;">Feature My Haunt $29 →</button>
               </div>
-              <div style="text-align:center;font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:8px;">Intro price ends Aug 31, then $59/season</div>
+              <div style="text-align:center;font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:8px;">Intro price ends Aug 31, then $59/season. Perfect for haunts running Oct–Nov.</div>
             </div>
           </div>
           <button onclick="submitHauntListing()" style="width:100%;background:#e8431a;color:#fff;border:none;padding:16px;border-radius:12px;font-family:Oswald,sans-serif;font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;">Submit for Review →</button>
@@ -3871,9 +3897,9 @@ var currentUser = window.currentUser || null;
                 <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#333;font-family:-apple-system,sans-serif;"><span style="color:#333;">✗</span> <span style="color:#555;">Free listings get 1 photo and standard placement</span></div>
               </div>
               <div style="display:flex;gap:8px;">
-                <button onclick="showToast(&#39;Featured upgrade coming soon! 🎃&#39;)" style="flex:1;background:#e8431a;color:#fff;border:none;padding:12px;border-radius:10px;font-family:Oswald,sans-serif;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.3px;">Upgrade to Featured $29 →</button>
+                <button onclick="showToast(&#39;Featured upgrade coming soon! 🎃&#39;)" style="flex:1;background:#e8431a;color:#fff;border:none;padding:12px;border-radius:10px;font-family:Oswald,sans-serif;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.3px;">Feature This Event $29 →</button>
               </div>
-              <div style="text-align:center;font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:8px;">Intro price ends Aug 31, then $59/season</div>
+              <div style="text-align:center;font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:8px;">Intro price ends Aug 31, then $59 per event.</div>
             </div>
           </div>
           <button onclick="submitEventListing()" style="width:100%;background:#e8431a;color:#fff;border:none;padding:16px;border-radius:12px;font-family:Oswald,sans-serif;font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;">Submit for Review →</button>
@@ -3992,9 +4018,9 @@ var currentUser = window.currentUser || null;
                 <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#333;font-family:-apple-system,sans-serif;"><span style="color:#333;">✗</span> <span style="color:#555;">Free listings get 1 photo and standard placement</span></div>
               </div>
               <div style="display:flex;gap:8px;">
-                <button onclick="showToast(&#39;Featured upgrade coming soon! 🎃&#39;)" style="flex:1;background:#e8431a;color:#fff;border:none;padding:12px;border-radius:10px;font-family:Oswald,sans-serif;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.3px;">Upgrade to Featured $29 →</button>
+                <button onclick="showToast(&#39;Featured upgrade coming soon! 🎃&#39;)" style="flex:1;background:#e8431a;color:#fff;border:none;padding:12px;border-radius:10px;font-family:Oswald,sans-serif;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.3px;">Feature My Shop $29 →</button>
               </div>
-              <div style="text-align:center;font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:8px;">Intro price ends Aug 31, then $59/season</div>
+              <div style="text-align:center;font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:8px;">$29 for 90 days intro, then $59 per 90 days.</div>
             </div>
           </div>
 
@@ -4075,7 +4101,7 @@ var currentUser = window.currentUser || null;
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">👥 Meetups</div>
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">☠️ Conventions</div>
             </div>
-            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_46.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_46.html#">Privacy Policy</a>.</div>
+            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_47.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_47.html#">Privacy Policy</a>.</div>
             <button class="auth-submit" onclick="doSignup()">Create My Account →</button>
             <div class="auth-switch">Already have an account? <a onclick="switchTab(&#39;login&#39;)">Log in →</a></div>
           </div>
@@ -4119,7 +4145,7 @@ var currentUser = window.currentUser || null;
             <div style="font-family:&#39;Special Elite&#39;,serif;font-size:10px;color:#e8431a;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">⬡ Founder Member ⬡</div>
             <div style="position:relative;width:100px;height:100px;margin:0 auto 12px;">
               <div style="width:100px;height:100px;border-radius:50%;background:radial-gradient(135deg,#8b0000,#2a0000);display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;z-index:2;overflow:hidden;">
-                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_46.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_47.html" style="width:100%;height:100%;object-fit:cover;display:none;">
                 <span id="avatarEmoji">🎃</span>
               </div>
               <div style="position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(#e8431a,#8b0000,#ff4500,#8b0000,#e8431a);z-index:1;"></div>
@@ -4270,7 +4296,7 @@ var currentUser = window.currentUser || null;
         <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Profile Photo</div>
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#e8431a,#c0392b);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;overflow:hidden;border:2px solid #e8431a;">
-            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_46.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_47.html" style="width:100%;height:100%;object-fit:cover;display:none;">
             <span id="editAvatarEmoji">🎃</span>
           </div>
           <button onclick="triggerPhotoUpload()" style="flex:1;background:#0a0a0a;border:1px dashed #333;border-radius:10px;padding:12px;color:#aaa;font-family:Oswald,sans-serif;font-size:13px;cursor:pointer;letter-spacing:.5px;">📷 Upload Photo</button>
@@ -5532,6 +5558,232 @@ function togglePwd(id, btn) {
 // }
 // ── END SUPABASE SNIPPET ────────────────────────────────────────────────────
 
+// ═══ RADIUS / NEARBY CITIES ═══
+var _radiusMiles = 0;
+
+function setRadius(el, miles) {
+  document.querySelectorAll('.radius-chip').forEach(function(c){c.classList.remove('active');});
+  el.classList.add('active');
+  _radiusMiles = miles;
+}
+
+// Nearby cities map — grouped by radius rings
+var nearbyCities = {
+  'burbank': {
+    10: ['Glendale','North Hollywood','Studio City','Toluca Lake','Universal City','Sun Valley','Sunland','Tujunga'],
+    25: ['Los Angeles','Pasadena','Sherman Oaks','Encino','Van Nuys','Reseda','Chatsworth','Woodland Hills','Calabasas','Alhambra','Monterey Park','San Gabriel','Temple City','Arcadia','Monrovia'],
+    50: ['Long Beach','Anaheim','Santa Monica','Culver City','Inglewood','Torrance','Compton','Hawthorne','El Monte','West Covina','Pomona','Ontario','Rancho Cucamonga','Oxnard','Thousand Oaks','Simi Valley','Ventura','Santa Clarita','Valencia']
+  },
+  'los angeles': {
+    10: ['West Hollywood','Culver City','Inglewood','Hawthorne','Gardena','Compton','South Gate','Lynwood','Maywood','Bell','Huntington Park','Vernon','Commerce','Monterey Park','Alhambra'],
+    25: ['Long Beach','Torrance','Carson','Lakewood','Downey','Norwalk','Whittier','La Mirada','Santa Fe Springs','Pico Rivera','El Monte','Arcadia','Pasadena','Burbank','Glendale','Santa Monica','Malibu','San Fernando'],
+    50: ['Anaheim','Santa Ana','Orange','Garden Grove','Pomona','Ontario','Rancho Cucamonga','Riverside','San Bernardino','Oxnard','Ventura','Santa Barbara','Thousand Oaks','Palmdale','Lancaster']
+  },
+  'new york': {
+    10: ['Brooklyn','Queens','Bronx','Newark','Jersey City','Hoboken','Yonkers','Mount Vernon','New Rochelle'],
+    25: ['Staten Island','Stamford','Greenwich','White Plains','Hempstead','Long Island City','Jamaica','Flushing','Astoria','Bayonne','Elizabeth'],
+    50: ['Hartford','Bridgeport','New Haven','Trenton','Philadelphia','Allentown','Poughkeepsie','Newburgh']
+  },
+  'chicago': {
+    10: ['Evanston','Oak Park','Cicero','Berwyn','Calumet City','Harvey','Waukegan','Skokie'],
+    25: ['Naperville','Aurora','Joliet','Elgin','Waukegan','Gary','Hammond','Arlington Heights','Schaumburg'],
+    50: ['Rockford','Kenosha','Racine','Milwaukee','South Bend','Kankakee']
+  },
+  'houston': {
+    10: ['Pasadena','Baytown','Pearland','Sugar Land','Missouri City','Stafford','Bellaire','West University'],
+    25: ['Katy','The Woodlands','Conroe','League City','Friendswood','Galveston','Texas City','Clear Lake'],
+    50: ['Galveston','Beaumont','Port Arthur','Angleton','Victoria','Bryan','College Station']
+  },
+  'dallas': {
+    10: ['Fort Worth','Arlington','Irving','Garland','Mesquite','Plano','Richardson','Grand Prairie'],
+    25: ['McKinney','Frisco','Allen','Denton','Carrollton','Lewisville','Flower Mound','Mansfield'],
+    50: ['Waco','Tyler','Longview','Sherman','Gainesville']
+  },
+  'phoenix': {
+    10: ['Scottsdale','Tempe','Mesa','Chandler','Glendale','Peoria','Sun City'],
+    25: ['Gilbert','Queen Creek','Apache Junction','Avondale','Goodyear','Surprise','Litchfield Park'],
+    50: ['Tucson','Prescott','Flagstaff','Yuma','Casa Grande']
+  },
+  'san francisco': {
+    10: ['Oakland','Berkeley','San Jose','Santa Clara','Fremont','Hayward','Daly City','South San Francisco'],
+    25: ['Walnut Creek','Concord','Richmond','San Rafael','Novato','San Mateo','Redwood City','Palo Alto'],
+    50: ['Santa Cruz','Salinas','Monterey','Sacramento','Stockton','Modesto']
+  },
+  'seattle': {
+    10: ['Bellevue','Redmond','Kirkland','Renton','Burien','Tukwila','Shoreline','Edmonds'],
+    25: ['Tacoma','Auburn','Kent','Federal Way','Puyallup','Bothell','Everett','Marysville'],
+    50: ['Olympia','Bellingham','Vancouver WA','Portland OR']
+  },
+  'portland': {
+    10: ['Gresham','Beaverton','Hillsboro','Lake Oswego','Milwaukie','Tigard','Tualatin'],
+    25: ['Vancouver WA','Salem','McMinnville','Newberg','Oregon City','Camas WA','Longview WA'],
+    50: ['Salem','Albany','Corvallis','Eugene','Astoria','Tillamook']
+  },
+  'denver': {
+    10: ['Aurora','Lakewood','Westminster','Thornton','Arvada','Centennial','Englewood'],
+    25: ['Boulder','Longmont','Loveland','Fort Collins','Greeley','Castle Rock','Parker','Brighton'],
+    50: ['Colorado Springs','Pueblo','Vail','Aspen','Grand Junction']
+  },
+  'miami': {
+    10: ['Fort Lauderdale','Hollywood FL','Hialeah','Miami Beach','Coral Gables','Homestead','Doral'],
+    25: ['West Palm Beach','Boca Raton','Delray Beach','Pompano Beach','Davie','Miramar','Pembroke Pines'],
+    50: ['Naples','Marco Island','Key West','Vero Beach','Port St Lucie']
+  },
+  'atlanta': {
+    10: ['Decatur','Sandy Springs','Marietta','Smyrna','Roswell','Alpharetta','College Park'],
+    25: ['Cumming','Kennesaw','Douglasville','Fayetteville','Newnan','Lawrenceville','Gainesville GA'],
+    50: ['Macon','Athens','Chattanooga TN','Greenville SC']
+  },
+  'boston': {
+    10: ['Cambridge','Somerville','Quincy','Newton','Brookline','Waltham','Malden'],
+    25: ['Worcester','Providence RI','Manchester NH','Lowell','Lawrence','Salem MA','Plymouth'],
+    50: ['Springfield MA','Hartford CT','Portland ME','Concord NH']
+  },
+  'las vegas': {
+    10: ['Henderson','North Las Vegas','Boulder City','Summerlin','Paradise'],
+    25: ['Pahrump','Mesquite NV','Laughlin'],
+    50: ['St George UT','Kingman AZ','Barstow CA']
+  },
+  'san diego': {
+    10: ['Chula Vista','El Cajon','Santee','La Mesa','National City','Escondido','Vista'],
+    25: ['Oceanside','Carlsbad','Encinitas','San Marcos','Fallbrook','Temecula','Murrieta'],
+    50: ['Los Angeles','Orange County','Riverside','San Bernardino','Tijuana MX']
+  },
+  'orange county': {
+    10: ['Anaheim','Santa Ana','Irvine','Huntington Beach','Garden Grove','Fullerton','Orange'],
+    25: ['Long Beach','Los Angeles','Riverside','San Bernardino','Temecula','Murrieta'],
+    50: ['San Diego','Los Angeles','Palm Springs']
+  },
+  'pasadena': {
+    10: ['Arcadia','Monrovia','Temple City','San Gabriel','Alhambra','El Monte','Burbank','Glendale'],
+    25: ['Los Angeles','Pomona','West Covina','Covina','Azusa','Glendora','La Verne'],
+    50: ['Long Beach','Anaheim','Ontario','San Bernardino','Riverside']
+  },
+  'long beach': {
+    10: ['Compton','Carson','Torrance','Signal Hill','Lakewood','Bellflower','Paramount'],
+    25: ['Los Angeles','Anaheim','Garden Grove','Huntington Beach','Santa Ana','Inglewood'],
+    50: ['San Diego','Riverside','Ontario','Burbank','Pasadena']
+  },
+  'nashville': {
+    10: ['Brentwood','Franklin','Murfreesboro','Hendersonville','Gallatin','Madison TN'],
+    25: ['Columbia TN','Shelbyville','Lebanon TN','Clarksville TN'],
+    50: ['Memphis','Knoxville','Chattanooga','Louisville KY']
+  },
+  'new orleans': {
+    10: ['Metairie','Kenner','Gretna','Harvey LA','Chalmette'],
+    25: ['Hammond LA','Slidell','Covington LA','Mandeville'],
+    50: ['Baton Rouge','Biloxi MS','Mobile AL','Lafayette LA']
+  },
+  'austin': {
+    10: ['Round Rock','Cedar Park','Pflugerville','Georgetown TX','Kyle TX','Buda TX'],
+    25: ['San Marcos','Lockhart','Bastrop','Elgin TX','Taylor TX'],
+    50: ['San Antonio','Waco','Temple TX','Killeen']
+  },
+  'san antonio': {
+    10: ['Leon Valley','Converse','Universal City TX','Schertz','Live Oak TX'],
+    25: ['New Braunfels','Seguin','Boerne','Kerrville'],
+    50: ['Austin','Laredo','Corpus Christi','San Marcos']
+  },
+  'minneapolis': {
+    10: ['St Paul','Bloomington MN','Eden Prairie','Plymouth MN','Minnetonka','Edina','Richfield'],
+    25: ['Burnsville','Apple Valley','Eagan','Woodbury','Stillwater','Lakeville'],
+    50: ['Rochester MN','St Cloud','Duluth','Madison WI']
+  },
+  'kansas city': {
+    10: ['Overland Park','Lee Summit','Independence MO','Olathe','Shawnee KS'],
+    25: ['Blue Springs','Liberty MO','Leavenworth KS','Lawrence KS'],
+    50: ['Columbia MO','Topeka KS','Joplin MO','Wichita KS']
+  },
+  'st louis': {
+    10: ['Clayton MO','Ferguson','Florissant','Chesterfield MO','Belleville IL','East St Louis'],
+    25: ['O Fallon MO','St Charles MO','Collinsville IL','Edwardsville IL'],
+    50: ['Columbia MO','Springfield MO','Cape Girardeau','Peoria IL']
+  },
+  'pittsburgh': {
+    10: ['McKeesport','Bethel Park','Mount Lebanon','Carnegie PA','Monroeville'],
+    25: ['Greensburg','Uniontown','Washington PA','Beaver PA'],
+    50: ['Cleveland OH','Morgantown WV','Erie PA','Youngstown OH']
+  },
+  'cleveland': {
+    10: ['Lakewood OH','Parma','Euclid','Strongsville','Mentor OH','Lorain'],
+    25: ['Akron','Youngstown','Canton OH','Elyria','Medina OH'],
+    50: ['Pittsburgh PA','Columbus OH','Toledo OH','Erie PA']
+  },
+  'columbus': {
+    10: ['Dublin OH','Westerville','Hilliard','Gahanna','Grove City OH','Reynoldsburg'],
+    25: ['Newark OH','Lancaster OH','Marion OH','Chillicothe'],
+    50: ['Cincinnati','Cleveland','Dayton','Toledo OH']
+  },
+  'cincinnati': {
+    10: ['Covington KY','Newport KY','Florence KY','Norwood OH','Fairfield OH','Mason OH'],
+    25: ['Hamilton OH','Middletown OH','Oxford OH','Batavia OH'],
+    50: ['Columbus OH','Dayton','Louisville KY','Indianapolis IN']
+  },
+  'indianapolis': {
+    10: ['Carmel IN','Fishers IN','Lawrence IN','Greenwood IN','Noblesville IN'],
+    25: ['Anderson IN','Muncie','Greenfield IN','Franklin IN'],
+    50: ['Columbus OH','Cincinnati','Louisville KY','Fort Wayne IN']
+  },
+  'charlotte': {
+    10: ['Concord NC','Gastonia','Rock Hill SC','Huntersville NC','Matthews NC'],
+    25: ['Monroe NC','Kannapolis','Statesville','Mooresville NC'],
+    50: ['Greensboro NC','Winston Salem','Columbia SC','Spartanburg SC']
+  },
+  'raleigh': {
+    10: ['Durham','Chapel Hill','Cary NC','Apex NC','Wake Forest NC'],
+    25: ['Garner NC','Clayton NC','Smithfield NC','Hillsborough NC'],
+    50: ['Greensboro NC','Fayetteville NC','Wilmington NC','Richmond VA']
+  },
+  'richmond': {
+    10: ['Henrico VA','Chesterfield VA','Midlothian','Colonial Heights VA'],
+    25: ['Fredericksburg VA','Williamsburg VA','Petersburg VA','Hopewell VA'],
+    50: ['Washington DC','Norfolk VA','Raleigh NC','Charlottesville VA']
+  },
+  'washington dc': {
+    10: ['Arlington VA','Alexandria VA','Bethesda MD','Silver Spring MD','College Park MD'],
+    25: ['Baltimore','Rockville MD','Reston VA','Tysons VA','Gaithersburg MD'],
+    50: ['Richmond VA','Philadelphia','Annapolis MD','Frederick MD']
+  },
+  'baltimore': {
+    10: ['Towson MD','Catonsville MD','Dundalk MD','Essex MD','Parkville MD'],
+    25: ['Columbia MD','Annapolis MD','Bel Air MD','Westminster MD'],
+    50: ['Washington DC','Philadelphia','Wilmington DE','York PA']
+  },
+  'philadelphia': {
+    10: ['Camden NJ','Cherry Hill NJ','Upper Darby PA','Norristown PA','Chester PA'],
+    25: ['Wilmington DE','Trenton NJ','Reading PA','Allentown PA'],
+    50: ['Baltimore','New York','Atlantic City NJ','Harrisburg PA']
+  },
+  'detroit': {
+    10: ['Dearborn','Livonia','Sterling Heights','Warren MI','Southfield','Ann Arbor'],
+    25: ['Pontiac MI','Troy MI','Royal Oak','Flint MI','Monroe MI'],
+    50: ['Toledo OH','Lansing MI','Grand Rapids MI','Windsor ON']
+  },
+  'sacramento': {
+    10: ['Elk Grove','Roseville','Folsom','Citrus Heights','Rancho Cordova','West Sacramento'],
+    25: ['Davis CA','Woodland CA','Lincoln CA','Auburn CA','Stockton','Lodi CA'],
+    50: ['San Francisco','Fresno','Reno NV','Chico CA']
+  },
+  'portland or': {
+    10: ['Gresham','Beaverton','Hillsboro','Lake Oswego','Milwaukie','Tigard'],
+    25: ['Vancouver WA','Salem','McMinnville','Newberg','Oregon City'],
+    50: ['Seattle','Eugene','Astoria','Tillamook']
+  },
+};
+
+function getCitiesForRadius(city, miles) {
+  if (miles === 0) return [];
+  var key = city.toLowerCase().replace(/,?\s*(ca|tx|ny|fl|il|pa|oh|wa|or|co|az|nv|ga|tn|nc|va|ma|md|nj|mn|mo|wi|in|ky|la|al|sc|ok|ar|ct|ri|ne|ks|ia|nd|sd|id|mt|wy|vt|nh|me|de|hi|ak|ut|nm|wv|mi|ms)$/i, '').trim();
+  var cityData = nearbyCities[key];
+  if (!cityData) return [];
+  
+  var result = [];
+  if (miles >= 10 && cityData[10]) result = result.concat(cityData[10]);
+  if (miles >= 25 && cityData[25]) result = result.concat(cityData[25]);
+  if (miles >= 50 && cityData[50]) result = result.concat(cityData[50]);
+  return result;
+}
+
 async function doSearch() {
   var z = document.getElementById('zipSearch');
   if (!z || !z.value.trim()) { showToast('Enter a zip code or city! 🎃'); return; }
@@ -5781,10 +6033,23 @@ async function loadEvents(category, citySearch) {
   var filtered = data;
   var searchTerm = (citySearch && citySearch.trim()) ? citySearch.trim() : 'Burbank';
   var search = searchTerm.toLowerCase();
+  
+  // Get nearby cities based on radius setting
+  var nearbyCityList = getCitiesForRadius(searchTerm, _radiusMiles);
+  
   filtered = data.filter(function(e) {
     var city = (e.city || '').toLowerCase();
     var location = (e.location || '').toLowerCase();
-    return city.indexOf(search) !== -1 || location.indexOf(search) !== -1;
+    // Match primary city
+    if (city.indexOf(search) !== -1 || location.indexOf(search) !== -1) return true;
+    // Match nearby cities
+    if (nearbyCityList.length > 0) {
+      return nearbyCityList.some(function(nearby) {
+        var n = nearby.toLowerCase();
+        return city.indexOf(n) !== -1 || location.indexOf(n) !== -1;
+      });
+    }
+    return false;
   });
 
   var rc = document.getElementById('resultCount');

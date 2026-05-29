@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_49.html -->
+<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_54.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -216,7 +216,7 @@ body {
 .search-btn { background: #e8431a; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; font-family: Oswald, sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; letter-spacing: .5px; flex-shrink: 0; }
 .date-chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; margin-bottom: 8px; }
 .chip, .dpill, .dp { background: #141414; border: 1px solid #252525; border-radius: 20px; padding: 6px 14px; font-size: 12px; color: #888; cursor: pointer; white-space: nowrap; font-family: -apple-system, sans-serif; flex-shrink: 0; }
-.chip.active, .dpill.active, .dp.active { border-color: #e8431a; color: #e8431a; }
+.chip.active, .dpill.active, .dp.active { border-color: #fff; color: #fff; background:rgba(255,255,255,0.08); }
 .cal-btn { background: #141414; border: 1px solid #252525; border-radius: 10px; padding: 8px 14px; font-size: 12px; color: #888; cursor: pointer; font-family: -apple-system, sans-serif; display: flex; align-items: center; gap: 6px; }
 .cal-btn.active { border-color: #e8431a; color: #e8431a; }
 .radius-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
@@ -237,7 +237,7 @@ body {
 .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .cat-card {
   background: linear-gradient(160deg,#1a0800,#111);
-  border: 1px solid #e8431a;
+  border: 1px solid #2a2a2a;
   border-radius: 14px;
   padding: 18px 8px 16px;
   display: flex;
@@ -684,9 +684,9 @@ body { display:flex; flex-direction:column; color:#e0d8cc; }
   transition:all .15s;
 }
 .radius-chip.active {
-  border-color:#e8431a;
-  color:#e8431a;
-  background:rgba(232,67,26,0.08);
+  border-color:#fff;
+  color:#fff;
+  background:rgba(255,255,255,0.08);
 }
 .chip {
   background:#141414;
@@ -779,7 +779,7 @@ body { display:flex; flex-direction:column; color:#e0d8cc; }
   transition:transform .15s;
 }
 .t-card:active { transform:scale(0.97); }
-.t-card.feat { border-color:#3a1a0a; }
+.t-card.feat { border-color:#2a2a2a; }
 .t-img {
   height:90px;
   display:flex;
@@ -1348,7 +1348,7 @@ body { display:flex; flex-direction:column; color:#e0d8cc; }
   transition: border-color .15s;
 }
 .event-card:active { border-color: #e8431a; }
-.event-card.featured { border-color: #3a1a0a; }
+.event-card.featured { border-color: #2a2a2a; }
 .event-icon {
   width: 50px;
   height: 50px;
@@ -1425,7 +1425,7 @@ body { display:flex; flex-direction:column; color:#e0d8cc; }
 }
 .countdown-eyebrow {
   font-size: 12px;
-  color: #e8431a;
+  color: #888;
   letter-spacing: 1px;
   margin-bottom: 6px;
   font-family: 'Oswald', sans-serif;
@@ -1455,9 +1455,9 @@ body { display:flex; flex-direction:column; color:#e0d8cc; }
   font-family: 'Oswald', sans-serif;
   font-size: 42px;
   font-weight: 700;
-  color: #e8431a;
+  color: #fff;
   line-height: 1;
-  text-shadow: 0 0 20px rgba(232,67,26,0.4);
+  text-shadow: none;
 }
 .countdown-lbl {
   font-size: 10px;
@@ -2710,7 +2710,7 @@ var currentUser = window.currentUser || null;
 </head>
 <body>
 
-<div id="splash" class="hidden" style="display: none;">
+<div id="splash">
   <img src="data:image/jpeg;base64,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" alt="FrightSpot">
   <div id="splash-text">Loading Frights...</div>
 </div>
@@ -2852,7 +2852,7 @@ var currentUser = window.currentUser || null;
         <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:radial-gradient(circle,rgba(124,58,237,0.15) 0%,transparent 70%);pointer-events:none;"></div>
         <div style="flex:1;position:relative;z-index:1;">
           <div style="font-family:Oswald,sans-serif;font-size:20px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Join FrightPack 🌕🐺</div>
-          <div style="font-size:12px;color:#aa88ff;font-family:-apple-system,sans-serif;line-height:1.5;">Find your people and do weird things together</div>
+          <div style="font-size:12px;color:#aa88ff;font-family:-apple-system,sans-serif;line-height:1.5;">Find your people. Go to spooky events together.</div>
         </div>
         <div style="background:#7c3aed;color:#fff;border-radius:10px;padding:10px 16px;font-family:Oswald,sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px;flex-shrink:0;position:relative;z-index:1;box-shadow:0 0 16px rgba(124,58,237,0.5);">Join Free →</div>
       </div>
@@ -2864,13 +2864,13 @@ var currentUser = window.currentUser || null;
         <div class="countdown-eyebrow">Not that anyone's counting…</div>
         <div class="countdown-title">Halloween Countdown</div>
         <div class="countdown-timer" id="countdownTimer">
-          <div class="countdown-unit"><div class="countdown-num" id="cdDays">155</div><div class="countdown-lbl">Days</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdDays">--</div><div class="countdown-lbl">Days</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdHours">04</div><div class="countdown-lbl">Hours</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdHours">--</div><div class="countdown-lbl">Hours</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdMins">51</div><div class="countdown-lbl">Mins</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdMins">--</div><div class="countdown-lbl">Mins</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">30</div><div class="countdown-lbl">Secs</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">--</div><div class="countdown-lbl">Secs</div></div>
         </div>
         <div class="countdown-sub">Until October 31, 2026</div>
       </div>
@@ -2886,7 +2886,9 @@ var currentUser = window.currentUser || null;
         <div class="block-title">Near You</div>
         <div class="see-all" onclick="fsShow(&#39;explore&#39;)">See all →</div>
       </div>
-      <div class="t-strip" id="nearYouStrip"><div class="t-card feat" onclick="openEventDetail(&#39;b6e2df02-cf64-4e0e-b485-0c8fb9a06ad3&#39;)"><div class="t-img" style="background:#060a14;"><span>👁️</span></div><div class="t-body"><div class="t-cat">Paranormal</div><div class="t-name">Alcatraz Night Tours San Francisco</div><div class="t-meta">📍 San Francisco · Mar 8</div><div class="t-foot"><span></span><span class="t-price">$55+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;9c051257-fbee-44c9-a4a1-c5031cb726d6&#39;)"><div class="t-img" style="background:#0a060a;"><span>🕯️</span></div><div class="t-body"><div class="t-cat">Shop</div><div class="t-name">Spooky Swap Meet Heritage Square LA</div><div class="t-meta">📍 Los Angeles · Apr 1</div><div class="t-foot"><span></span><span class="t-price">$20+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;0e708594-5dd1-4e2c-b45c-9770042a49d9&#39;)"><div class="t-img" style="background:#06060a;"><span>🛸</span></div><div class="t-body"><div class="t-cat">Alien &amp; UFO</div><div class="t-name">Contact in the Desert</div><div class="t-meta">📍 Indian Wells · May 28</div><div class="t-foot"><span></span><span class="t-price">$125+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;8c4029af-89fe-4fa3-b8b3-300a756b7fca&#39;)"><div class="t-img" style="background:#06060a;"><span>🛸</span></div><div class="t-body"><div class="t-cat">Alien &amp; UFO</div><div class="t-name">Contact in the Desert 2026 Full Schedule</div><div class="t-meta">📍 Indian Wells · May 28</div><div class="t-foot"><span></span><span class="t-price">$125+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;51e816a4-85c9-4afd-af99-2087b503b04f&#39;)"><div class="t-img" style="background:#0a0606;"><span>☠️</span></div><div class="t-body"><div class="t-cat">Conventions</div><div class="t-name">Monsterpalooza 2026</div><div class="t-meta">📍 Pasadena · May 29</div><div class="t-foot"><span></span><span class="t-price">$35+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;35aac15b-e2b6-4166-bc56-4f8fe2900853&#39;)"><div class="t-img" style="background:#0a0606;"><span>☠️</span></div><div class="t-body"><div class="t-cat">Conventions</div><div class="t-name">Monsterpalooza</div><div class="t-meta">📍 Pasadena · May 29</div><div class="t-foot"><span></span><span class="t-price">$96+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;d2645043-fd5e-42b6-acc6-538b78c06fab&#39;)"><div class="t-img" style="background:#060a14;"><span>👁️</span></div><div class="t-body"><div class="t-cat">Paranormal</div><div class="t-name">Zak Bagans Haunted Museum Las Vegas</div><div class="t-meta">📍 Las Vegas NV · Jun 1</div><div class="t-foot"><span></span><span class="t-price">$35+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;2a249867-5425-4eb1-a513-c65aaf27f069&#39;)"><div class="t-img" style="background:#060a14;"><span>👁️</span></div><div class="t-body"><div class="t-cat">Paranormal</div><div class="t-name">Eastern State Penitentiary Philadelphia</div><div class="t-meta">📍 Philadelphia PA · Jun 1</div><div class="t-foot"><span></span><span class="t-price">$20+</span></div></div></div></div>
+      <div class="t-strip" id="nearYouStrip">
+        <div style="color:#555;font-size:13px;padding:20px;font-family:-apple-system,sans-serif;">Loading... 🎃</div>
+      </div>
     </div>
 
     <div class="divider"></div>
@@ -2897,7 +2899,9 @@ var currentUser = window.currentUser || null;
         <div class="block-title">Trending This Week</div>
         <div class="see-all" onclick="fsShow(&#39;explore&#39;)">See all →</div>
       </div>
-      <div class="t-strip" id="trendingStrip"><div class="t-card feat" onclick="openEventDetail(&#39;01c97498-daf4-4d79-8e32-060d816c288b&#39;)"><div class="t-img" style="background:#140a06;"><span>🎃</span></div><div class="t-body"><div class="t-cat">Haunts Map</div><div class="t-name">Universal Horror Unleashed Las Vegas</div><div class="t-meta">📍 Las Vegas NV · Jun 1</div><div class="t-foot"><span></span><span class="t-price">$49+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;ac951f9e-c068-422a-b783-d222250f6c1b&#39;)"><div class="t-img" style="background:#060f06;"><span>🎦</span></div><div class="t-body"><div class="t-cat">Film</div><div class="t-name">Sleep No More McKittrick Hotel NYC</div><div class="t-meta">📍 New York · Jun 1</div><div class="t-foot"><span></span><span class="t-price">$110+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;bded2e2e-8fad-4bc3-8b39-f428e2273d48&#39;)"><div class="t-img" style="background:#060a14;"><span>👁️</span></div><div class="t-body"><div class="t-cat">Paranormal</div><div class="t-name">Winchester Mystery House San Jose</div><div class="t-meta">📍 San Jose · Jun 1</div><div class="t-foot"><span></span><span class="t-price">$40+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;b1e88010-a416-416f-a046-1cd78e530f98&#39;)"><div class="t-img" style="background:#060a14;"><span>👁️</span></div><div class="t-body"><div class="t-cat">Paranormal</div><div class="t-name">Waverly Hills Sanatorium Louisville KY</div><div class="t-meta">📍 Louisville KY · Jun 1</div><div class="t-foot"><span></span><span class="t-price">$30+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;ddd2be52-e521-4cdb-adc9-a68a00b1735d&#39;)"><div class="t-img" style="background:#060f06;"><span>🎦</span></div><div class="t-body"><div class="t-cat">Film</div><div class="t-name">Alamo Drafthouse Terror Tuesday Horror Screenings</div><div class="t-meta">📍 Multiple Cities · Jun 1</div><div class="t-foot"><span></span><span class="t-price">$12+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;07af968d-07ce-4306-bc72-40708a140d89&#39;)"><div class="t-img" style="background:#060a14;"><span>👁️</span></div><div class="t-body"><div class="t-cat">Paranormal</div><div class="t-name">Alcatraz Island Night Tour San Francisco</div><div class="t-meta">📍 San Francisco · Jun 1</div><div class="t-foot"><span></span><span class="t-price">$50+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;26a7be76-d031-438b-b116-60c851f736f2&#39;)"><div class="t-img" style="background:#0a0606;"><span>☠️</span></div><div class="t-body"><div class="t-cat">Conventions</div><div class="t-name">Creep IE Con Aftermath 2026</div><div class="t-meta">📍 Ontario · Jul 10</div><div class="t-foot"><span></span><span class="t-price">$40+</span></div></div></div><div class="t-card feat" onclick="openEventDetail(&#39;87c67ccb-49c4-44c8-91cf-3a5389b15e33&#39;)"><div class="t-img" style="background:#0a0606;"><span>☠️</span></div><div class="t-body"><div class="t-cat">Conventions</div><div class="t-name">Midsummer Scream</div><div class="t-meta">📍 Long Beach · Aug 7</div><div class="t-foot"><span></span><span class="t-price">$42-$199</span></div></div></div></div>
+      <div class="t-strip" id="trendingStrip">
+        <div style="color:#555;font-size:13px;padding:20px;font-family:-apple-system,sans-serif;">Loading... 🎃</div>
+      </div>
     </div>
 
     <div class="divider"></div>
@@ -2936,7 +2940,7 @@ var currentUser = window.currentUser || null;
   <div class="fs-page" id="fs-page-community">
     <div class="comm-hero">
       <div class="comm-hero-title">Fright <span>Pack</span></div>
-      <div class="comm-hero-sub">Welcome to FrightPack. Find your people, host meetups, and connect with local horror fans who share your same interests.</div>
+      <div class="comm-hero-sub">Find your people. Go to spooky events together.</div>
       <div class="comm-privacy-note"><span class="comm-privacy-icon">🔒</span>Control what you share and who can find you.</div>
     </div>
 
@@ -4102,7 +4106,7 @@ var currentUser = window.currentUser || null;
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">👥 Meetups</div>
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">☠️ Conventions</div>
             </div>
-            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_49.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_49.html#">Privacy Policy</a>.</div>
+            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_54.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_54.html#">Privacy Policy</a>.</div>
             <button class="auth-submit" onclick="doSignup()">Create My Account →</button>
             <div class="auth-switch">Already have an account? <a onclick="switchTab(&#39;login&#39;)">Log in →</a></div>
           </div>
@@ -4146,7 +4150,7 @@ var currentUser = window.currentUser || null;
             <div style="font-family:&#39;Special Elite&#39;,serif;font-size:10px;color:#e8431a;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">⬡ Founder Member ⬡</div>
             <div style="position:relative;width:100px;height:100px;margin:0 auto 12px;">
               <div style="width:100px;height:100px;border-radius:50%;background:radial-gradient(135deg,#8b0000,#2a0000);display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;z-index:2;overflow:hidden;">
-                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_49.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_54.html" style="width:100%;height:100%;object-fit:cover;display:none;">
                 <span id="avatarEmoji">🎃</span>
               </div>
               <div style="position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(#e8431a,#8b0000,#ff4500,#8b0000,#e8431a);z-index:1;"></div>
@@ -4297,7 +4301,7 @@ var currentUser = window.currentUser || null;
         <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Profile Photo</div>
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#e8431a,#c0392b);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;overflow:hidden;border:2px solid #e8431a;">
-            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_49.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_54.html" style="width:100%;height:100%;object-fit:cover;display:none;">
             <span id="editAvatarEmoji">🎃</span>
           </div>
           <button onclick="triggerPhotoUpload()" style="flex:1;background:#0a0a0a;border:1px dashed #333;border-radius:10px;padding:12px;color:#aaa;font-family:Oswald,sans-serif;font-size:13px;cursor:pointer;letter-spacing:.5px;">📷 Upload Photo</button>
@@ -6496,7 +6500,14 @@ async function loadHomeStrips() {
   var catEmoji = {'Haunts Map':'🎃','Paranormal':'👁️','Conventions':'☠️','Festivals':'🌕','Shop':'🕯️','Meetups':'🦇','Film':'🎦','Classes':'⚗️','Bars & Restaurants':'🍸','Alien & UFO':'🛸'};
   var catBg = {'Haunts Map':'#140a06','Paranormal':'#060a14','Conventions':'#0a0606','Festivals':'#0a0a06','Shop':'#0a060a','Meetups':'#060a0a','Film':'#060f06','Classes':'#0a0a14','Bars & Restaurants':'#0a0606','Alien & UFO':'#06060a'};
 
-  // Load all upcoming events, show first 16 on home page
+  // Get current search city and radius
+  var z = document.getElementById('zipSearch');
+  var currentCity = (z && z.value.trim()) ? z.value.trim() : 'Burbank';
+  var currentRadius = _radiusMiles || 5;
+  var nearbyCityList = getCitiesForRadius(currentCity, currentRadius);
+  var allCities = [currentCity].concat(nearbyCityList);
+
+  // Load a larger pool then filter client-side by city
   var res = await window.supabase
     .from('events')
     .select('*')
@@ -6504,8 +6515,28 @@ async function loadHomeStrips() {
     .or('end_date.gte.' + todayStr + ',end_date.is.null')
     .order('featured', { ascending: false })
     .order('start_date', { ascending: true })
-    .limit(16);
+    .limit(200);
   var data = res.data || [];
+
+  // Filter to only nearby cities
+  var searchLower = currentCity.toLowerCase();
+  var primaryMatches = [];
+  var nearbyMatches = [];
+
+  data.forEach(function(e) {
+    var eCity = (e.city || '').toLowerCase();
+    var eLoc = (e.location || '').toLowerCase();
+    if (eCity.indexOf(searchLower) !== -1 || eLoc.indexOf(searchLower) !== -1) {
+      primaryMatches.push(e);
+    } else if (nearbyCityList.some(function(n) {
+      var nl = n.toLowerCase();
+      return eCity.indexOf(nl) !== -1 || eLoc.indexOf(nl) !== -1;
+    })) {
+      nearbyMatches.push(e);
+    }
+  });
+
+  var filtered = primaryMatches.concat(nearbyMatches);
 
   function buildTCard(e) {
     var emoji = catEmoji[e.category] || '🎃';
@@ -6535,13 +6566,19 @@ async function loadHomeStrips() {
   var nearYou = document.getElementById('nearYouStrip');
   var trending = document.getElementById('trendingStrip');
 
-  if (data && data.length > 0) {
-    var half = Math.ceil(data.length / 2);
-    if (nearYou) nearYou.innerHTML = data.slice(0, Math.min(8, half)).map(buildTCard).join('');
-    if (trending) trending.innerHTML = data.slice(Math.min(8, half), Math.min(16, data.length)).map(buildTCard).join('') || nearYou.innerHTML;
+  if (filtered.length > 0) {
+    // Near You = first 8 primary city matches
+    var nearYouEvents = filtered.slice(0, 8);
+    // Trending = next 8, prefer featured
+    var trendingEvents = filtered.slice(8, 16);
+    if (trendingEvents.length === 0) trendingEvents = nearYouEvents;
+
+    if (nearYou) nearYou.innerHTML = nearYouEvents.map(buildTCard).join('');
+    if (trending) trending.innerHTML = trendingEvents.map(buildTCard).join('');
   } else {
-    if (nearYou) nearYou.innerHTML = '<div style="color:#555;font-size:13px;padding:20px;font-family:-apple-system,sans-serif;">No events found nearby 👻</div>';
-    if (trending) trending.innerHTML = '<div style="color:#555;font-size:13px;padding:20px;font-family:-apple-system,sans-serif;">Check back soon! 🎃</div>';
+    var noEvents = '<div style="color:#555;font-size:13px;padding:20px;font-family:-apple-system,sans-serif;">No events found nearby 👻<br><br><span style="color:#e8431a;cursor:pointer;" onclick="document.getElementById('zipSearch').value='';loadHomeStrips();">Try a different city →</span></div>';
+    if (nearYou) nearYou.innerHTML = noEvents;
+    if (trending) trending.innerHTML = noEvents;
   }
 }
 

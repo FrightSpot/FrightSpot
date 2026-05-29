@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_57.html -->
+<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_58.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -2868,9 +2868,9 @@ var currentUser = window.currentUser || null;
           <div class="countdown-colon">:</div>
           <div class="countdown-unit"><div class="countdown-num" id="cdHours">04</div><div class="countdown-lbl">Hours</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdMins">14</div><div class="countdown-lbl">Mins</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdMins">10</div><div class="countdown-lbl">Mins</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">39</div><div class="countdown-lbl">Secs</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">21</div><div class="countdown-lbl">Secs</div></div>
         </div>
         <div class="countdown-sub">Until October 31, 2026</div>
       </div>
@@ -4102,7 +4102,7 @@ var currentUser = window.currentUser || null;
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">👥 Meetups</div>
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">☠️ Conventions</div>
             </div>
-            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_57.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_57.html#">Privacy Policy</a>.</div>
+            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_58.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_58.html#">Privacy Policy</a>.</div>
             <button class="auth-submit" onclick="doSignup()">Create My Account →</button>
             <div class="auth-switch">Already have an account? <a onclick="switchTab(&#39;login&#39;)">Log in →</a></div>
           </div>
@@ -4146,7 +4146,7 @@ var currentUser = window.currentUser || null;
             <div style="font-family:&#39;Special Elite&#39;,serif;font-size:10px;color:#e8431a;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">⬡ Founder Member ⬡</div>
             <div style="position:relative;width:100px;height:100px;margin:0 auto 12px;">
               <div style="width:100px;height:100px;border-radius:50%;background:radial-gradient(135deg,#8b0000,#2a0000);display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;z-index:2;overflow:hidden;">
-                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_57.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_58.html" style="width:100%;height:100%;object-fit:cover;display:none;">
                 <span id="avatarEmoji">🎃</span>
               </div>
               <div style="position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(#e8431a,#8b0000,#ff4500,#8b0000,#e8431a);z-index:1;"></div>
@@ -4297,7 +4297,7 @@ var currentUser = window.currentUser || null;
         <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Profile Photo</div>
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#e8431a,#c0392b);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;overflow:hidden;border:2px solid #e8431a;">
-            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_57.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_58.html" style="width:100%;height:100%;object-fit:cover;display:none;">
             <span id="editAvatarEmoji">🎃</span>
           </div>
           <button onclick="triggerPhotoUpload()" style="flex:1;background:#0a0a0a;border:1px dashed #333;border-radius:10px;padding:12px;color:#aaa;font-family:Oswald,sans-serif;font-size:13px;cursor:pointer;letter-spacing:.5px;">📷 Upload Photo</button>
@@ -6080,16 +6080,10 @@ async function loadEvents(category, citySearch) {
 
   if (category) query = query.eq('category', category);
 
-  // Apply date filter
-  if (dateRange) {
-    // Events that start within the range OR are ongoing (started before, end after range start)
-    query = query.or(
-      'start_date.gte.' + dateRange.start + ',end_date.gte.' + dateRange.start
-    ).lte('start_date', dateRange.end);
-  } else {
-    // All Upcoming - just filter out past events
-    query = query.or('end_date.gte.' + todayISO + ',end_date.is.null');
-  }
+  // Apply date filter client-side after fetching (more flexible)
+  // Just fetch all upcoming and filter locally
+  query = query.or('end_date.gte.' + todayISO + ',end_date.is.null');
+  window._pendingDateRange = dateRange;
 
   var { data, error } = await query;
 
@@ -6114,7 +6108,7 @@ async function loadEvents(category, citySearch) {
     var city = (e.city || '').toLowerCase();
     var location = (e.location || '').toLowerCase();
     if (city.indexOf(search) !== -1 || location.indexOf(search) !== -1) {
-      primaryMatches.push(e); // exact city match — goes first
+      primaryMatches.push(e);
     } else if (nearbyCityList.length > 0) {
       var isNearby = nearbyCityList.some(function(nearby) {
         var n = nearby.toLowerCase();
@@ -6125,6 +6119,22 @@ async function loadEvents(category, citySearch) {
   });
 
   filtered = primaryMatches.concat(nearbyMatches);
+
+  // Apply date filter client-side
+  var dr = window._pendingDateRange;
+  if (dr) {
+    filtered = filtered.filter(function(e) {
+      var start = e.start_date || null;
+      var end = e.end_date || null;
+      // No dates = permanent listing, always show
+      if (!start && !end) return true;
+      // Event ends before range starts = exclude
+      if (end && end < dr.start) return false;
+      // Event starts after range ends = exclude
+      if (start && start > dr.end) return false;
+      return true;
+    });
+  }
 
   var rc = document.getElementById('resultCount');
   var rl = document.getElementById('resultLoc');

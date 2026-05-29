@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_48.html -->
+<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_49.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -671,15 +671,17 @@ body { display:flex; flex-direction:column; color:#e0d8cc; }
 .date-chips::-webkit-scrollbar { display:none; }
 .radius-chip {
   background:#141414;
-  border:1px solid #252525;
+  border:1px solid #2e2e2e;
   border-radius:20px;
-  padding:5px 10px;
-  font-size:11px;
-  color:#666;
-  font-family:Oswald,sans-serif;
+  padding:7px 16px;
+  font-size:13px;
+  color:#aaa;
   cursor:pointer;
   white-space:nowrap;
-  letter-spacing:.3px;
+  flex-shrink:0;
+  font-family:'Oswald',sans-serif;
+  letter-spacing:.5px;
+  transition:all .15s;
 }
 .radius-chip.active {
   border-color:#e8431a;
@@ -2753,12 +2755,12 @@ var currentUser = window.currentUser || null;
         <div class="chip" onclick="setChip(this)">This Month</div>
         <div class="chip" onclick="setChip(this)">All Upcoming</div>
       </div>
-      <div style="display:flex;align-items:center;gap:8px;padding:4px 2px 2px;overflow-x:auto;scrollbar-width:none;">
-        <span style="font-size:11px;color:#666;font-family:-apple-system,sans-serif;white-space:nowrap;flex-shrink:0;">Within</span>
-        <div class="radius-chip active" onclick="setRadius(this,0)" data-miles="0" style="flex-shrink:0;">City only</div>
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 2px 2px;overflow-x:auto;scrollbar-width:none;">
+        <span style="font-size:13px;color:#666;font-family:Oswald,sans-serif;white-space:nowrap;flex-shrink:0;letter-spacing:.5px;">Within</span>
+        <div class="radius-chip" onclick="setRadius(this,0)" data-miles="0" style="flex-shrink:0;">City only</div>
+        <div class="radius-chip active" onclick="setRadius(this,5)" data-miles="5" style="flex-shrink:0;">5 mi</div>
         <div class="radius-chip" onclick="setRadius(this,10)" data-miles="10" style="flex-shrink:0;">10 mi</div>
-        <div class="radius-chip" onclick="setRadius(this,25)" data-miles="25" style="flex-shrink:0;">25 mi</div>
-        <div class="radius-chip" onclick="setRadius(this,50)" data-miles="50" style="flex-shrink:0;">50 mi</div>
+        <div class="radius-chip" onclick="setRadius(this,25)" data-miles="25" style="flex-shrink:0;">25+ mi</div>
       </div>
     </div>
 
@@ -2866,9 +2868,9 @@ var currentUser = window.currentUser || null;
           <div class="countdown-colon">:</div>
           <div class="countdown-unit"><div class="countdown-num" id="cdHours">04</div><div class="countdown-lbl">Hours</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdMins">58</div><div class="countdown-lbl">Mins</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdMins">51</div><div class="countdown-lbl">Mins</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">36</div><div class="countdown-lbl">Secs</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">30</div><div class="countdown-lbl">Secs</div></div>
         </div>
         <div class="countdown-sub">Until October 31, 2026</div>
       </div>
@@ -4100,7 +4102,7 @@ var currentUser = window.currentUser || null;
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">👥 Meetups</div>
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">☠️ Conventions</div>
             </div>
-            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_48.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_48.html#">Privacy Policy</a>.</div>
+            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_49.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_49.html#">Privacy Policy</a>.</div>
             <button class="auth-submit" onclick="doSignup()">Create My Account →</button>
             <div class="auth-switch">Already have an account? <a onclick="switchTab(&#39;login&#39;)">Log in →</a></div>
           </div>
@@ -4144,7 +4146,7 @@ var currentUser = window.currentUser || null;
             <div style="font-family:&#39;Special Elite&#39;,serif;font-size:10px;color:#e8431a;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">⬡ Founder Member ⬡</div>
             <div style="position:relative;width:100px;height:100px;margin:0 auto 12px;">
               <div style="width:100px;height:100px;border-radius:50%;background:radial-gradient(135deg,#8b0000,#2a0000);display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;z-index:2;overflow:hidden;">
-                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_48.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_49.html" style="width:100%;height:100%;object-fit:cover;display:none;">
                 <span id="avatarEmoji">🎃</span>
               </div>
               <div style="position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(#e8431a,#8b0000,#ff4500,#8b0000,#e8431a);z-index:1;"></div>
@@ -4295,7 +4297,7 @@ var currentUser = window.currentUser || null;
         <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Profile Photo</div>
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#e8431a,#c0392b);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;overflow:hidden;border:2px solid #e8431a;">
-            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_48.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_49.html" style="width:100%;height:100%;object-fit:cover;display:none;">
             <span id="editAvatarEmoji">🎃</span>
           </div>
           <button onclick="triggerPhotoUpload()" style="flex:1;background:#0a0a0a;border:1px dashed #333;border-radius:10px;padding:12px;color:#aaa;font-family:Oswald,sans-serif;font-size:13px;cursor:pointer;letter-spacing:.5px;">📷 Upload Photo</button>
@@ -5558,7 +5560,7 @@ function togglePwd(id, btn) {
 // ── END SUPABASE SNIPPET ────────────────────────────────────────────────────
 
 // ═══ RADIUS / NEARBY CITIES ═══
-var _radiusMiles = 0;
+var _radiusMiles = 5;
 
 function setRadius(el, miles) {
   document.querySelectorAll('.radius-chip').forEach(function(c){c.classList.remove('active');});
@@ -5569,101 +5571,121 @@ function setRadius(el, miles) {
 // Nearby cities map — grouped by radius rings
 var nearbyCities = {
   'burbank': {
+    5: ['Glendale','North Hollywood','Studio City','Toluca Lake','Universal City'],
     10: ['Glendale','North Hollywood','Studio City','Toluca Lake','Universal City','Sun Valley','Sunland','Tujunga'],
     25: ['Los Angeles','Pasadena','Sherman Oaks','Encino','Van Nuys','Reseda','Chatsworth','Woodland Hills','Calabasas','Alhambra','Monterey Park','San Gabriel','Temple City','Arcadia','Monrovia'],
     50: ['Long Beach','Anaheim','Santa Monica','Culver City','Inglewood','Torrance','Compton','Hawthorne','El Monte','West Covina','Pomona','Ontario','Rancho Cucamonga','Oxnard','Thousand Oaks','Simi Valley','Ventura','Santa Clarita','Valencia']
   },
   'los angeles': {
+    5: ['West Hollywood','Culver City','Inglewood','Hawthorne','Gardena','Monterey Park','Alhambra'],
     10: ['West Hollywood','Culver City','Inglewood','Hawthorne','Gardena','Compton','South Gate','Lynwood','Maywood','Bell','Huntington Park','Vernon','Commerce','Monterey Park','Alhambra'],
     25: ['Long Beach','Torrance','Carson','Lakewood','Downey','Norwalk','Whittier','La Mirada','Santa Fe Springs','Pico Rivera','El Monte','Arcadia','Pasadena','Burbank','Glendale','Santa Monica','Malibu','San Fernando'],
     50: ['Anaheim','Santa Ana','Orange','Garden Grove','Pomona','Ontario','Rancho Cucamonga','Riverside','San Bernardino','Oxnard','Ventura','Santa Barbara','Thousand Oaks','Palmdale','Lancaster']
   },
   'new york': {
+    5: ['Brooklyn','Queens','Bronx','Newark','Jersey City','Hoboken'],
     10: ['Brooklyn','Queens','Bronx','Newark','Jersey City','Hoboken','Yonkers','Mount Vernon','New Rochelle'],
     25: ['Staten Island','Stamford','Greenwich','White Plains','Hempstead','Long Island City','Jamaica','Flushing','Astoria','Bayonne','Elizabeth'],
     50: ['Hartford','Bridgeport','New Haven','Trenton','Philadelphia','Allentown','Poughkeepsie','Newburgh']
   },
   'chicago': {
+    5: ['Evanston','Oak Park','Cicero','Berwyn','Skokie'],
     10: ['Evanston','Oak Park','Cicero','Berwyn','Calumet City','Harvey','Waukegan','Skokie'],
     25: ['Naperville','Aurora','Joliet','Elgin','Waukegan','Gary','Hammond','Arlington Heights','Schaumburg'],
     50: ['Rockford','Kenosha','Racine','Milwaukee','South Bend','Kankakee']
   },
   'houston': {
+    5: ['Pasadena','Pearland','Bellaire','West University'],
     10: ['Pasadena','Baytown','Pearland','Sugar Land','Missouri City','Stafford','Bellaire','West University'],
     25: ['Katy','The Woodlands','Conroe','League City','Friendswood','Galveston','Texas City','Clear Lake'],
     50: ['Galveston','Beaumont','Port Arthur','Angleton','Victoria','Bryan','College Station']
   },
   'dallas': {
+    5: ['Fort Worth','Arlington','Irving','Garland','Mesquite'],
     10: ['Fort Worth','Arlington','Irving','Garland','Mesquite','Plano','Richardson','Grand Prairie'],
     25: ['McKinney','Frisco','Allen','Denton','Carrollton','Lewisville','Flower Mound','Mansfield'],
     50: ['Waco','Tyler','Longview','Sherman','Gainesville']
   },
   'phoenix': {
+    5: ['Scottsdale','Tempe','Mesa','Chandler'],
     10: ['Scottsdale','Tempe','Mesa','Chandler','Glendale','Peoria','Sun City'],
     25: ['Gilbert','Queen Creek','Apache Junction','Avondale','Goodyear','Surprise','Litchfield Park'],
     50: ['Tucson','Prescott','Flagstaff','Yuma','Casa Grande']
   },
   'san francisco': {
+    5: ['Oakland','Berkeley','Daly City','South San Francisco'],
     10: ['Oakland','Berkeley','San Jose','Santa Clara','Fremont','Hayward','Daly City','South San Francisco'],
     25: ['Walnut Creek','Concord','Richmond','San Rafael','Novato','San Mateo','Redwood City','Palo Alto'],
     50: ['Santa Cruz','Salinas','Monterey','Sacramento','Stockton','Modesto']
   },
   'seattle': {
+    5: ['Bellevue','Renton','Burien','Tukwila','Shoreline'],
     10: ['Bellevue','Redmond','Kirkland','Renton','Burien','Tukwila','Shoreline','Edmonds'],
     25: ['Tacoma','Auburn','Kent','Federal Way','Puyallup','Bothell','Everett','Marysville'],
     50: ['Olympia','Bellingham','Vancouver WA','Portland OR']
   },
   'portland': {
+    5: ['Gresham','Beaverton','Milwaukie','Tigard'],
     10: ['Gresham','Beaverton','Hillsboro','Lake Oswego','Milwaukie','Tigard','Tualatin'],
     25: ['Vancouver WA','Salem','McMinnville','Newberg','Oregon City','Camas WA','Longview WA'],
     50: ['Salem','Albany','Corvallis','Eugene','Astoria','Tillamook']
   },
   'denver': {
+    5: ['Aurora','Lakewood','Westminster','Englewood'],
     10: ['Aurora','Lakewood','Westminster','Thornton','Arvada','Centennial','Englewood'],
     25: ['Boulder','Longmont','Loveland','Fort Collins','Greeley','Castle Rock','Parker','Brighton'],
     50: ['Colorado Springs','Pueblo','Vail','Aspen','Grand Junction']
   },
   'miami': {
+    5: ['Fort Lauderdale','Hialeah','Miami Beach','Coral Gables'],
     10: ['Fort Lauderdale','Hollywood FL','Hialeah','Miami Beach','Coral Gables','Homestead','Doral'],
     25: ['West Palm Beach','Boca Raton','Delray Beach','Pompano Beach','Davie','Miramar','Pembroke Pines'],
     50: ['Naples','Marco Island','Key West','Vero Beach','Port St Lucie']
   },
   'atlanta': {
+    5: ['Decatur','Sandy Springs','Smyrna','College Park'],
     10: ['Decatur','Sandy Springs','Marietta','Smyrna','Roswell','Alpharetta','College Park'],
     25: ['Cumming','Kennesaw','Douglasville','Fayetteville','Newnan','Lawrenceville','Gainesville GA'],
     50: ['Macon','Athens','Chattanooga TN','Greenville SC']
   },
   'boston': {
+    5: ['Cambridge','Somerville','Quincy','Brookline'],
     10: ['Cambridge','Somerville','Quincy','Newton','Brookline','Waltham','Malden'],
     25: ['Worcester','Providence RI','Manchester NH','Lowell','Lawrence','Salem MA','Plymouth'],
     50: ['Springfield MA','Hartford CT','Portland ME','Concord NH']
   },
   'las vegas': {
+    5: ['Henderson','North Las Vegas','Paradise'],
     10: ['Henderson','North Las Vegas','Boulder City','Summerlin','Paradise'],
     25: ['Pahrump','Mesquite NV','Laughlin'],
     50: ['St George UT','Kingman AZ','Barstow CA']
   },
   'san diego': {
+    5: ['Chula Vista','El Cajon','La Mesa','National City'],
     10: ['Chula Vista','El Cajon','Santee','La Mesa','National City','Escondido','Vista'],
     25: ['Oceanside','Carlsbad','Encinitas','San Marcos','Fallbrook','Temecula','Murrieta'],
     50: ['Los Angeles','Orange County','Riverside','San Bernardino','Tijuana MX']
   },
   'orange county': {
+    5: ['Anaheim','Santa Ana','Irvine','Huntington Beach'],
     10: ['Anaheim','Santa Ana','Irvine','Huntington Beach','Garden Grove','Fullerton','Orange'],
     25: ['Long Beach','Los Angeles','Riverside','San Bernardino','Temecula','Murrieta'],
     50: ['San Diego','Los Angeles','Palm Springs']
   },
   'pasadena': {
+    5: ['Arcadia','Monrovia','Temple City','San Gabriel','Alhambra'],
     10: ['Arcadia','Monrovia','Temple City','San Gabriel','Alhambra','El Monte','Burbank','Glendale'],
     25: ['Los Angeles','Pomona','West Covina','Covina','Azusa','Glendora','La Verne'],
     50: ['Long Beach','Anaheim','Ontario','San Bernardino','Riverside']
   },
   'long beach': {
+    5: ['Compton','Carson','Signal Hill','Lakewood'],
     10: ['Compton','Carson','Torrance','Signal Hill','Lakewood','Bellflower','Paramount'],
     25: ['Los Angeles','Anaheim','Garden Grove','Huntington Beach','Santa Ana','Inglewood'],
     50: ['San Diego','Riverside','Ontario','Burbank','Pasadena']
   },
   'nashville': {
+    5: ['Brentwood','Franklin','Hendersonville'],
     10: ['Brentwood','Franklin','Murfreesboro','Hendersonville','Gallatin','Madison TN'],
     25: ['Columbia TN','Shelbyville','Lebanon TN','Clarksville TN'],
     50: ['Memphis','Knoxville','Chattanooga','Louisville KY']
@@ -5674,6 +5696,7 @@ var nearbyCities = {
     50: ['Baton Rouge','Biloxi MS','Mobile AL','Lafayette LA']
   },
   'austin': {
+    5: ['Round Rock','Cedar Park','Pflugerville'],
     10: ['Round Rock','Cedar Park','Pflugerville','Georgetown TX','Kyle TX','Buda TX'],
     25: ['San Marcos','Lockhart','Bastrop','Elgin TX','Taylor TX'],
     50: ['San Antonio','Waco','Temple TX','Killeen']
@@ -5739,6 +5762,7 @@ var nearbyCities = {
     50: ['Washington DC','Norfolk VA','Raleigh NC','Charlottesville VA']
   },
   'washington dc': {
+    5: ['Arlington VA','Alexandria VA','Bethesda MD','Silver Spring MD'],
     10: ['Arlington VA','Alexandria VA','Bethesda MD','Silver Spring MD','College Park MD'],
     25: ['Baltimore','Rockville MD','Reston VA','Tysons VA','Gaithersburg MD'],
     50: ['Richmond VA','Philadelphia','Annapolis MD','Frederick MD']
@@ -5759,6 +5783,7 @@ var nearbyCities = {
     50: ['Toledo OH','Lansing MI','Grand Rapids MI','Windsor ON']
   },
   'sacramento': {
+    5: ['Elk Grove','Roseville','Citrus Heights'],
     10: ['Elk Grove','Roseville','Folsom','Citrus Heights','Rancho Cordova','West Sacramento'],
     25: ['Davis CA','Woodland CA','Lincoln CA','Auburn CA','Stockton','Lodi CA'],
     50: ['San Francisco','Fresno','Reno NV','Chico CA']
@@ -5771,16 +5796,16 @@ var nearbyCities = {
 };
 
 function getCitiesForRadius(city, miles) {
-  if (miles === 0) return [];
   var key = city.toLowerCase().replace(/,?\s*(ca|tx|ny|fl|il|pa|oh|wa|or|co|az|nv|ga|tn|nc|va|ma|md|nj|mn|mo|wi|in|ky|la|al|sc|ok|ar|ct|ri|ne|ks|ia|nd|sd|id|mt|wy|vt|nh|me|de|hi|ak|ut|nm|wv|mi|ms)$/i, '').trim();
   var cityData = nearbyCities[key];
   if (!cityData) return [];
-  
+
   var result = [];
+  if (miles >= 5 && cityData[5]) result = result.concat(cityData[5]);
   if (miles >= 10 && cityData[10]) result = result.concat(cityData[10]);
   if (miles >= 25 && cityData[25]) result = result.concat(cityData[25]);
-  if (miles >= 50 && cityData[50]) result = result.concat(cityData[50]);
-  return result;
+  if (miles >= 25 && cityData[50]) result = result.concat(cityData[50]); // 25+ includes 50 data
+  return [...new Set(result)]; // dedupe
 }
 
 async function doSearch() {
@@ -6036,20 +6061,24 @@ async function loadEvents(category, citySearch) {
   // Get nearby cities based on radius setting
   var nearbyCityList = getCitiesForRadius(searchTerm, _radiusMiles);
   
-  filtered = data.filter(function(e) {
+  var primaryMatches = [];
+  var nearbyMatches = [];
+
+  data.forEach(function(e) {
     var city = (e.city || '').toLowerCase();
     var location = (e.location || '').toLowerCase();
-    // Match primary city
-    if (city.indexOf(search) !== -1 || location.indexOf(search) !== -1) return true;
-    // Match nearby cities
-    if (nearbyCityList.length > 0) {
-      return nearbyCityList.some(function(nearby) {
+    if (city.indexOf(search) !== -1 || location.indexOf(search) !== -1) {
+      primaryMatches.push(e); // exact city match — goes first
+    } else if (nearbyCityList.length > 0) {
+      var isNearby = nearbyCityList.some(function(nearby) {
         var n = nearby.toLowerCase();
         return city.indexOf(n) !== -1 || location.indexOf(n) !== -1;
       });
+      if (isNearby) nearbyMatches.push(e);
     }
-    return false;
   });
+
+  filtered = primaryMatches.concat(nearbyMatches);
 
   var rc = document.getElementById('resultCount');
   var rl = document.getElementById('resultLoc');

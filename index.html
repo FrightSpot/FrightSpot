@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_56.html -->
+<!-- saved from url=(0062)file:///Users/jenniferspincic/Downloads/frightspot-app_57.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -2868,9 +2868,9 @@ var currentUser = window.currentUser || null;
           <div class="countdown-colon">:</div>
           <div class="countdown-unit"><div class="countdown-num" id="cdHours">04</div><div class="countdown-lbl">Hours</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdMins">31</div><div class="countdown-lbl">Mins</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdMins">14</div><div class="countdown-lbl">Mins</div></div>
           <div class="countdown-colon">:</div>
-          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">01</div><div class="countdown-lbl">Secs</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cdSecs">39</div><div class="countdown-lbl">Secs</div></div>
         </div>
         <div class="countdown-sub">Until October 31, 2026</div>
       </div>
@@ -4102,7 +4102,7 @@ var currentUser = window.currentUser || null;
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">👥 Meetups</div>
               <div class="interest-pill" onclick="this.classList.toggle(&#39;active&#39;)">☠️ Conventions</div>
             </div>
-            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_56.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_56.html#">Privacy Policy</a>.</div>
+            <div class="auth-terms">By creating an account you agree to FrightSpot's <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_57.html#">Terms of Service</a> and <a href="file:///Users/jenniferspincic/Downloads/frightspot-app_57.html#">Privacy Policy</a>.</div>
             <button class="auth-submit" onclick="doSignup()">Create My Account →</button>
             <div class="auth-switch">Already have an account? <a onclick="switchTab(&#39;login&#39;)">Log in →</a></div>
           </div>
@@ -4146,7 +4146,7 @@ var currentUser = window.currentUser || null;
             <div style="font-family:&#39;Special Elite&#39;,serif;font-size:10px;color:#e8431a;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">⬡ Founder Member ⬡</div>
             <div style="position:relative;width:100px;height:100px;margin:0 auto 12px;">
               <div style="width:100px;height:100px;border-radius:50%;background:radial-gradient(135deg,#8b0000,#2a0000);display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;z-index:2;overflow:hidden;">
-                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_56.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+                <img id="avatarImg" src="file:///Users/jenniferspincic/Downloads/frightspot-app_57.html" style="width:100%;height:100%;object-fit:cover;display:none;">
                 <span id="avatarEmoji">🎃</span>
               </div>
               <div style="position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(#e8431a,#8b0000,#ff4500,#8b0000,#e8431a);z-index:1;"></div>
@@ -4297,7 +4297,7 @@ var currentUser = window.currentUser || null;
         <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Profile Photo</div>
         <div style="display:flex;align-items:center;gap:14px;">
           <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#e8431a,#c0392b);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;overflow:hidden;border:2px solid #e8431a;">
-            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_56.html" style="width:100%;height:100%;object-fit:cover;display:none;">
+            <img id="editAvatarPreview" src="file:///Users/jenniferspincic/Downloads/frightspot-app_57.html" style="width:100%;height:100%;object-fit:cover;display:none;">
             <span id="editAvatarEmoji">🎃</span>
           </div>
           <button onclick="triggerPhotoUpload()" style="flex:1;background:#0a0a0a;border:1px dashed #333;border-radius:10px;padding:12px;color:#aaa;font-family:Oswald,sans-serif;font-size:13px;cursor:pointer;letter-spacing:.5px;">📷 Upload Photo</button>
@@ -5897,7 +5897,11 @@ async function doSearch() {
 }
 
 function updateRadius(v) { var e=document.getElementById('radiusDisplay'); if(e) e.textContent=v; }
-function setChip(el) { document.querySelectorAll('.chip,.dpill,.dp').forEach(function(c){c.classList.remove('active');}); el.classList.add('active'); }
+function setChip(el) {
+  document.querySelectorAll('.chip,.dpill,.dp').forEach(function(c){c.classList.remove('active');});
+  el.classList.add('active');
+  window._activeDateFilter = el.textContent.trim();
+}
 function setDP(el) { setChip(el); }
 function toggleFilters() {
   var p=document.getElementById('filterPanel'); var b=document.getElementById('filterToggle');
@@ -6026,6 +6030,33 @@ async function catClick(el, cat, count) {
 // ── LOAD EVENTS FROM SUPABASE ────────────────────────────────────────────────
 var todayISO = new Date().toISOString().split('T')[0];
 
+function getDateRange(filter) {
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  if (filter === 'Today') {
+    var end = new Date(today);
+    end.setDate(end.getDate() + 1);
+    return { start: today.toISOString().split('T')[0], end: end.toISOString().split('T')[0] };
+  }
+  if (filter === 'This Weekend') {
+    var day = today.getDay(); // 0=Sun, 6=Sat
+    var daysToFri = day <= 5 ? 5 - day : 6;
+    var fri = new Date(today); fri.setDate(today.getDate() + daysToFri);
+    var mon = new Date(fri); mon.setDate(fri.getDate() + 3);
+    return { start: fri.toISOString().split('T')[0], end: mon.toISOString().split('T')[0] };
+  }
+  if (filter === 'This Week') {
+    var endWeek = new Date(today); endWeek.setDate(today.getDate() + 7);
+    return { start: today.toISOString().split('T')[0], end: endWeek.toISOString().split('T')[0] };
+  }
+  if (filter === 'This Month') {
+    var endMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+    return { start: today.toISOString().split('T')[0], end: endMonth.toISOString().split('T')[0] };
+  }
+  return null; // All Upcoming - no date filter
+}
+
 async function loadEvents(category, citySearch) {
   if (!window.supabase) { showToast('Still connecting... try again in a moment 🎃'); return; }
 
@@ -6034,16 +6065,31 @@ async function loadEvents(category, citySearch) {
   if (rs) rs.style.display = 'block';
   if (el) el.innerHTML = '<div style="text-align:center;padding:40px;color:#555;font-size:13px;font-family:-apple-system,sans-serif;">Loading frights... 🎃</div>';
 
+  // Get active date filter
+  var activeChip = document.querySelector('.chip.active');
+  var dateFilter = window._activeDateFilter || (activeChip ? activeChip.textContent.trim() : 'This Weekend');
+  var dateRange = getDateRange(dateFilter);
+
   var query = window.supabase
     .from('events')
     .select('*')
     .in('status', ['active', 'live'])
-    .or('end_date.gte.' + todayISO + ',end_date.is.null')
     .order('featured', { ascending: false })
     .order('start_date', { ascending: true, nullsFirst: true })
     .limit(200);
 
   if (category) query = query.eq('category', category);
+
+  // Apply date filter
+  if (dateRange) {
+    // Events that start within the range OR are ongoing (started before, end after range start)
+    query = query.or(
+      'start_date.gte.' + dateRange.start + ',end_date.gte.' + dateRange.start
+    ).lte('start_date', dateRange.end);
+  } else {
+    // All Upcoming - just filter out past events
+    query = query.or('end_date.gte.' + todayISO + ',end_date.is.null');
+  }
 
   var { data, error } = await query;
 

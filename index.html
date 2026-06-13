@@ -2669,6 +2669,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const SUPABASE_URL = 'https://kjuuvusysakeobcsaste.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqdXV2dXN5c2FrZW9iY3Nhc3RlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwOTYzMjUsImV4cCI6MjA5MzY3MjMyNX0.Cr5-bH01CMfwRZhZSmB36HbMr1RD72cBT_st2ae0mZY';
+var ADMIN_USER_ID = 'cc1bbcf6-951e-42f3-8405-64b556e41950';
 window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {
     persistSession: true,
@@ -2694,15 +2695,16 @@ window.addEventListener('load', async function() {
 
 // Auth state listener
 window.supabase.auth.onAuthStateChange(function(event, session) {
+  // Ignore token refresh events to prevent loops
+  if (event === 'TOKEN_REFRESHED') return;
+
   if (session && session.user) {
     window.currentUser = session.user;
     if (typeof updateAuthUI === 'function') updateAuthUI(session.user);
     // Show admin button if admin
-    setTimeout(function() {
-      var adminBtn = document.getElementById('adminNavBtn');
-      if (adminBtn) adminBtn.style.display = (window.currentUser && window.currentUser.id === ADMIN_USER_ID) ? 'block' : 'none';
-    }, 300);
-    // Only navigate on explicit sign in, not on token refresh
+    var adminBtn = document.getElementById('adminNavBtn');
+    if (adminBtn) adminBtn.style.display = (session.user.id === ADMIN_USER_ID) ? 'block' : 'none';
+    // Only navigate on explicit sign in through the modal
     if (event === 'SIGNED_IN') {
       var modal = document.getElementById('loginModal');
       if (modal && modal.classList.contains('open')) {
@@ -2710,9 +2712,11 @@ window.supabase.auth.onAuthStateChange(function(event, session) {
         if (typeof fsShow === 'function') fsShow('home');
       }
     }
-  } else {
+  } else if (event === 'SIGNED_OUT') {
     window.currentUser = null;
     if (typeof updateAuthUI === 'function') updateAuthUI(null);
+    var adminBtn = document.getElementById('adminNavBtn');
+    if (adminBtn) adminBtn.style.display = 'none';
   }
 });
 </script>
@@ -6351,7 +6355,6 @@ function sendChat() {
 }
 
 // ═══ ADMIN ═══
-var ADMIN_USER_ID = 'cc1bbcf6-951e-42f3-8405-64b556e41950';
 var _currentAdminSubmission = null;
 
 function isAdmin() {

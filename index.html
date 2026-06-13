@@ -6432,7 +6432,15 @@ window.addEventListener('load', function() {
     if (splash) splash.classList.add('hidden');
     setTimeout(function() { if (splash) splash.style.display = 'none'; }, 500);
   }, 1200);
-  setTimeout(loadHomeStrips, 500);
+  // Wait for Supabase to be ready before loading strips
+  function tryLoadStrips(attempts) {
+    if (window.supabase) {
+      loadHomeStrips();
+    } else if (attempts > 0) {
+      setTimeout(function() { tryLoadStrips(attempts - 1); }, 300);
+    }
+  }
+  setTimeout(function() { tryLoadStrips(10); }, 500);
 });
 
 // ═══ COUNTDOWN ═══

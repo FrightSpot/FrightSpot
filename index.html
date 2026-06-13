@@ -5856,26 +5856,31 @@ async function loadEvents(category, citySearch) {
     if (stateMatch) searchState = stateMatch[1].toUpperCase();
   }
 
-  function cityMatches(eventCity, searchTerm) {
+  function cityMatches(eventCity, searchTerm, requireState) {
     var c = eventCity.toLowerCase();
     if (c.indexOf(searchTerm) === -1) return false;
-    // If user specified a state and event has a different state, exclude it
-    if (searchState) {
-      var stateInCity = eventCity.match(/(CA|TX|NY|FL|IL|PA|OH|WA|OR|CO|AZ|NV|GA|TN|NC|VA|MA|MD|NJ|MN|MO|WI|IN|KY|LA|AL|SC|OK|AR|CT|RI|NE|KS|IA|ND|SD|ID|MT|WY|VT|NH|ME|DE|HI|AK|UT|NM|WV|MI|MS)/i);
-      if (stateInCity && stateInCity[1].toUpperCase() !== searchState) return false;
-    }
+    // Always check state if available
+    var stateInCity = eventCity.match(/(CA|TX|NY|FL|IL|PA|OH|WA|OR|CO|AZ|NV|GA|TN|NC|VA|MA|MD|NJ|MN|MO|WI|IN|KY|LA|AL|SC|OK|AR|CT|RI|NE|KS|IA|ND|SD|ID|MT|WY|VT|NH|ME|DE|HI|AK|UT|NM|WV|MI|MS)/i);
+    if (searchState && stateInCity && stateInCity[1].toUpperCase() !== searchState) return false;
+    // For nearby city matching, if event has a state that doesnt match search state, exclude it
+    if (requireState && searchState && stateInCity && stateInCity[1].toUpperCase() !== searchState) return false;
     return true;
   }
 
   data.forEach(function(e) {
     var city = (e.city || '');
     var location = (e.location || '').toLowerCase();
-    if (cityMatches(city, search) || location.indexOf(search) !== -1) {
+    if (cityMatches(city, search, false) || location.indexOf(search) !== -1) {
+      // Double check state for primary matches too
+      var evState = city.match(/(CA|TX|NY|FL|IL|PA|OH|WA|OR|CO|AZ|NV|GA|TN|NC|VA|MA|MD|NJ|MN|MO|WI|IN|KY|LA|AL|SC|OK|AR|CT|RI|NE|KS|IA|ND|SD|ID|MT|WY|VT|NH|ME|DE|HI|AK|UT|NM|WV|MI|MS)/i);
+      if (searchState && evState && evState[1].toUpperCase() !== searchState) return;
       primaryMatches.push(e);
     } else if (nearbyCityList.length > 0) {
       var isNearby = nearbyCityList.some(function(nearby) {
         var n = nearby.toLowerCase();
-        return cityMatches(city, n) || location.indexOf(n) !== -1;
+        // For nearby matches, enforce state matching to prevent Long Beach CA showing in NY searches
+        if (!cityMatches(city, n, true)) return false;
+        return true;
       });
       if (isNearby) nearbyMatches.push(e);
     }

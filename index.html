@@ -6317,23 +6317,114 @@ function selectAdmission(type) {
   }
 }
 
-function submitHauntListing() {
+async function submitHauntListing() {
   var name = document.getElementById('hauntName') ? document.getElementById('hauntName').value.trim() : '';
   var email = document.getElementById('hauntContactEmail') ? document.getElementById('hauntContactEmail').value.trim() : '';
   var city = document.getElementById('hauntCity') ? document.getElementById('hauntCity').value.trim() : '';
+  var contactName = document.getElementById('hauntContactName') ? document.getElementById('hauntContactName').value.trim() : '';
   if (!name || !email || !city) { showToast('Please fill in all required fields 👻'); return; }
-  showToast('Submitted! We review within 24 hours 🎃');
-  showSubmitForm('choice');
+
+  var submission = {
+    type: 'haunt',
+    name: name,
+    description: document.getElementById('hauntDesc') ? document.getElementById('hauntDesc').value.trim() : '',
+    city: city,
+    zip: document.getElementById('hauntZip') ? document.getElementById('hauntZip').value.trim() : '',
+    address: document.getElementById('hauntAddress') ? document.getElementById('hauntAddress').value.trim() : '',
+    start_date: document.getElementById('hauntStart') ? document.getElementById('hauntStart').value || null : null,
+    end_date: document.getElementById('hauntEnd') ? document.getElementById('hauntEnd').value || null : null,
+    hours: document.getElementById('hauntHours') ? document.getElementById('hauntHours').value.trim() : '',
+    price: document.getElementById('hauntPrice') ? document.getElementById('hauntPrice').value.trim() : '',
+    ticket_url: document.getElementById('hauntTicket') ? document.getElementById('hauntTicket').value.trim() : '',
+    instagram: document.getElementById('hauntInsta') ? document.getElementById('hauntInsta').value.trim() : '',
+    haunt_type: _hauntType,
+    admission_type: _admType,
+    contact_name: contactName,
+    contact_email: email,
+    status: 'pending'
+  };
+
+  try {
+    var { error } = await window.supabase.from('submissions').insert([submission]);
+    if (error) throw error;
+    showToast('Submitted! We review within 24 hours 🎃');
+    showSubmitForm('choice');
+  } catch(e) {
+    console.error('Submission error:', e);
+    showToast('Something went wrong. Please try again 👻');
+  }
 }
 
-function submitEventListing() {
-  showToast('Submitted! We review within 24 hours 🎃');
-  showSubmitForm('choice');
+async function submitEventListing() {
+  var nameEl = document.querySelector('#submitEventForm input[placeholder="e.g. Midsummer Scream 2026"]');
+  var emailEl = document.querySelector('#submitEventForm input[type="email"]');
+  var cityEl = document.querySelector('#submitEventForm input[placeholder="City"]');
+  var catEl = document.querySelector('#submitEventForm select');
+
+  if (!nameEl || !nameEl.value.trim()) { showToast('Please enter an event name 👻'); return; }
+  if (!emailEl || !emailEl.value.trim()) { showToast('Please enter your email 👻'); return; }
+
+  var submission = {
+    type: 'event',
+    name: nameEl ? nameEl.value.trim() : '',
+    category: catEl ? catEl.value.replace(/^[^\s]+ /, '') : '',
+    description: (document.querySelector('#submitEventForm textarea') || {}).value || '',
+    city: cityEl ? cityEl.value.trim() : '',
+    contact_email: emailEl ? emailEl.value.trim() : '',
+    contact_name: (document.querySelector('#submitEventForm input[placeholder="First and last name"]') || {}).value || '',
+    website: (document.querySelector('#submitEventForm input[placeholder="https://..."]') || {}).value || '',
+    ticket_url: (document.querySelectorAll('#submitEventForm input[type="url"]')[1] || {}).value || '',
+    instagram: (document.querySelector('#submitEventForm input[placeholder="@yourhandle"]') || {}).value || '',
+    price: (document.querySelector('#submitEventForm input[placeholder="$25 or Free"]') || {}).value || '',
+    hours: (document.querySelector('#submitEventForm input[placeholder="e.g. Sat–Sun 10am–6pm"]') || {}).value || '',
+    start_date: (document.querySelectorAll('#submitEventForm input[type="date"]')[0] || {}).value || null,
+    end_date: (document.querySelectorAll('#submitEventForm input[type="date"]')[1] || {}).value || null,
+    status: 'pending'
+  };
+
+  try {
+    var { error } = await window.supabase.from('submissions').insert([submission]);
+    if (error) throw error;
+    showToast('Submitted! We review within 24 hours 🎃');
+    showSubmitForm('choice');
+  } catch(e) {
+    console.error('Submission error:', e);
+    showToast('Something went wrong. Please try again 👻');
+  }
 }
 
-function submitShopListing() {
-  showToast('Submitted! We review within 24 hours 🎃');
-  showSubmitForm('choice');
+async function submitShopListing() {
+  var nameEl = document.querySelector('#submitShopForm input[placeholder="e.g. The Dark Emporium"]');
+  var emailEl = document.querySelector('#submitShopForm input[type="email"]');
+
+  if (!nameEl || !nameEl.value.trim()) { showToast('Please enter your shop name 👻'); return; }
+  if (!emailEl || !emailEl.value.trim()) { showToast('Please enter your email 👻'); return; }
+
+  var submission = {
+    type: 'shop',
+    name: nameEl ? nameEl.value.trim() : '',
+    category: 'Spooky Retail',
+    description: (document.querySelector('#submitShopForm textarea') || {}).value || '',
+    city: (document.querySelector('#submitShopForm input[placeholder="City"]') || {}).value || '',
+    zip: (document.querySelector('#submitShopForm input[placeholder="91505"]') || {}).value || '',
+    address: (document.querySelector('#submitShopForm input[placeholder="Street address"]') || {}).value || '',
+    hours: (document.querySelector('#submitShopForm input[placeholder="e.g. Mon-Sat 10am-7pm, Sun 12-5pm"]') || {}).value || '',
+    website: (document.querySelector('#submitShopForm input[type="url"]') || {}).value || '',
+    instagram: (document.querySelector('#submitShopForm input[placeholder="@yourshop"]') || {}).value || '',
+    contact_name: (document.querySelector('#submitShopForm input[placeholder="First and last name"]') || {}).value || '',
+    contact_email: emailEl ? emailEl.value.trim() : '',
+    status: 'pending'
+  };
+
+  try {
+    var { error } = await window.supabase.from('submissions').insert([submission]);
+    if (error) throw error;
+    showToast('Submitted! We review within 24 hours 🎃');
+    showSubmitForm('choice');
+  } catch(e) {
+    console.error('Submission error:', e);
+    showToast('Something went wrong. Please try again 👻');
+  }
 }
 
 // ═══ SAVE ═══

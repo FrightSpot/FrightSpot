@@ -2697,9 +2697,18 @@ window.supabase.auth.onAuthStateChange(function(event, session) {
   if (session && session.user) {
     window.currentUser = session.user;
     if (typeof updateAuthUI === 'function') updateAuthUI(session.user);
+    // Show admin button if admin
+    setTimeout(function() {
+      var adminBtn = document.getElementById('adminNavBtn');
+      if (adminBtn) adminBtn.style.display = (window.currentUser && window.currentUser.id === ADMIN_USER_ID) ? 'block' : 'none';
+    }, 300);
+    // Only navigate on explicit sign in, not on token refresh
     if (event === 'SIGNED_IN') {
-      // welcome toast removed
-      if (typeof fsShow === 'function') fsShow('home');
+      var modal = document.getElementById('loginModal');
+      if (modal && modal.classList.contains('open')) {
+        modal.classList.remove('open');
+        if (typeof fsShow === 'function') fsShow('home');
+      }
     }
   } else {
     window.currentUser = null;

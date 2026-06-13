@@ -2685,26 +2685,17 @@ window.addEventListener('load', async function() {
   if (session && session.user) {
     window.currentUser = session.user;
     if (typeof updateAuthUI === 'function') updateAuthUI(session.user);
-    // Show admin button if admin
-    setTimeout(function() {
-      var adminBtn = document.getElementById('adminNavBtn');
-      if (adminBtn) adminBtn.style.display = isAdmin() ? 'block' : 'none';
-    }, 300);
   }
 });
 
 // Auth state listener
 window.supabase.auth.onAuthStateChange(function(event, session) {
-  // Ignore token refresh events to prevent loops
   if (event === 'TOKEN_REFRESHED') return;
-
   if (session && session.user) {
     window.currentUser = session.user;
     if (typeof updateAuthUI === 'function') updateAuthUI(session.user);
-    // Show admin button if admin
     var adminBtn = document.getElementById('adminNavBtn');
-    if (adminBtn) adminBtn.style.display = (session.user.id === ADMIN_USER_ID) ? 'block' : 'none';
-    // Only navigate on explicit sign in through the modal
+    if (adminBtn) adminBtn.style.display = (session.user.id === ADMIN_USER_ID) ? 'flex' : 'none';
     if (event === 'SIGNED_IN') {
       var modal = document.getElementById('loginModal');
       if (modal && modal.classList.contains('open')) {
@@ -2796,52 +2787,44 @@ var currentUser = window.currentUser || null;
     <!-- CATEGORIES — THE STAR -->
     <div class="cats-block">
       <div class="block-title">Browse Events by Category</div>
-      <div class="cat-grid">
-        <div class="cat-card" onclick="catClick(this,'Haunts','154')">
+            <div class="cat-grid">
+        <div class="cat-card" onclick="catClick(this,'Haunts Map','158')">
           <div class="cat-emoji">🎃</div>
-          <div class="cat-name">Haunts</div>
+          <div class="cat-name">Haunts Map</div>
         </div>
-        <div class="cat-card" onclick="catClick(this,'Conventions','118')">
+        <div class="cat-card" onclick="catClick(this,'Conventions','165')">
           <div class="cat-emoji">☠️</div>
           <div class="cat-name">Conventions</div>
         </div>
-        <div class="cat-card" onclick="catClick(this,'Paranormal','271')">
+        <div class="cat-card" onclick="catClick(this,'Paranormal','292')">
           <div class="cat-emoji">👁️</div>
           <div class="cat-name">Paranormal</div>
         </div>
-        <div class="cat-card" onclick="catClick(this,'Film & Theater','28')">
+        <div class="cat-card" onclick="catClick(this,'Film','33')">
           <div class="cat-emoji">🎦</div>
           <div class="cat-name">Film &amp; Theater</div>
         </div>
-        <div class="cat-card" onclick="catClick(this,'Festivals','107')">
+        <div class="cat-card" onclick="catClick(this,'Festivals','117')">
           <div class="cat-emoji">🌕</div>
           <div class="cat-name">Festivals</div>
         </div>
-        <div class="cat-card" onclick="catClick(this,'Classes','16')">
+        <div class="cat-card" onclick="catClick(this,'Classes','8')">
           <div class="cat-emoji">⚗️</div>
           <div class="cat-name">Classes</div>
         </div>
-        <div class="cat-card" onclick="catClick(this,'Markets & Pop Ups','84')">
-          <div class="cat-emoji">🛍️</div>
-          <div class="cat-name">Markets &amp; Pop Ups</div>
-        </div>
-        <div class="cat-card" onclick="catClick(this,'Spooky Retail','63')">
+        <div class="cat-card" onclick="catClick(this,'Shop','187')">
           <div class="cat-emoji">🕯️</div>
-          <div class="cat-name">Spooky Retail</div>
+          <div class="cat-name">Shop &amp; Markets</div>
         </div>
-        <div class="cat-card" onclick="catClick(this,'Art','4')">
-          <div class="cat-emoji">🎨</div>
-          <div class="cat-name">Art</div>
-        </div>
-        <div class="cat-card" onclick="catClick(this,'Meetups','57')">
+        <div class="cat-card" onclick="catClick(this,'Meetups','80')">
           <div class="cat-emoji">👥</div>
           <div class="cat-name">Meetups</div>
         </div>
-        <div class="cat-card" onclick="catClick(this,'Bars & Restaurants','41')">
+        <div class="cat-card" onclick="catClick(this,'Bars & Restaurants','42')">
           <div class="cat-emoji">🍸</div>
           <div class="cat-name">Bars &amp; Restaurants</div>
         </div>
-        <div class="cat-card" onclick="catClick(this,'Alien & UFO','12')">
+        <div class="cat-card" onclick="catClick(this,'Alien & UFO','19')">
           <div class="cat-emoji">🛸</div>
           <div class="cat-name">Alien &amp; UFO</div>
         </div>
@@ -2964,232 +2947,488 @@ var currentUser = window.currentUser || null;
   </div>
 
   <div class="fs-page" id="fs-page-community">
-    <div style="background:#080808;min-height:100%;padding-bottom:80px;">
+    <div class="comm-hero">
+      <div class="comm-hero-title">Fright <span>Pack</span></div>
+      <div class="comm-hero-sub">Find your people. Go to spooky events together.</div>
+      <div class="comm-privacy-note"><span class="comm-privacy-icon">🔒</span>Control what you share and who can find you.</div>
+    </div>
 
-      <!-- HERO -->
-      <div style="padding:24px 16px 20px;background:linear-gradient(160deg,#1a0800,#080808);border-bottom:1px solid #1e1e1e;">
-        <div style="font-family:Oswald,sans-serif;font-size:28px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Fright<span style="color:#e8431a;">Pack</span></div>
-        <div style="font-size:13px;color:#888;font-family:-apple-system,sans-serif;line-height:1.5;">Find your people. Go to spooky events together.</div>
+  <!-- HOST A MEETUP BANNER -->
+  <div class="section" style="padding-bottom:14px;">
+    <div class="meetup-banner" onclick="openMeetupModal()">
+      <div class="meetup-banner-icon">☠️</div>
+      <div class="meetup-banner-text">
+        <div class="meetup-banner-title">Host a Meetup</div>
+        <div class="meetup-banner-sub">Create an event, invite the community, share anywhere</div>
       </div>
+      <div style="background:#e8431a;color:#fff;border-radius:8px;padding:8px 14px;font-family:Oswald,sans-serif;font-size:12px;font-weight:700;letter-spacing:.5px;flex-shrink:0;box-shadow:0 0 12px rgba(232,67,26,0.4);">Host One →</div>
+    </div>
+  </div>
 
-      <!-- HOST A MEETUP BANNER -->
-      <div style="padding:16px 16px 0;">
-        <div onclick="openMeetupModal()" style="background:#141414;border:1px solid #e8431a;border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;cursor:pointer;box-shadow:0 0 16px rgba(232,67,26,0.15);">
-          <div style="font-size:32px;flex-shrink:0;">☠️</div>
-          <div style="flex:1;">
-            <div style="font-family:Oswald,sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px;">Host a Meetup</div>
-            <div style="font-size:12px;color:#888;font-family:-apple-system,sans-serif;">Create an event, invite the community, share anywhere</div>
+  <div class="divider"></div>
+
+  <!-- FIND A BUDDY -->
+  <div class="section">
+    <div class="sec-head">
+      <div>
+        <div class="sec-title">Find Your Pack</div>
+        <div style="font-size:12px;color:#888;font-family:-apple-system,sans-serif;margin-top:5px;">Connect with locals who are just as weird as you are</div>
+      </div>
+      <div class="sec-more">See all →</div>
+    </div>
+  </div>
+  <div class="partner-grid">
+    <!-- Ghost Hunters -->
+    <div onclick="fsShow('group')" style="background:linear-gradient(135deg,#0f0a1a,#111);border:1px solid #7c3aed;border-radius:16px;padding:12px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 0 20px rgba(124,58,237,0.15);margin-bottom:10px;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(124,58,237,0.1) 0%,transparent 60%);pointer-events:none;"></div>
+      <div style="position:relative;z-index:1;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:22px;filter:drop-shadow(0 0 8px rgba(124,58,237,0.6));">🔦</span>
+            <div>
+              <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px;">Ghost Hunters</div>
+              <div style="font-size:10px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:600;">24 members</div>
+            </div>
           </div>
-          <div style="background:#e8431a;color:#fff;border:none;padding:8px 14px;border-radius:8px;font-family:Oswald,sans-serif;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0;">Host One →</div>
+          <div style="background:rgba(124,58,237,0.2);border:1px solid rgba(124,58,237,0.4);border-radius:20px;padding:3px 8px;font-size:9px;color:#aa88ff;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">🔥 Active</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border-left:2px solid #7c3aed;border-radius:0 6px 6px 0;padding:6px 10px;margin-bottom:8px;">
+          <div style="font-size:11px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.4;font-style:italic;">"Did anyone see the lights over Burbank last night? 👀"</div>
+          <div style="font-size:9px;color:#555;font-family:-apple-system,sans-serif;margin-top:2px;">MacabreMarco · 2h ago</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:-4px;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#e8431a;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">S</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#1d9e75;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">J</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#c0392b;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:6px;">K</div>
+            <div style="font-size:10px;color:#666;font-family:-apple-system,sans-serif;">+21 others</div>
+          </div>
+          <div style="font-size:11px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">Join Pack →</div>
         </div>
       </div>
+    </div>
 
-      <!-- GROUPS -->
-      <div style="padding:20px 16px 0;">
-        <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Find Your Pack</div>
-        <div style="font-size:12px;color:#666;font-family:-apple-system,sans-serif;margin-bottom:16px;">Join a group, start a conversation, find your people</div>
-
-        <!-- GHOST HUNTERS -->
-        <div onclick="fsShow('group')" style="background:#141414;border:1px solid #2a2a2a;border-radius:14px;padding:16px;margin-bottom:10px;cursor:pointer;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-            <span style="font-size:30px;flex-shrink:0;">🔦</span>
-            <div style="flex:1;">
-              <div style="font-family:Oswald,sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px;">Ghost Hunters</div>
-              <div style="font-size:12px;color:#888;font-family:-apple-system,sans-serif;">Share sightings, plan investigations, find a crew</div>
+    <!-- Home Haunt Builders -->
+    <div onclick="fsShow('group')" style="background:linear-gradient(135deg,#0f0a1a,#111);border:1px solid #7c3aed;border-radius:14px;padding:12px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 0 16px rgba(124,58,237,0.15);margin-bottom:0;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(124,58,237,0.1) 0%,transparent 60%);pointer-events:none;"></div>
+      <div style="position:relative;z-index:1;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:22px;filter:drop-shadow(0 0 8px rgba(124,58,237,0.6));">🏚️</span>
+            <div>
+              <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px;">Home Haunt Builders</div>
+              <div style="font-size:10px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:600;">18 members</div>
             </div>
-            <div style="background:#e8431a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-family:Oswald,sans-serif;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;">Join →</div>
           </div>
-          <div style="background:#0f0f0f;border-left:2px solid #333;border-radius:0 8px 8px 0;padding:8px 12px;margin-bottom:10px;">
-            <div style="font-size:12px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.5;font-style:italic;">"Did anyone see the lights over Burbank last night? 👀"</div>
-            <div style="font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:3px;">MacabreMarco · 2h ago</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:6px;">
-            <div style="width:22px;height:22px;border-radius:50%;background:#e8431a;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;">S</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#1d9e75;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">J</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#c0392b;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">K</div>
-            <div style="font-size:11px;color:#555;font-family:-apple-system,sans-serif;margin-left:4px;">24 members</div>
-            <div style="margin-left:auto;background:rgba(232,67,26,0.15);border:1px solid rgba(232,67,26,0.3);border-radius:20px;padding:2px 8px;font-size:9px;color:#e8431a;font-family:Oswald,sans-serif;font-weight:700;">🔥 Active</div>
-          </div>
+          <div style="background:rgba(124,58,237,0.2);border:1px solid rgba(124,58,237,0.4);border-radius:20px;padding:3px 8px;font-size:9px;color:#aa88ff;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">💬 3 new</div>
         </div>
+        <div style="background:rgba(0,0,0,0.3);border-left:2px solid #7c3aed;border-radius:0 6px 6px 0;padding:6px 10px;margin-bottom:8px;">
+          <div style="font-size:11px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.4;font-style:italic;">"Anyone know where to get cheap foam in bulk near the Valley? 🏗️"</div>
+          <div style="font-size:9px;color:#555;font-family:-apple-system,sans-serif;margin-top:2px;">HauntHenry · 4h ago</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#7c3aed;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">M</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#e8431a;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">S</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#2a5a3a;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:6px;">H</div>
+            <div style="font-size:10px;color:#666;font-family:-apple-system,sans-serif;">+15 others</div>
+          </div>
+          <div style="font-size:11px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">Join Pack →</div>
+        </div>
+      </div>
+    </div>
 
-        <!-- HOME HAUNT BUILDERS -->
-        <div onclick="fsShow('group')" style="background:#141414;border:1px solid #2a2a2a;border-radius:14px;padding:16px;margin-bottom:10px;cursor:pointer;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-            <span style="font-size:30px;flex-shrink:0;">🏚️</span>
-            <div style="flex:1;">
-              <div style="font-family:Oswald,sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px;">Home Haunt Builders</div>
-              <div style="font-size:12px;color:#888;font-family:-apple-system,sans-serif;">Share your build, swap props, find collaborators</div>
+    <!-- Witchy Circle -->
+    <div onclick="fsShow('group')" style="background:linear-gradient(135deg,#0f0a1a,#111);border:1px solid #7c3aed;border-radius:14px;padding:12px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 0 16px rgba(124,58,237,0.15);margin-bottom:0;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(124,58,237,0.1) 0%,transparent 60%);pointer-events:none;"></div>
+      <div style="position:relative;z-index:1;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:22px;filter:drop-shadow(0 0 8px rgba(124,58,237,0.6));">🌙</span>
+            <div>
+              <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px;">Witchy Circle</div>
+              <div style="font-size:10px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:600;">15 members</div>
             </div>
-            <div style="background:#e8431a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-family:Oswald,sans-serif;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;">Join →</div>
           </div>
-          <div style="background:#0f0f0f;border-left:2px solid #333;border-radius:0 8px 8px 0;padding:8px 12px;margin-bottom:10px;">
-            <div style="font-size:12px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.5;font-style:italic;">"Anyone know where to get cheap foam in bulk near the Valley? 🏗️"</div>
-            <div style="font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:3px;">HauntHenry · 4h ago · 3 replies</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:6px;">
-            <div style="width:22px;height:22px;border-radius:50%;background:#7c3aed;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;">M</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#e8431a;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">S</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#2a5a3a;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">H</div>
-            <div style="font-size:11px;color:#555;font-family:-apple-system,sans-serif;margin-left:4px;">18 members</div>
-            <div style="margin-left:auto;background:rgba(255,255,255,0.05);border:1px solid #2a2a2a;border-radius:20px;padding:2px 8px;font-size:9px;color:#888;font-family:Oswald,sans-serif;font-weight:700;">💬 3 new</div>
-          </div>
+          <div style="background:rgba(124,58,237,0.2);border:1px solid rgba(124,58,237,0.4);border-radius:20px;padding:3px 8px;font-size:9px;color:#aa88ff;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">🔥 Active</div>
         </div>
+        <div style="background:rgba(0,0,0,0.3);border-left:2px solid #7c3aed;border-radius:0 6px 6px 0;padding:6px 10px;margin-bottom:8px;">
+          <div style="font-size:11px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.4;font-style:italic;">"Full moon circle at Griffith Park this Saturday - who's joining? 🌕"</div>
+          <div style="font-size:9px;color:#555;font-family:-apple-system,sans-serif;margin-top:2px;">MoonWitch · 1d ago</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#9b59b6;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">W</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#1d9e75;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">J</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#7c3aed;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:6px;">L</div>
+            <div style="font-size:10px;color:#666;font-family:-apple-system,sans-serif;">+12 others</div>
+          </div>
+          <div style="font-size:11px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">Join Pack →</div>
+        </div>
+      </div>
+    </div>
 
-        <!-- WITCHY CIRCLE -->
-        <div onclick="fsShow('group')" style="background:#141414;border:1px solid #2a2a2a;border-radius:14px;padding:16px;margin-bottom:10px;cursor:pointer;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-            <span style="font-size:30px;flex-shrink:0;">🌙</span>
-            <div style="flex:1;">
-              <div style="font-family:Oswald,sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px;">Witchy Circle</div>
-              <div style="font-size:12px;color:#888;font-family:-apple-system,sans-serif;">Rituals, moon circles, occult resources, local connections</div>
+    <!-- UFO & Alien Enthusiasts -->
+    <div onclick="fsShow('group')" style="background:linear-gradient(135deg,#0f0a1a,#111);border:1px solid #7c3aed;border-radius:14px;padding:12px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 0 16px rgba(124,58,237,0.15);margin-bottom:0;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(124,58,237,0.1) 0%,transparent 60%);pointer-events:none;"></div>
+      <div style="position:relative;z-index:1;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:22px;filter:drop-shadow(0 0 8px rgba(124,58,237,0.6));">🛸</span>
+            <div>
+              <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px;">UFO & Alien Enthusiasts</div>
+              <div style="font-size:10px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:600;">147 members</div>
             </div>
-            <div style="background:#e8431a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-family:Oswald,sans-serif;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;">Join →</div>
           </div>
-          <div style="background:#0f0f0f;border-left:2px solid #333;border-radius:0 8px 8px 0;padding:8px 12px;margin-bottom:10px;">
-            <div style="font-size:12px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.5;font-style:italic;">"Full moon circle at Griffith Park this Saturday - who's joining? 🌕"</div>
-            <div style="font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:3px;">MoonWitch · 1d ago</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:6px;">
-            <div style="width:22px;height:22px;border-radius:50%;background:#9b59b6;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;">W</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#1d9e75;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">J</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#7c3aed;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">L</div>
-            <div style="font-size:11px;color:#555;font-family:-apple-system,sans-serif;margin-left:4px;">15 members</div>
-            <div style="margin-left:auto;background:rgba(232,67,26,0.15);border:1px solid rgba(232,67,26,0.3);border-radius:20px;padding:2px 8px;font-size:9px;color:#e8431a;font-family:Oswald,sans-serif;font-weight:700;">🔥 Active</div>
-          </div>
+          <div style="background:rgba(232,67,26,0.15);border:1px solid rgba(232,67,26,0.3);border-radius:20px;padding:3px 8px;font-size:9px;color:#e8431a;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">🔥 Trending</div>
         </div>
+        <div style="background:rgba(0,0,0,0.3);border-left:2px solid #7c3aed;border-radius:0 6px 6px 0;padding:6px 10px;margin-bottom:8px;">
+          <div style="font-size:11px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.4;font-style:italic;">"Did anyone see the lights over Burbank last night? Triangle formation, completely silent 👀"</div>
+          <div style="font-size:9px;color:#555;font-family:-apple-system,sans-serif;margin-top:2px;">MacabreMarco · 2h ago · 12 replies</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#e8431a;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">S</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#7c3aed;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">M</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#1d9e75;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:6px;">J</div>
+            <div style="font-size:10px;color:#666;font-family:-apple-system,sans-serif;">+144 others</div>
+          </div>
+          <div style="font-size:11px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">Join Pack →</div>
+        </div>
+      </div>
+    </div>
 
-        <!-- UFO & ALIEN ENTHUSIASTS -->
-        <div onclick="fsShow('group')" style="background:#141414;border:1px solid #2a2a2a;border-radius:14px;padding:16px;margin-bottom:10px;cursor:pointer;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-            <span style="font-size:30px;flex-shrink:0;">🛸</span>
-            <div style="flex:1;">
-              <div style="font-family:Oswald,sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px;">UFO & Alien Enthusiasts</div>
-              <div style="font-size:12px;color:#888;font-family:-apple-system,sans-serif;">Sightings, sky watches, investigations and close encounters</div>
+    <!-- Horror Movie Junkies -->
+    <div onclick="fsShow('group')" style="background:linear-gradient(135deg,#0f0a1a,#111);border:1px solid #7c3aed;border-radius:14px;padding:12px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 0 16px rgba(124,58,237,0.15);margin-bottom:0;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(124,58,237,0.1) 0%,transparent 60%);pointer-events:none;"></div>
+      <div style="position:relative;z-index:1;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:22px;filter:drop-shadow(0 0 8px rgba(124,58,237,0.6));">🎬</span>
+            <div>
+              <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px;">Horror Movie Junkies</div>
+              <div style="font-size:10px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:600;">22 members</div>
             </div>
-            <div style="background:#e8431a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-family:Oswald,sans-serif;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;">Join →</div>
           </div>
-          <div style="background:#0f0f0f;border-left:2px solid #333;border-radius:0 8px 8px 0;padding:8px 12px;margin-bottom:10px;">
-            <div style="font-size:12px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.5;font-style:italic;">"Did anyone see the lights over Burbank last night? Triangle formation, completely silent 👀"</div>
-            <div style="font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:3px;">MacabreMarco · 2h ago · 12 replies</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:6px;">
-            <div style="width:22px;height:22px;border-radius:50%;background:#e8431a;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;">S</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#7c3aed;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">M</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#1d9e75;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">J</div>
-            <div style="font-size:11px;color:#555;font-family:-apple-system,sans-serif;margin-left:4px;">147 members</div>
-            <div style="margin-left:auto;background:rgba(232,67,26,0.15);border:1px solid rgba(232,67,26,0.3);border-radius:20px;padding:2px 8px;font-size:9px;color:#e8431a;font-family:Oswald,sans-serif;font-weight:700;">🔥 Trending</div>
-          </div>
+          <div style="background:rgba(124,58,237,0.2);border:1px solid rgba(124,58,237,0.4);border-radius:20px;padding:3px 8px;font-size:9px;color:#aa88ff;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">💬 7 new</div>
         </div>
+        <div style="background:rgba(0,0,0,0.3);border-left:2px solid #7c3aed;border-radius:0 6px 6px 0;padding:6px 10px;margin-bottom:8px;">
+          <div style="font-size:11px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.4;font-style:italic;">"Outdoor horror screening at Exposition Park next Friday - anyone want to go? 🎟️"</div>
+          <div style="font-size:9px;color:#555;font-family:-apple-system,sans-serif;margin-top:2px;">ScreamQueen · 6h ago · 7 replies</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#c0392b;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">Q</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#e8431a;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">S</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#7c3aed;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:6px;">M</div>
+            <div style="font-size:10px;color:#666;font-family:-apple-system,sans-serif;">+19 others</div>
+          </div>
+          <div style="font-size:11px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">Join Pack →</div>
+        </div>
+      </div>
+    </div>
 
-        <!-- HORROR MOVIE JUNKIES -->
-        <div onclick="fsShow('group')" style="background:#141414;border:1px solid #2a2a2a;border-radius:14px;padding:16px;margin-bottom:10px;cursor:pointer;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-            <span style="font-size:30px;flex-shrink:0;">🎬</span>
-            <div style="flex:1;">
-              <div style="font-family:Oswald,sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px;">Horror Movie Junkies</div>
-              <div style="font-size:12px;color:#888;font-family:-apple-system,sans-serif;">What to watch, screenings, find people to go with</div>
+    <!-- Dark Creatives -->
+    <div onclick="fsShow('group')" style="background:linear-gradient(135deg,#0f0a1a,#111);border:1px solid #7c3aed;border-radius:14px;padding:12px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 0 16px rgba(124,58,237,0.15);margin-bottom:0;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(124,58,237,0.1) 0%,transparent 60%);pointer-events:none;"></div>
+      <div style="position:relative;z-index:1;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:22px;filter:drop-shadow(0 0 8px rgba(124,58,237,0.6));">🎨</span>
+            <div>
+              <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px;">Dark Creatives</div>
+              <div style="font-size:10px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:600;">19 members</div>
             </div>
-            <div style="background:#e8431a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-family:Oswald,sans-serif;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;">Join →</div>
           </div>
-          <div style="background:#0f0f0f;border-left:2px solid #333;border-radius:0 8px 8px 0;padding:8px 12px;margin-bottom:10px;">
-            <div style="font-size:12px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.5;font-style:italic;">"Outdoor horror screening at Exposition Park next Friday - anyone want to go? 🎟️"</div>
-            <div style="font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:3px;">ScreamQueen · 6h ago · 7 replies</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:6px;">
-            <div style="width:22px;height:22px;border-radius:50%;background:#c0392b;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;">Q</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#e8431a;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">S</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#7c3aed;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">M</div>
-            <div style="font-size:11px;color:#555;font-family:-apple-system,sans-serif;margin-left:4px;">22 members</div>
-            <div style="margin-left:auto;background:rgba(255,255,255,0.05);border:1px solid #2a2a2a;border-radius:20px;padding:2px 8px;font-size:9px;color:#888;font-family:Oswald,sans-serif;font-weight:700;">💬 7 new</div>
-          </div>
+          <div style="background:rgba(124,58,237,0.2);border:1px solid rgba(124,58,237,0.4);border-radius:20px;padding:3px 8px;font-size:9px;color:#aa88ff;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">💬 2 new</div>
         </div>
+        <div style="background:rgba(0,0,0,0.3);border-left:2px solid #7c3aed;border-radius:0 6px 6px 0;padding:6px 10px;margin-bottom:8px;">
+          <div style="font-size:11px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.4;font-style:italic;">"Looking for a prop builder to collaborate on a dark art installation - anyone interested? 🎭"</div>
+          <div style="font-size:9px;color:#555;font-family:-apple-system,sans-serif;margin-top:2px;">DarkArtDave · Yesterday</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#2a2a4a;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">D</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#7c3aed;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">L</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#1d9e75;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:6px;">J</div>
+            <div style="font-size:10px;color:#666;font-family:-apple-system,sans-serif;">+16 others</div>
+          </div>
+          <div style="font-size:11px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">Join Pack →</div>
+        </div>
+      </div>
+    </div>
 
-        <!-- DARK CREATIVES -->
-        <div onclick="fsShow('group')" style="background:#141414;border:1px solid #2a2a2a;border-radius:14px;padding:16px;margin-bottom:10px;cursor:pointer;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-            <span style="font-size:30px;flex-shrink:0;">🎨</span>
-            <div style="flex:1;">
-              <div style="font-family:Oswald,sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px;">Dark Creatives</div>
-              <div style="font-size:12px;color:#888;font-family:-apple-system,sans-serif;">Dark art, prop building, creative collabs and inspiration</div>
+    <!-- Spooky Families -->
+    <div onclick="fsShow('group')" style="background:linear-gradient(135deg,#0f0a1a,#111);border:1px solid #7c3aed;border-radius:14px;padding:12px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 0 16px rgba(124,58,237,0.15);margin-bottom:0;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(124,58,237,0.1) 0%,transparent 60%);pointer-events:none;"></div>
+      <div style="position:relative;z-index:1;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:22px;filter:drop-shadow(0 0 8px rgba(124,58,237,0.6));">👨‍👩‍👧</span>
+            <div>
+              <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px;">Spooky Families</div>
+              <div style="font-size:10px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:600;">31 members</div>
             </div>
-            <div style="background:#e8431a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-family:Oswald,sans-serif;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;">Join →</div>
           </div>
-          <div style="background:#0f0f0f;border-left:2px solid #333;border-radius:0 8px 8px 0;padding:8px 12px;margin-bottom:10px;">
-            <div style="font-size:12px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.5;font-style:italic;">"Looking for a prop builder to collaborate on a dark art installation - anyone interested? 🎭"</div>
-            <div style="font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:3px;">DarkArtDave · Yesterday · 2 replies</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:6px;">
-            <div style="width:22px;height:22px;border-radius:50%;background:#2a2a4a;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;">D</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#7c3aed;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">L</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#1d9e75;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">J</div>
-            <div style="font-size:11px;color:#555;font-family:-apple-system,sans-serif;margin-left:4px;">19 members</div>
-            <div style="margin-left:auto;background:rgba(255,255,255,0.05);border:1px solid #2a2a2a;border-radius:20px;padding:2px 8px;font-size:9px;color:#888;font-family:Oswald,sans-serif;font-weight:700;">💬 2 new</div>
-          </div>
+          <div style="background:rgba(124,58,237,0.2);border:1px solid rgba(124,58,237,0.4);border-radius:20px;padding:3px 8px;font-size:9px;color:#aa88ff;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">💬 4 new</div>
         </div>
+        <div style="background:rgba(0,0,0,0.3);border-left:2px solid #7c3aed;border-radius:0 6px 6px 0;padding:6px 10px;margin-bottom:8px;">
+          <div style="font-size:11px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.4;font-style:italic;">"Best kid-friendly haunts in the San Fernando Valley this October? My kids are 6 & 9 🎃"</div>
+          <div style="font-size:9px;color:#555;font-family:-apple-system,sans-serif;margin-top:2px;">SpookyMom · 3h ago · 9 replies</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#e8431a;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">M</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#1d9e75;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">D</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#7c3aed;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:6px;">S</div>
+            <div style="font-size:10px;color:#666;font-family:-apple-system,sans-serif;">+28 others</div>
+          </div>
+          <div style="font-size:11px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">Join Pack →</div>
+        </div>
+      </div>
+    </div>
 
-        <!-- SPOOKY FAMILIES -->
-        <div onclick="fsShow('group')" style="background:#141414;border:1px solid #2a2a2a;border-radius:14px;padding:16px;margin-bottom:10px;cursor:pointer;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-            <span style="font-size:30px;flex-shrink:0;">👨‍👩‍👧</span>
-            <div style="flex:1;">
-              <div style="font-family:Oswald,sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px;">Spooky Families</div>
-              <div style="font-size:12px;color:#888;font-family:-apple-system,sans-serif;">Kid-friendly haunts, family events, meet other spooky families</div>
+    <!-- Haunt Seekers -->
+    <div onclick="fsShow('group')" style="background:linear-gradient(135deg,#0f0a1a,#111);border:1px solid #7c3aed;border-radius:14px;padding:12px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 0 16px rgba(124,58,237,0.15);margin-bottom:0;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(124,58,237,0.1) 0%,transparent 60%);pointer-events:none;"></div>
+      <div style="position:relative;z-index:1;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:22px;filter:drop-shadow(0 0 8px rgba(124,58,237,0.6));">🎟️</span>
+            <div>
+              <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px;">Haunt Seekers</div>
+              <div style="font-size:10px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:600;">44 members</div>
             </div>
-            <div style="background:#e8431a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-family:Oswald,sans-serif;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;">Join →</div>
           </div>
-          <div style="background:#0f0f0f;border-left:2px solid #333;border-radius:0 8px 8px 0;padding:8px 12px;margin-bottom:10px;">
-            <div style="font-size:12px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.5;font-style:italic;">"Best kid-friendly haunts in the San Fernando Valley this October? My kids are 6 and 9 🎃"</div>
-            <div style="font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:3px;">SpookyMom · 3h ago · 9 replies</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:6px;">
-            <div style="width:22px;height:22px;border-radius:50%;background:#e8431a;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;">M</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#1d9e75;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">D</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#7c3aed;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">S</div>
-            <div style="font-size:11px;color:#555;font-family:-apple-system,sans-serif;margin-left:4px;">31 members</div>
-            <div style="margin-left:auto;background:rgba(255,255,255,0.05);border:1px solid #2a2a2a;border-radius:20px;padding:2px 8px;font-size:9px;color:#888;font-family:Oswald,sans-serif;font-weight:700;">💬 4 new</div>
-          </div>
+          <div style="background:rgba(232,67,26,0.15);border:1px solid rgba(232,67,26,0.3);border-radius:20px;padding:3px 8px;font-size:9px;color:#e8431a;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">🔥 Trending</div>
         </div>
-
-        <!-- HAUNT SEEKERS -->
-        <div onclick="fsShow('group')" style="background:#141414;border:1px solid #2a2a2a;border-radius:14px;padding:16px;margin-bottom:10px;cursor:pointer;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-            <span style="font-size:30px;flex-shrink:0;">🎟️</span>
-            <div style="flex:1;">
-              <div style="font-family:Oswald,sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px;">Haunt Seekers</div>
-              <div style="font-size:12px;color:#888;font-family:-apple-system,sans-serif;">Best haunts, reviews, find people to go with this season</div>
-            </div>
-            <div style="background:#e8431a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-family:Oswald,sans-serif;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;">Join →</div>
-          </div>
-          <div style="background:#0f0f0f;border-left:2px solid #333;border-radius:0 8px 8px 0;padding:8px 12px;margin-bottom:10px;">
-            <div style="font-size:12px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.5;font-style:italic;">"Terror Vision Haunted Manor in Burbank is on fire - who wants to go opening weekend? I need a crew!"</div>
-            <div style="font-size:10px;color:#555;font-family:-apple-system,sans-serif;margin-top:3px;">HauntHunter · 1h ago · 15 replies</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:6px;">
-            <div style="width:22px;height:22px;border-radius:50%;background:#c0392b;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;">H</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#e8431a;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">S</div>
-            <div style="width:22px;height:22px;border-radius:50%;background:#7c3aed;border:2px solid #141414;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-left:-6px;">M</div>
-            <div style="font-size:11px;color:#555;font-family:-apple-system,sans-serif;margin-left:4px;">44 members</div>
-            <div style="margin-left:auto;background:rgba(232,67,26,0.15);border:1px solid rgba(232,67,26,0.3);border-radius:20px;padding:2px 8px;font-size:9px;color:#e8431a;font-family:Oswald,sans-serif;font-weight:700;">🔥 Trending</div>
-          </div>
+        <div style="background:rgba(0,0,0,0.3);border-left:2px solid #7c3aed;border-radius:0 6px 6px 0;padding:6px 10px;margin-bottom:8px;">
+          <div style="font-size:11px;color:#ccc;font-family:-apple-system,sans-serif;line-height:1.4;font-style:italic;">"Terror Vision Haunted Manor in Burbank is 🔥 - who wants to go opening weekend? I need a crew!"</div>
+          <div style="font-size:9px;color:#555;font-family:-apple-system,sans-serif;margin-top:2px;">HauntHunter · 1h ago · 15 replies</div>
         </div>
-
-        <!-- REQUEST A PACK -->
-        <div style="background:#141414;border:1px solid #2a2a2a;border-radius:14px;padding:16px;text-align:center;margin-bottom:20px;">
-          <div style="font-size:24px;margin-bottom:8px;">➕</div>
-          <div style="font-family:Oswald,sans-serif;font-size:15px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Don't see your people?</div>
-          <div style="font-size:12px;color:#888;font-family:-apple-system,sans-serif;line-height:1.5;margin-bottom:14px;">Request a new pack. If there's enough interest we'll make it happen.</div>
-          <button onclick="openNewPackModal()" style="background:#e8431a;color:#fff;border:none;padding:12px 24px;border-radius:10px;font-family:Oswald,sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;">Request a Pack →</button>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#c0392b;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">H</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#e8431a;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:-5px;">S</div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#7c3aed;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;font-family:Oswald,sans-serif;margin-right:6px;">M</div>
+            <div style="font-size:10px;color:#666;font-family:-apple-system,sans-serif;">+41 others</div>
+          </div>
+          <div style="font-size:11px;color:#7c3aed;font-family:Oswald,sans-serif;font-weight:700;letter-spacing:.3px;">Join Pack →</div>
         </div>
+      </div>
+    </div>
 
+  </div>
+
+  <!-- REQUEST A PACK -->
+  <div style="padding:16px 16px 4px;">
+    <div style="background:linear-gradient(135deg,#0a0a0a,#111);border:1px solid #252525;border-radius:14px;padding:16px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:8px;">➕</div>
+      <div style="font-family:Oswald,sans-serif;font-size:15px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Don't see your people?</div>
+      <div style="font-size:12px;color:#888;font-family:-apple-system,sans-serif;line-height:1.5;margin-bottom:14px;">Request a new pack. If there's enough interest we'll make it happen.</div>
+      <button onclick="openNewPackModal()" style="background:#e8431a;color:#fff;border:none;padding:12px 24px;border-radius:10px;font-family:Oswald,sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;box-shadow:0 0 14px rgba(232,67,26,0.25);">Request a Pack →</button>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- RECENT MEETUPS -->
+  <div class="section">
+    <div class="sec-head">
+      <div class="sec-title">Recent Meetups</div>
+      <div class="sec-more">See all →</div>
+    </div>
+  </div>
+  <div class="meetup-strip">
+    <div class="meetup-card" onclick="showToast('Opening meetup... 🎃')">
+      <div class="meetup-card-top" style="background:#0a0f14;">🛸<div class="meetup-type-badge badge-open">Open</div></div>
+      <div class="meetup-card-body">
+        <div class="meetup-card-type">UFO & Alien Enthusiasts</div>
+        <div class="meetup-card-name">Griffith Park Sky Watch</div>
+        <div class="meetup-card-meta">📍 Los Feliz · Sat 9pm</div>
+        <div class="meetup-card-foot">
+          <div class="meetup-attending">👥 8 going</div>
+          <div class="meetup-spots">4 spots left</div>
+        </div>
+      </div>
+    </div>
+    <div class="meetup-card" onclick="showToast('Opening meetup... 🎃')">
+      <div class="meetup-card-top" style="background:#14060a;">🔦<div class="meetup-type-badge badge-new">New</div></div>
+      <div class="meetup-card-body">
+        <div class="meetup-card-type">Ghost Hunt</div>
+        <div class="meetup-card-name">Linda Vista Hospital Investigation</div>
+        <div class="meetup-card-meta">📍 Boyle Heights · Fri 10pm</div>
+        <div class="meetup-card-foot">
+          <div class="meetup-attending">👥 5 going</div>
+          <div class="meetup-spots">7 spots left</div>
+        </div>
+      </div>
+    </div>
+    <div class="meetup-card" onclick="showToast('Opening meetup... 🎃')">
+      <div class="meetup-card-top" style="background:#0f060f;">🌙<div class="meetup-type-badge badge-open">Open</div></div>
+      <div class="meetup-card-body">
+        <div class="meetup-card-type">Witchy Circle</div>
+        <div class="meetup-card-name">Full Moon Ritual in Silver Lake</div>
+        <div class="meetup-card-meta">📍 Silver Lake · Sun 8pm</div>
+        <div class="meetup-card-foot">
+          <div class="meetup-attending">👥 11 going</div>
+          <div class="meetup-spots">1 spot left</div>
+        </div>
+      </div>
+    </div>
+    <div class="meetup-card" onclick="showToast('Opening meetup... 🎃')">
+      <div class="meetup-card-top" style="background:#060f06;">🎬<div class="meetup-type-badge badge-full">Full</div></div>
+      <div class="meetup-card-body">
+        <div class="meetup-card-type">Horror Movie Junkies</div>
+        <div class="meetup-card-name">80s Slashers Marathon</div>
+        <div class="meetup-card-meta">📍 Burbank · Sat 7pm</div>
+        <div class="meetup-card-foot">
+          <div class="meetup-attending">👥 12 going</div>
+          <div class="meetup-spots" style="color:#777;">Full</div>
+        </div>
+      </div>
+    </div>
+    <div class="meetup-card" onclick="showToast('Opening meetup... 🎃')">
+      <div class="meetup-card-top" style="background:#1a0e06;">🏚️<div class="meetup-type-badge badge-new">New</div></div>
+      <div class="meetup-card-body">
+        <div class="meetup-card-type">Home Haunt Builders</div>
+        <div class="meetup-card-name">Prop Build Day in Burbank</div>
+        <div class="meetup-card-meta">📍 Burbank · Sun 10am</div>
+        <div class="meetup-card-foot">
+          <div class="meetup-attending">👥 3 going</div>
+          <div class="meetup-spots">9 spots left</div>
+        </div>
       </div>
     </div>
   </div>
 
-    <!-- ADMIN PAGE -->
+  <div class="divider"></div>
+
+  <!-- MEMBERS NEAR YOU -->
+  <div class="section">
+    <div class="sec-head">
+      <div class="sec-title">Members Near You</div>
+      <div class="sec-more">See all →</div>
+    </div>
+  </div>
+  <div class="members-strip">
+    <div class="member-card" onclick="showToast('Opening profile... 👤')">
+      <div class="member-avatar" style="background:#e8431a;">S</div>
+      <div class="member-name">SpookyJen</div>
+      <div class="member-location">Burbank, CA · 1.2 mi</div>
+      <div class="member-interests"><span>🎃</span><span>👻</span><span>🔦</span></div>
+      <span class="member-badge badge-founder">Founder</span>
+    </div>
+    <div class="member-card" onclick="showToast('Opening profile... 👤')">
+      <div class="member-avatar" style="background:#7c3aed;">M</div>
+      <div class="member-name">MacabreMarco</div>
+      <div class="member-location">Glendale, CA · 3.4 mi</div>
+      <div class="member-interests"><span>🏚️</span><span>🎭</span><span>🎬</span></div>
+      <span class="member-badge badge-elite">Elite</span>
+    </div>
+    <div class="member-card" onclick="showToast('Opening profile... 👤')">
+      <div class="member-avatar" style="background:#1d9e75;">G</div>
+      <div class="member-name">GhostHunter_SC</div>
+      <div class="member-location">Pasadena, CA · 9 mi</div>
+      <div class="member-interests"><span>🔦</span><span>🛸</span><span>👁️</span></div>
+      <span class="member-badge badge-elite">Elite</span>
+    </div>
+    <div class="member-card" onclick="showToast('Opening profile... 👤')">
+      <div class="member-avatar" style="background:#b8860b;">W</div>
+      <div class="member-name">WitchyWendy</div>
+      <div class="member-location">Silver Lake · 7.3 mi</div>
+      <div class="member-interests"><span>🌙</span><span>🔮</span><span>🕯️</span></div>
+      <span class="member-badge badge-member">Member</span>
+    </div>
+    <div class="member-card" onclick="showToast('Opening profile... 👤')">
+      <div class="member-avatar" style="background:#c0392b;">D</div>
+      <div class="member-name">DreadheadDave</div>
+      <div class="member-location">NoHo · 5.8 mi</div>
+      <div class="member-interests"><span>🎭</span><span>🎃</span><span>🎬</span></div>
+      <span class="member-badge badge-member">Member</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COMMUNITY FEED -->
+  <div class="section">
+    <div class="sec-head">
+      <div class="sec-title">Community Feed</div>
+      <div class="sec-more">See all →</div>
+    </div>
+  </div>
+  <div class="feed-list">
+    <div class="feed-post">
+      <div class="feed-post-header">
+        <div class="feed-avatar" style="background:#e8431a;">S</div>
+        <div class="feed-meta">
+          <div class="feed-name">SpookyJen_LA</div>
+          <div class="feed-time">2 hours ago · Burbank, CA</div>
+        </div>
+        <span class="feed-type-badge ft-review">Review</span>
+      </div>
+      <div class="feed-text">Just got back from Terror Vision Haunted Manor and WOW. The set design is next level , these people clearly work in film. My friend literally screamed and ran out 😂 💀💀💀💀💀</div>
+      <div class="feed-actions">
+        <button class="feed-action" onclick="showToast('Liked! ❤️')">❤️ 24</button>
+        <button class="feed-action" onclick="showToast('Comments coming soon!')">💬 8</button>
+        <button class="feed-action" onclick="showToast('Shared!')">↗️ Share</button>
+      </div>
+    </div>
+    <div class="feed-post">
+      <div class="feed-post-header">
+        <div class="feed-avatar" style="background:#1d9e75;">G</div>
+        <div class="feed-meta">
+          <div class="feed-name">GhostHunter_SoCal</div>
+          <div class="feed-time">5 hours ago · Pasadena, CA</div>
+        </div>
+        <span class="feed-type-badge ft-find">Partner Find</span>
+      </div>
+      <div class="feed-text">Looking for 2-3 people to investigate the Old Pasadena City Hall this Saturday night. Have equipment. DM me if interested 🔦👻</div>
+      <div class="feed-actions">
+        <button class="feed-action" onclick="showToast('Liked! ❤️')">❤️ 11</button>
+        <button class="feed-action" onclick="showToast('Comments coming soon!')">💬 14</button>
+        <button class="feed-action" onclick="showToast('Shared!')">↗️ Share</button>
+      </div>
+    </div>
+    <div class="feed-post">
+      <div class="feed-post-header">
+        <div class="feed-avatar" style="background:#b8860b;">W</div>
+        <div class="feed-meta">
+          <div class="feed-name">WitchyWendy</div>
+          <div class="feed-time">Yesterday · Silver Lake, CA</div>
+        </div>
+        <span class="feed-type-badge ft-meetup">Meetup</span>
+      </div>
+      <div class="feed-text">Hosting a full moon circle this Sunday in Silver Lake 🌕 All experience levels welcome. Bring a candle and an open mind. 1 spot left, link in profile!</div>
+      <div class="feed-actions">
+        <button class="feed-action" onclick="showToast('Liked! ❤️')">❤️ 31</button>
+        <button class="feed-action" onclick="showToast('Comments coming soon!')">💬 6</button>
+        <button class="feed-action" onclick="showToast('Shared!')">↗️ Share</button>
+      </div>
+    </div>
+    <div class="feed-post">
+      <div class="feed-post-header">
+        <div class="feed-avatar" style="background:#7c3aed;">M</div>
+        <div class="feed-meta">
+          <div class="feed-name">MacabreMarco</div>
+          <div class="feed-time">2 days ago · Burbank, CA</div>
+        </div>
+        <span class="feed-type-badge ft-photo">Photo</span>
+      </div>
+      <div class="feed-text">Started building my 2026 home haunt! This year doing a full Victorian funeral parlor theme 🏚️ Anyone in Burbank want to do a prop swap? I have extra tombstones and wrought iron fence pieces.</div>
+      <div class="feed-actions">
+        <button class="feed-action" onclick="showToast('Liked! ❤️')">❤️ 47</button>
+        <button class="feed-action" onclick="showToast('Comments coming soon!')">💬 22</button>
+        <button class="feed-action" onclick="showToast('Shared!')">↗️ Share</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ADMIN PAGE -->
   <div class="fs-page" id="fs-page-admin" style="display:none;">
     <div style="background:#080808;min-height:100%;padding-bottom:80px;">
-
-      <!-- HEADER -->
       <div style="padding:20px 16px 16px;background:linear-gradient(160deg,#1a0800,#080808);border-bottom:1px solid #1e1e1e;display:flex;align-items:center;justify-content:space-between;">
         <div>
           <div style="font-family:Oswald,sans-serif;font-size:24px;font-weight:700;color:#fff;text-transform:uppercase;">Admin 🔐</div>
@@ -3197,31 +3436,28 @@ var currentUser = window.currentUser || null;
         </div>
         <div id="adminPendingCount" style="background:#e8431a;color:#fff;font-family:Oswald,sans-serif;font-size:16px;font-weight:700;padding:6px 14px;border-radius:20px;">0</div>
       </div>
-
-      <!-- SUBMISSIONS LIST -->
       <div id="adminSubmissionsList" style="padding:16px;">
-        <div style="color:#555;font-size:13px;font-family:-apple-system,sans-serif;text-align:center;padding:40px;">Loading submissions...</div>
+        <div style="color:#555;font-size:13px;font-family:-apple-system,sans-serif;text-align:center;padding:40px;">Loading...</div>
       </div>
-
     </div>
   </div>
 
   <!-- ADMIN DETAIL MODAL -->
   <div id="adminModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9999;overflow-y:auto;">
-    <div style="max-width:480px;margin:0 auto;padding:20px 16px 80px;">
+    <div style="max-width:480px;margin:0 auto;padding:20px 16px 100px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
         <div style="font-family:Oswald,sans-serif;font-size:20px;font-weight:700;color:#fff;">Review Submission</div>
         <button onclick="closeAdminModal()" style="background:none;border:none;color:#888;font-size:24px;cursor:pointer;">✕</button>
       </div>
       <div id="adminModalContent"></div>
-      <div style="display:flex;gap:10px;margin-top:20px;position:sticky;bottom:20px;">
+      <div style="display:flex;gap:10px;margin-top:20px;">
         <button onclick="approveSubmission()" style="flex:1;background:#1d9e75;color:#fff;border:none;padding:16px;border-radius:12px;font-family:Oswald,sans-serif;font-size:16px;font-weight:700;cursor:pointer;">✓ Approve & Go Live</button>
         <button onclick="rejectSubmission()" style="flex:1;background:#c0392b;color:#fff;border:none;padding:16px;border-radius:12px;font-family:Oswald,sans-serif;font-size:16px;font-weight:700;cursor:pointer;">✕ Reject</button>
       </div>
     </div>
   </div>
 
-  <div class="fs-page" id="fs-page-perks">
+    <div class="fs-page" id="fs-page-perks">
     <div style="background:#080808;min-height:100%;padding-bottom:40px;">
 
       <!-- HERO -->
@@ -3512,13 +3748,10 @@ var currentUser = window.currentUser || null;
           <!-- PHOTO + INSTAGRAM -->
           <div style="background:#141414;border:1px solid #252525;border-radius:14px;padding:16px;margin-bottom:14px;">
             <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Photo & Social</div>
-            <label style="display:block;cursor:pointer;margin-bottom:12px;">
-              <div id="hauntPhotoPreview" style="height:90px;background:#0a0a0a;border:1px dashed #2a2a2a;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
-                <span style="font-size:24px;">📷</span>
-                <span style="font-size:12px;color:#777;font-family:-apple-system,sans-serif;">Tap to upload a photo</span>
-              </div>
-              <input type="file" id="hauntPhoto" accept="image/*" style="display:none;" onchange="previewPhoto(this,'hauntPhotoPreview')" />
-            </label>
+            <div onclick="showToast('Photo upload coming soon! 📸')" style="height:90px;background:#0a0a0a;border:1px dashed #2a2a2a;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:4px;margin-bottom:12px;">
+              <span style="font-size:24px;">📷</span>
+              <span style="font-size:12px;color:#777;font-family:-apple-system,sans-serif;">Tap to upload a photo</span>
+            </div>
             <div>
               <label style="font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;font-family:Oswald,sans-serif;">📸 Instagram Handle</label>
               <input type="text" id="hauntInsta" placeholder="@yourhaunt" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
@@ -3584,16 +3817,14 @@ var currentUser = window.currentUser || null;
               <label style="font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;font-family:Oswald,sans-serif;">Category *</label>
               <select style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;">
                 <option value="">Select a category...</option>
-                <option>🎃 Haunts</option>
                 <option>☠️ Conventions</option>
                 <option>👁️ Paranormal</option>
                 <option>🎦 Film & Theater</option>
-                <option>🌕 Festivals</option>
-                <option>⚗️ Classes</option>
+                <option>🌕 Fairs & Festivals</option>
+                <option>⚗️ Classes & Workshops</option>
                 <option>🛸 Alien & UFO</option>
                 <option>🍸 Bars & Restaurants</option>
-                <option>🛍️ Markets & Pop Ups</option>
-                <option>🎨 Art</option>
+                <option>🕯️ Shop & Markets</option>
                 <option>👥 Meetups</option>
               </select>
             </div>
@@ -3696,13 +3927,10 @@ var currentUser = window.currentUser || null;
           <div style="background:#141414;border:1px solid #252525;border-radius:14px;padding:16px;margin-bottom:14px;">
             <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Photo</div>
             <div style="font-size:11px;color:#666;font-family:-apple-system,sans-serif;margin-bottom:12px;">Free listings get 1 photo. <span style="color:#e8431a;">Featured</span> listings get a gallery of 6.</div>
-            <label style="display:block;cursor:pointer;">
-              <div id="eventPhotoPreview" style="height:90px;background:#0a0a0a;border:1px dashed #2a2a2a;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
-                <span style="font-size:24px;">📷</span>
-                <span style="font-size:12px;color:#777;font-family:-apple-system,sans-serif;">Tap to upload a photo</span>
-              </div>
-              <input type="file" id="eventPhoto" accept="image/*" style="display:none;" onchange="previewPhoto(this,'eventPhotoPreview')" />
-            </label>
+            <div onclick="showToast('Photo upload coming soon! 📸')" style="height:90px;background:#0a0a0a;border:1px dashed #2a2a2a;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:4px;">
+              <span style="font-size:24px;">📷</span>
+              <span style="font-size:12px;color:#777;font-family:-apple-system,sans-serif;">Tap to upload a photo</span>
+            </div>
           </div>
           <!-- UPGRADE TO FEATURED -->
           <div style="background:linear-gradient(160deg,#1a0800,#111);border:1px solid #e8431a;border-radius:14px;padding:16px;margin-bottom:14px;position:relative;overflow:hidden;">
@@ -3742,7 +3970,7 @@ var currentUser = window.currentUser || null;
             <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;">Shop Info</div>
             <div style="margin-bottom:12px;">
               <label style="font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;font-family:Oswald,sans-serif;">Shop Name *</label>
-              <input type="text" id="shopName" placeholder="e.g. The Dark Emporium" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
+              <input type="text" placeholder="e.g. The Dark Emporium" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
             </div>
             <div style="margin-bottom:12px;">
               <label style="font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;font-family:Oswald,sans-serif;">Type of Shop</label>
@@ -3805,13 +4033,10 @@ var currentUser = window.currentUser || null;
           <div style="background:#141414;border:1px solid #252525;border-radius:14px;padding:16px;margin-bottom:14px;">
             <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Photo</div>
             <div style="font-size:11px;color:#666;font-family:-apple-system,sans-serif;margin-bottom:12px;">Free listings get 1 photo. <span style="color:#e8431a;">Featured</span> listings get a gallery of 6.</div>
-            <label style="display:block;cursor:pointer;">
-              <div id="shopPhotoPreview" style="height:90px;background:#0a0a0a;border:1px dashed #2a2a2a;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
-                <span style="font-size:24px;">📷</span>
-                <span style="font-size:12px;color:#777;font-family:-apple-system,sans-serif;">Tap to upload a photo</span>
-              </div>
-              <input type="file" id="shopPhoto" accept="image/*" style="display:none;" onchange="previewPhoto(this,'shopPhotoPreview')" />
-            </label>
+            <div onclick="showToast('Photo upload coming soon! 📸')" style="height:90px;background:#0a0a0a;border:1px dashed #2a2a2a;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:4px;">
+              <span style="font-size:24px;">📷</span>
+              <span style="font-size:12px;color:#777;font-family:-apple-system,sans-serif;">Tap to upload a photo</span>
+            </div>
           </div>
 
           <!-- CONTACT -->
@@ -3819,11 +4044,11 @@ var currentUser = window.currentUser || null;
             <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;">Your Contact Info</div>
             <div style="margin-bottom:12px;">
               <label style="font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;font-family:Oswald,sans-serif;">Your Name *</label>
-              <input type="text" id="shopContactName" placeholder="First and last name" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
+              <input type="text" placeholder="First and last name" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
             </div>
             <div>
               <label style="font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;font-family:Oswald,sans-serif;">Your Email *</label>
-              <input type="email" id="shopContactEmail" placeholder="you@email.com" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
+              <input type="email" placeholder="you@email.com" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
               <div style="font-size:10px;color:#555;margin-top:4px;font-family:-apple-system,sans-serif;">Not shown publicly. We'll email you when your listing goes live.</div>
             </div>
           </div>
@@ -3872,7 +4097,7 @@ var currentUser = window.currentUser || null;
           <button class="auth-tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</button>
         </div>
         <div class="auth-panel active" id="panel-login">
-
+          <div class="auth-div-text">or log in with email</div><div class="auth-div-line"></div></div>
           <div style="padding:0 20px;">
             <div class="input-group"><label class="input-label">Email</label><input class="auth-input" type="email" placeholder="your@email.com" id="loginEmail" /></div>
             <div class="input-group" style="position:relative;"><label class="input-label">Password</label><input class="auth-input" type="password" placeholder="••••••••" id="loginPassword" /><button onclick="togglePwd('loginPassword',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:#777;cursor:pointer;font-size:16px;padding:0;margin-top:10px;">👁</button></div>
@@ -3902,7 +4127,7 @@ var currentUser = window.currentUser || null;
               
               <div class="perk-row"><span class="perk-icon">📰</span>Weekly newsletter with the best frights near you</div>
             </div>
-
+            <div class="auth-div-text">or sign up with email</div><div class="auth-div-line"></div></div>
             <div class="input-group"><label class="input-label">Your Name</label><input class="auth-input" type="text" placeholder="First name or nickname" id="signupName" /></div>
             <div class="input-group"><label class="input-label">Username</label><div class="username-row"><span class="username-prefix">@</span><input class="username-input" type="text" placeholder="spookyjenny" id="signupUsername" /></div></div>
             <div class="input-group"><label class="input-label">Email</label><input class="auth-input" type="email" placeholder="your@email.com" id="signupEmail" /></div>
@@ -4095,7 +4320,7 @@ var currentUser = window.currentUser || null;
           <div onclick="fsShow('meetups')" style="background:#141414;border:1px solid #1e1e1e;border-radius:10px;padding:14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;"><div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#ccc;font-family:Oswald,sans-serif;letter-spacing:.5px;"><span style="font-size:18px;">🎭</span>My Meetups</div><span style="color:#333;font-size:16px;">›</span></div>
           <div onclick="fsShow('badges')" style="background:#141414;border:1px solid #1e1e1e;border-radius:10px;padding:14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;"><div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#ccc;font-family:Oswald,sans-serif;letter-spacing:.5px;"><span style="font-size:18px;">🏆</span>My Badges</div><span style="color:#333;font-size:16px;">›</span></div>
           <div onclick="showToast('Settings coming soon!')" style="background:#141414;border:1px solid #1e1e1e;border-radius:10px;padding:14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;"><div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#ccc;font-family:Oswald,sans-serif;letter-spacing:.5px;"><span style="font-size:18px;">⚙️</span>Settings</div><span style="color:#333;font-size:16px;">›</span></div>
-          <div id="adminNavBtn" onclick="fsShow('admin')" style="display:none;background:#1a0800;border:1px solid #e8431a;border-radius:10px;padding:14px;display:none;align-items:center;justify-content:space-between;cursor:pointer;"><div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#e8431a;font-family:Oswald,sans-serif;letter-spacing:.5px;font-weight:700;"><span style="font-size:18px;">🔐</span>Admin Panel</div><span style="color:#e8431a;font-size:16px;">›</span></div>
+          <div id="adminNavBtn" onclick="fsShow('admin')" style="display:none;background:#1a0800;border:1px solid #e8431a;border-radius:10px;padding:14px;align-items:center;justify-content:space-between;cursor:pointer;"><div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#e8431a;font-family:Oswald,sans-serif;letter-spacing:.5px;font-weight:700;"><span style="font-size:18px;">🔐</span>Admin Panel</div><span style="color:#e8431a;font-size:16px;">›</span></div>
         </div>
       </div>
 
@@ -5027,7 +5252,7 @@ var currentUser = window.currentUser || null;
     <input class="modal-inp" type="password" placeholder="Password" />
     <button class="modal-btn" onclick="showToast('Login coming soon! 🎃');document.getElementById('loginModal').classList.remove('open')">Log In →</button>
     <div class="modal-div"><div class="modal-line"></div><div class="modal-or">or</div><div class="modal-line"></div></div>
-
+    
     <div style="text-align:center;font-size:12px;color:#666;margin-top:14px;font-family:-apple-system,sans-serif;">No account? <a style="color:#e8431a;cursor:pointer;" onclick="document.getElementById('loginModal').classList.remove('open');fsShow('login');switchTab('signup')">Sign up free →</a></div>
   </div>
 </div>
@@ -5162,12 +5387,7 @@ function updateProfileSubnav(name) {
 }
 
 function fsShow(name) {
-  if (name === 'submit' && _lastSubmitForm && _lastSubmitForm !== 'choice') {
-    setTimeout(function() { showSubmitForm(_lastSubmitForm); }, 50);
-  }
-  if (name === 'admin') {
-    setTimeout(loadAdminSubmissions, 100);
-  }
+  if (name === 'admin') { setTimeout(loadAdminSubmissions, 100); }
   var pages = document.querySelectorAll('.fs-page');
   for (var i = 0; i < pages.length; i++) {
     pages[i].classList.remove('fs-active');
@@ -5284,23 +5504,14 @@ async function doLogin() {
   var btn = document.querySelector('#panel-login .auth-submit');
   if (btn) { btn.textContent = 'Logging in...'; btn.disabled = true; }
   try {
-    console.log('Attempting login with:', e.value.trim());
     var { data, error } = await window.supabase.auth.signInWithPassword({
       email: e.value.trim(), password: p.value
     });
-    console.log('Login result:', data, error);
     if (btn) { btn.textContent = 'Log In →'; btn.disabled = false; }
-    if (error) { 
-      console.error('Login error:', error);
-      showToast('❌ ' + (error.message || 'Login failed')); 
-    } else {
-      showToast('Welcome back! 🎃');
-      var modal = document.getElementById('loginModal');
-      if (modal) modal.classList.remove('open');
-      fsShow('home');
+    if (error) {
+      showToast('❌ ' + (error.message || 'Login failed'));
     }
   } catch(err) {
-    console.error('Login exception:', err);
     if (btn) { btn.textContent = 'Log In →'; btn.disabled = false; }
     showToast('❌ ' + err.message);
   }
@@ -5338,23 +5549,10 @@ async function doSignup() {
 }
 
 async function doGoogleLogin() {
-  try {
-    console.log('Google login starting...');
-    console.log('Supabase:', window.supabase ? 'ready' : 'NOT READY');
-    console.log('Redirect:', window.location.origin);
-    var { data, error } = await window.supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: window.location.origin }
-    });
-    console.log('OAuth result:', data, error);
-    if (error) {
-      console.error('OAuth error:', error);
-      showToast('❌ ' + error.message);
-    }
-  } catch(e) {
-    console.error('Google login exception:', e);
-    showToast('❌ ' + e.message);
-  }
+  var { error } = await window.supabase.auth.signInWithOAuth({
+    provider: 'google', options: { redirectTo: window.location.origin }
+  });
+  if (error) showToast('❌ ' + error.message);
 }
 
 async function doAppleLogin() {
@@ -5763,39 +5961,58 @@ function toggleFilters() {
 }
 
 var categoryFilters = {
-  'Haunts':[
-    {title:'Type',pills:['Home Haunt','Commercial Haunt']},
-    {title:'Scare Level',pills:['Kid Friendly','Mild Scares','Scary','Extreme']}
+  'Haunts Map':[
+    {title:'Type',pills:['All','Haunted House','Theme Park Haunt','Escape Room','Haunted Hayride','Drive-In','Touring Show']},
+    {title:'Intensity',pills:['Family Friendly','Mild Scares','Intense','Extreme']},
+    {title:'Features',pills:['Live Actors','Outdoor','Indoor','Full Contact']},
+    {title:'Price',pills:['Free','Under $20','Under $40','$40+']}
   ],
   'Conventions':[
-    {title:'Type',pills:['All','Horror Con','Paranormal Con','Psychic & Metaphysical','Bigfoot & Cryptid','Tattoo Expo','Haunters Industry']}
+    {title:'Type',pills:['All','Horror Con','Paranormal Con','Psychic & Metaphysical','Bigfoot & Cryptid','Tattoo Expo','Haunters Industry','Book Festival']},
+    {title:'Size',pills:['Local','Regional','National']},
+    {title:'Price',pills:['Free','Under $25','Under $50','$50+']}
   ],
-  'Paranormal':[],
-  'Film & Theater':[
-    {title:'Type',pills:['All','Horror Film Festival','Movie Screening','Immersive Theater','Murder Mystery Dinner','Rocky Horror','Puppetry']},
-    {title:'Scare Level',pills:['Kid Friendly','Mild Scares','Scary','Extreme']}
+  'Paranormal':[
+    {title:'Type',pills:['All','Ghost Tour','Paranormal Investigation','Haunted Location','Ghost Hunt Overnight','Pub Crawl Ghost Tour','True Crime Tour','Paracon']},
+    {title:'Location Type',pills:['Walking Tour','Historic Building','Cemetery','Asylum / Prison','Ship','Plantation']},
+    {title:'Experience',pills:['Beginner Friendly','Advanced','Guided','Self-Guided']},
+    {title:'Price',pills:['Free','Under $25','Under $75','$75+']}
+  ],
+  'Film':[
+    {title:'Type',pills:['All','Horror Film Festival','Movie Screening','Immersive Theater','Murder Mystery Dinner','Rocky Horror']},
+    {title:'Format',pills:['In Person','Drive-In','Recurring Weekly']},
+    {title:'Price',pills:['Free','Under $15','Under $30','$30+']}
   ],
   'Festivals':[
-    {title:'Type',pills:['All','Halloween / Fall Festival','Dia de los Muertos','Parade','Witchy']},
-    {title:'Good For',pills:['Family Friendly','Adults Only','All Ages','Pet Friendly']},
-    {title:'Activities',pills:['Pumpkin Patch','Animals','Rides','Games','Trick or Treat','Costume Contest','Hay Ride','Corn Maze','Arts & Crafts','Vendors','Food','Music']}
+    {title:'Type',pills:['All','Halloween Festival','Dia de los Muertos','Pagan Gathering','Bigfoot Festival','Zombie Fest','Zoo Boo','Pumpkin & Corn Maze','Parade']},
+    {title:'Vibe',pills:['Family Friendly','Adults Only','All Ages','Pet Friendly']},
+    {title:'Price',pills:['Free','Under $20','Under $50','$50+']}
   ],
   'Classes':[
-    {title:'Type',pills:['All','Witchy & Metaphysical','Wellness & Movement','Film & Writing','Prop & Set Building','Makeup & Costume','Taxidermy','Paranormal','Dark & Horror Art','Kids']},
-    {title:'Format',pills:['In Person','Online']}
+    {title:'Type',pills:['All','Tarot & Divination','Witchcraft & Ritual','Moon Circle','Yoga & Movement','Intuition & Healing','Fitness','SFX Makeup','Taxidermy','Paranormal','Horror Writing','Filmmaking','Dark Art','Candle Making','Herbalism & Crystals','Home Haunts','Set Building','Costume Design']},
+    {title:'Skill Level',pills:['Beginner','Intermediate','Advanced']},
+    {title:'Format',pills:['In Person','Online','Single Session','Multi-Week Series','Drop-In']},
+    {title:'Price',pills:['Free','Under $50','Under $100','$100+']}
   ],
-  'Markets & Pop Ups':[
-    {title:'Type',pills:['All','Witchy & Occult','Horror & Gore','Gothic & Dark Alt','Oddities & Taxidermy','Dark Art','Books & Collectibles']}
+  'Shop':[
+    {title:'Type',pills:['All','Retail Store','Market / Pop-Up']},
+    {title:'Vibe',pills:['All','Witchy & Occult','Horror & Gore','Gothic & Dark Alt','Oddities & Taxidermy','Dark Art','Books & Collectibles','Voodoo & Botanica']},
+    {title:'Price',pills:['Free Entry','Paid Entry']}
   ],
-  'Spooky Retail':[
-    {title:'Type',pills:['All','Witchy & Occult','Horror & Gore','Gothic & Dark Alt','Oddities & Taxidermy','Dark Art','Books & Collectibles']}
+  'Meetups':[
+    {title:'Type',pills:['All','Goth Club Night','Vampire Ball','Roller Disco','Pool Party','Horror Trivia','Horror Movie Night','Horror Book Club','Photography','Masquerade','Bar Crawl']},
+    {title:'Vibe',pills:['Goth & Industrial','Dark Alternative','Vampire','Horror Fan','Witchy']},
+    {title:'Price',pills:['Free','Under $20','$20+']}
   ],
-  'Art':[],
-  'Meetups':[],
   'Bars & Restaurants':[
-    {title:'Type',pills:['All','Bar','Restaurant','Coffee Shop']}
+    {title:'Type',pills:['All','Horror Bar','Gothic Bar','Themed Restaurant','Spooky Coffee','Haunted Venue','Cocktail Lounge']},
+    {title:'Vibe',pills:['All','Horror & Gore','Gothic & Dark Alt','Witchy & Occult','Tim Burton-esque','Paranormal History','Voodoo']},
+    {title:'Price',pills:['Free Entry','Under $20','$20+','$50+']}
   ],
-  'Alien & UFO':[]
+  'Alien & UFO':[
+    {title:'Type',pills:['All','UFO Festival','Alien Convention','Area 51 Tour','UFO Museum','Paranormal Conference','Mystery Lights']},
+    {title:'Price',pills:['Free','Under $25','Under $50','$50+']}
+  ]
 };
 
 // ── DATE ARCHIVING ──────────────────────────────────────────────────────────
@@ -5947,31 +6164,26 @@ async function loadEvents(category, citySearch) {
     if (stateMatch) searchState = stateMatch[1].toUpperCase();
   }
 
-  function cityMatches(eventCity, searchTerm, requireState) {
+  function cityMatches(eventCity, searchTerm) {
     var c = eventCity.toLowerCase();
     if (c.indexOf(searchTerm) === -1) return false;
-    // Always check state if available
-    var stateInCity = eventCity.match(/(CA|TX|NY|FL|IL|PA|OH|WA|OR|CO|AZ|NV|GA|TN|NC|VA|MA|MD|NJ|MN|MO|WI|IN|KY|LA|AL|SC|OK|AR|CT|RI|NE|KS|IA|ND|SD|ID|MT|WY|VT|NH|ME|DE|HI|AK|UT|NM|WV|MI|MS)/i);
-    if (searchState && stateInCity && stateInCity[1].toUpperCase() !== searchState) return false;
-    // For nearby city matching, if event has a state that doesnt match search state, exclude it
-    if (requireState && searchState && stateInCity && stateInCity[1].toUpperCase() !== searchState) return false;
+    // If user specified a state and event has a different state, exclude it
+    if (searchState) {
+      var stateInCity = eventCity.match(/(CA|TX|NY|FL|IL|PA|OH|WA|OR|CO|AZ|NV|GA|TN|NC|VA|MA|MD|NJ|MN|MO|WI|IN|KY|LA|AL|SC|OK|AR|CT|RI|NE|KS|IA|ND|SD|ID|MT|WY|VT|NH|ME|DE|HI|AK|UT|NM|WV|MI|MS)/i);
+      if (stateInCity && stateInCity[1].toUpperCase() !== searchState) return false;
+    }
     return true;
   }
 
   data.forEach(function(e) {
     var city = (e.city || '');
     var location = (e.location || '').toLowerCase();
-    if (cityMatches(city, search, false) || location.indexOf(search) !== -1) {
-      // Double check state for primary matches too
-      var evState = city.match(/(CA|TX|NY|FL|IL|PA|OH|WA|OR|CO|AZ|NV|GA|TN|NC|VA|MA|MD|NJ|MN|MO|WI|IN|KY|LA|AL|SC|OK|AR|CT|RI|NE|KS|IA|ND|SD|ID|MT|WY|VT|NH|ME|DE|HI|AK|UT|NM|WV|MI|MS)/i);
-      if (searchState && evState && evState[1].toUpperCase() !== searchState) return;
+    if (cityMatches(city, search) || location.indexOf(search) !== -1) {
       primaryMatches.push(e);
     } else if (nearbyCityList.length > 0) {
       var isNearby = nearbyCityList.some(function(nearby) {
         var n = nearby.toLowerCase();
-        // For nearby matches, enforce state matching to prevent Long Beach CA showing in NY searches
-        if (!cityMatches(city, n, true)) return false;
-        return true;
+        return cityMatches(city, n) || location.indexOf(n) !== -1;
       });
       if (isNearby) nearbyMatches.push(e);
     }
@@ -5992,18 +6204,6 @@ async function loadEvents(category, citySearch) {
       // Event starts after range ends = exclude
       if (start && start > dr.end) return false;
       return true;
-    });
-  }
-
-  // Apply filter tag pills client-side
-  var activeTags = getActiveFilterTags();
-  if (activeTags.length > 0) {
-    filtered = filtered.filter(function(e) {
-      var tags = e.filter_tags || [];
-      // Match if event has ANY of the selected tags
-      return activeTags.some(function(tag) {
-        return tags.indexOf(tag) !== -1;
-      });
     });
   }
 
@@ -6091,7 +6291,7 @@ function openEventDetail(id) {
       if (!e) { openEvent(); return; }
       window._currentEvent = e;
 
-      var catEmoji = {'Haunts':'🎃','Paranormal':'👁️','Conventions':'☠️','Festivals':'🌕','Markets & Pop Ups':'🛍️','Spooky Retail':'🕯️','Meetups':'🦇','Film & Theater':'🎦','Classes':'⚗️','Bars & Restaurants':'🍸','Alien & UFO':'🛸','Art':'🎨'};
+      var catEmoji = {'Haunts Map':'🎃','Paranormal':'👁️','Conventions':'☠️','Festivals':'🌕','Shop':'🕯️','Meetups':'🦇','Film':'🎦','Classes':'⚗️','Bars & Restaurants':'🍸','Alien & UFO':'🛸'};
       var emoji = catEmoji[e.category] || '🎃';
 
       // Build date string
@@ -6153,25 +6353,10 @@ function buildFilters(cat) {
   var fc=document.getElementById('filterContent'); if(fc) fc.innerHTML=html;
 }
 function toggleFPill(el) {
-  var g = el.closest('.filter-pills');
-  if (el.textContent === 'All') {
-    g.querySelectorAll('.fpill').forEach(function(p) { p.classList.remove('active'); });
-  } else {
-    var f = g.querySelector('.fpill');
-    if (f) f.classList.remove('active');
-  }
+  var g=el.closest('.filter-pills');
+  if(el.textContent==='All'){g.querySelectorAll('.fpill').forEach(function(p){p.classList.remove('active');});}
+  else{var f=g.querySelector('.fpill');if(f)f.classList.remove('active');}
   el.classList.toggle('active');
-  // Re-run search with new filters
-  doSearch();
-}
-
-function getActiveFilterTags() {
-  var tags = [];
-  document.querySelectorAll('.fpill.active').forEach(function(p) {
-    var t = p.textContent.trim();
-    if (t !== 'All') tags.push(t);
-  });
-  return tags;
 }
 
 
@@ -6355,161 +6540,11 @@ function sendChat() {
   input.value = '';
 }
 
-// ═══ ADMIN ═══
-var _currentAdminSubmission = null;
-
-function isAdmin() {
-  return window.currentUser && window.currentUser.id === ADMIN_USER_ID;
-}
-
-async function loadAdminSubmissions() {
-  if (!isAdmin()) { fsShow('home'); return; }
-  var list = document.getElementById('adminSubmissionsList');
-  var countEl = document.getElementById('adminPendingCount');
-  if (!list) return;
-
-  list.innerHTML = '<div style="color:#555;font-size:13px;font-family:-apple-system,sans-serif;text-align:center;padding:40px;">Loading...</div>';
-
-  var { data, error } = await window.supabase
-    .from('submissions')
-    .select('*')
-    .eq('status', 'pending')
-    .order('created_at', { ascending: false });
-
-  if (error) { list.innerHTML = '<div style="color:#e8431a;padding:20px;">Error loading submissions</div>'; return; }
-
-  if (countEl) countEl.textContent = data ? data.length : 0;
-
-  if (!data || data.length === 0) {
-    list.innerHTML = '<div style="color:#555;font-size:13px;font-family:-apple-system,sans-serif;text-align:center;padding:40px;">No pending submissions 🎃</div>';
-    return;
-  }
-
-  list.innerHTML = data.map(function(s) {
-    var typeEmoji = s.type === 'haunt' ? '🎃' : s.type === 'event' ? '☠️' : '🕯️';
-    var date = new Date(s.created_at).toLocaleDateString('en-US', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
-    return '<div onclick="openAdminModal(&quot;' + s.id + '&quot;)" style="background:#141414;border:1px solid #2a2a2a;border-radius:14px;padding:16px;margin-bottom:10px;cursor:pointer;">' +
-      '<div style="display:flex;align-items:center;gap:12px;">' +
-        '<span style="font-size:28px;">' + typeEmoji + '</span>' +
-        '<div style="flex:1;">' +
-          '<div style="font-family:Oswald,sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:2px;">' + (s.name || 'Unnamed') + '</div>' +
-          '<div style="font-size:11px;color:#888;font-family:-apple-system,sans-serif;">' + (s.city || '') + ' · ' + date + '</div>' +
-          '<div style="font-size:11px;color:#e8431a;font-family:Oswald,sans-serif;margin-top:2px;text-transform:uppercase;">' + (s.type || '') + '</div>' +
-        '</div>' +
-        '<div style="font-size:20px;color:#555;">›</div>' +
-      '</div>' +
-    '</div>';
-  }).join('');
-}
-
-function openAdminModal(id) {
-  window.supabase.from('submissions').select('*').eq('id', id).single().then(function(res) {
-    _currentAdminSubmission = res.data;
-    var s = res.data;
-    if (!s) return;
-
-    var fields = [
-      ['Type', s.type],
-      ['Name', s.name],
-      ['Category', s.category],
-      ['Description', s.description],
-      ['Address', s.address],
-      ['City', s.city],
-      ['Zip', s.zip],
-      ['Hours', s.hours],
-      ['Start Date', s.start_date],
-      ['End Date', s.end_date],
-      ['Price', s.price],
-      ['Admission', s.admission_type],
-      ['Haunt Type', s.haunt_type],
-      ['Website', s.website],
-      ['Ticket URL', s.ticket_url],
-      ['Instagram', s.instagram],
-      ['Contact Name', s.contact_name],
-      ['Contact Email', s.contact_email],
-      ['Notes', s.notes],
-    ];
-
-    var html = fields.filter(function(f) { return f[1]; }).map(function(f) {
-      return '<div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #1e1e1e;">' +
-        '<div style="font-size:10px;color:#666;font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;">' + f[0] + '</div>' +
-        '<div style="font-size:13px;color:#fff;font-family:-apple-system,sans-serif;">' + f[1] + '</div>' +
-      '</div>';
-    }).join('');
-
-    document.getElementById('adminModalContent').innerHTML = html;
-    document.getElementById('adminModal').style.display = 'block';
-  });
-}
-
-function closeAdminModal() {
-  document.getElementById('adminModal').style.display = 'none';
-  _currentAdminSubmission = null;
-}
-
-async function approveSubmission() {
-  var s = _currentAdminSubmission;
-  if (!s) return;
-
-  // Build event object from submission
-  var event = {
-    name: s.name,
-    category: s.category || (s.type === 'haunt' ? 'Haunts' : s.type === 'shop' ? 'Spooky Retail' : 'Events'),
-    description: s.description,
-    location: [s.address, s.city].filter(Boolean).join(', '),
-    city: s.city,
-    start_date: s.start_date || null,
-    end_date: s.end_date || null,
-    price: s.price || (s.admission_type === 'free' ? 'Free' : ''),
-    price_type: s.admission_type || 'paid',
-    website: s.website || '',
-    ticket_url: s.ticket_url || '',
-    image_url: '',
-    featured: false,
-    status: 'active'
-  };
-
-  try {
-    // Insert into events
-    var { error: eventError } = await window.supabase.from('events').insert([event]);
-    if (eventError) throw eventError;
-
-    // Mark submission as approved
-    var { error: subError } = await window.supabase.from('submissions').update({ status: 'approved' }).eq('id', s.id);
-    if (subError) throw subError;
-
-    closeAdminModal();
-    showToast('Approved and live! 🎃');
-    loadAdminSubmissions();
-  } catch(e) {
-    console.error('Approve error:', e);
-    showToast('Error approving. Try again 👻');
-  }
-}
-
-async function rejectSubmission() {
-  var s = _currentAdminSubmission;
-  if (!s) return;
-
-  try {
-    var { error } = await window.supabase.from('submissions').update({ status: 'rejected' }).eq('id', s.id);
-    if (error) throw error;
-    closeAdminModal();
-    showToast('Submission rejected.');
-    loadAdminSubmissions();
-  } catch(e) {
-    showToast('Error rejecting. Try again 👻');
-  }
-}
-
 // ═══ SUBMISSION FORMS ═══
 var _hauntType = 'home';
 var _admType = 'free';
 
-var _lastSubmitForm = 'choice';
-
 function showSubmitForm(which) {
-  _lastSubmitForm = which;
   document.getElementById('submitChoice').style.display = which === 'choice' ? 'block' : 'none';
   document.getElementById('submitHauntForm').style.display = which === 'haunt' ? 'block' : 'none';
   document.getElementById('submitEventForm').style.display = which === 'event' ? 'block' : 'none';
@@ -6562,136 +6597,138 @@ async function submitHauntListing() {
   var name = document.getElementById('hauntName') ? document.getElementById('hauntName').value.trim() : '';
   var email = document.getElementById('hauntContactEmail') ? document.getElementById('hauntContactEmail').value.trim() : '';
   var city = document.getElementById('hauntCity') ? document.getElementById('hauntCity').value.trim() : '';
-  var contactName = document.getElementById('hauntContactName') ? document.getElementById('hauntContactName').value.trim() : '';
   if (!name || !email || !city) { showToast('Please fill in all required fields 👻'); return; }
-
   var submission = {
-    type: 'haunt',
-    name: name,
+    type:'haunt', name:name,
     description: document.getElementById('hauntDesc') ? document.getElementById('hauntDesc').value.trim() : '',
-    city: city,
+    city:city,
     zip: document.getElementById('hauntZip') ? document.getElementById('hauntZip').value.trim() : '',
     address: document.getElementById('hauntAddress') ? document.getElementById('hauntAddress').value.trim() : '',
-    start_date: document.getElementById('hauntStart') ? document.getElementById('hauntStart').value || null : null,
-    end_date: document.getElementById('hauntEnd') ? document.getElementById('hauntEnd').value || null : null,
+    start_date: document.getElementById('hauntStart') ? document.getElementById('hauntStart').value||null : null,
+    end_date: document.getElementById('hauntEnd') ? document.getElementById('hauntEnd').value||null : null,
     hours: document.getElementById('hauntHours') ? document.getElementById('hauntHours').value.trim() : '',
     price: document.getElementById('hauntPrice') ? document.getElementById('hauntPrice').value.trim() : '',
     ticket_url: document.getElementById('hauntTicket') ? document.getElementById('hauntTicket').value.trim() : '',
     instagram: document.getElementById('hauntInsta') ? document.getElementById('hauntInsta').value.trim() : '',
-    haunt_type: _hauntType,
-    admission_type: _admType,
-    contact_name: contactName,
-    contact_email: email,
-    status: 'pending'
+    haunt_type: _hauntType, admission_type: _admType,
+    contact_name: document.getElementById('hauntContactName') ? document.getElementById('hauntContactName').value.trim() : '',
+    contact_email: email, status:'pending'
   };
-
   try {
     var { error } = await window.supabase.from('submissions').insert([submission]);
     if (error) throw error;
     showToast('Submitted! We review within 24 hours 🎃');
     showSubmitForm('choice');
-  } catch(e) {
-    console.error('Submission error:', e);
-    showToast('Something went wrong. Please try again 👻');
-  }
+  } catch(e) { showToast('Something went wrong. Please try again 👻'); }
 }
 
 async function submitEventListing() {
   var nameEl = document.querySelector('#submitEventForm input[placeholder="e.g. Midsummer Scream 2026"]');
   var emailEl = document.querySelector('#submitEventForm input[type="email"]');
-  var cityEl = document.querySelector('#submitEventForm input[placeholder="City"]');
-  var catEl = document.querySelector('#submitEventForm select');
-
-  if (!nameEl || !nameEl.value.trim()) { showToast('Please enter an event name 👻'); return; }
-  if (!emailEl || !emailEl.value.trim()) { showToast('Please enter your email 👻'); return; }
-
+  if (!nameEl||!nameEl.value.trim()) { showToast('Please enter an event name 👻'); return; }
+  if (!emailEl||!emailEl.value.trim()) { showToast('Please enter your email 👻'); return; }
   var submission = {
-    type: 'event',
-    name: nameEl ? nameEl.value.trim() : '',
-    category: catEl ? catEl.value.replace(/^[^\s]+ /, '') : '',
-    description: (document.querySelector('#submitEventForm textarea') || {}).value || '',
-    city: cityEl ? cityEl.value.trim() : '',
-    contact_email: emailEl ? emailEl.value.trim() : '',
-    contact_name: (document.querySelector('#submitEventForm input[placeholder="First and last name"]') || {}).value || '',
-    website: (document.querySelector('#submitEventForm input[placeholder="https://..."]') || {}).value || '',
-    ticket_url: (document.querySelectorAll('#submitEventForm input[type="url"]')[1] || {}).value || '',
-    instagram: (document.querySelector('#submitEventForm input[placeholder="@yourhandle"]') || {}).value || '',
-    price: (document.querySelector('#submitEventForm input[placeholder="$25 or Free"]') || {}).value || '',
-    hours: (document.querySelector('#submitEventForm input[placeholder="e.g. Sat–Sun 10am–6pm"]') || {}).value || '',
-    start_date: (document.querySelectorAll('#submitEventForm input[type="date"]')[0] || {}).value || null,
-    end_date: (document.querySelectorAll('#submitEventForm input[type="date"]')[1] || {}).value || null,
-    status: 'pending'
+    type:'event', name:nameEl.value.trim(),
+    contact_email:emailEl.value.trim(),
+    status:'pending'
   };
-
   try {
     var { error } = await window.supabase.from('submissions').insert([submission]);
     if (error) throw error;
     showToast('Submitted! We review within 24 hours 🎃');
     showSubmitForm('choice');
-  } catch(e) {
-    console.error('Submission error:', e);
-    showToast('Something went wrong. Please try again 👻');
-  }
+  } catch(e) { showToast('Something went wrong. Please try again 👻'); }
 }
 
-function previewPhoto(input, previewId) {
-  var preview = document.getElementById(previewId);
-  if (!preview || !input.files || !input.files[0]) return;
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    preview.style.backgroundImage = 'url(' + e.target.result + ')';
-    preview.style.backgroundSize = 'cover';
-    preview.style.backgroundPosition = 'center';
-    preview.style.height = '120px';
-    preview.style.borderRadius = '10px';
-    preview.style.border = '1px solid #e8431a';
-    preview.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:flex-end;justify-content:flex-end;padding:6px;box-sizing:border-box;"><span style="background:rgba(0,0,0,0.6);color:#fff;font-size:10px;font-family:-apple-system,sans-serif;padding:3px 8px;border-radius:4px;">Tap to change</span></div>';
-  };
-  reader.readAsDataURL(input.files[0]);
+function submitShopListing() {
+  showToast('Submitted! We review within 24 hours 🎃');
+  showSubmitForm('choice');
 }
 
-async function submitShopListing() {
-  var name = document.getElementById('shopName') ? document.getElementById('shopName').value.trim() : '';
-  var email = document.getElementById('shopContactEmail') ? document.getElementById('shopContactEmail').value.trim() : '';
-  var contactName = document.getElementById('shopContactName') ? document.getElementById('shopContactName').value.trim() : '';
-  var city = document.querySelector('#submitShopForm input[placeholder="City"]');
-  var desc = document.querySelector('#submitShopForm textarea');
-  var zip = document.querySelector('#submitShopForm input[placeholder="91505"]');
-  var address = document.querySelector('#submitShopForm input[placeholder="Street address"]');
-  var hours = document.querySelector('#submitShopForm input[placeholder="e.g. Mon-Sat 10am-7pm, Sun 12-5pm"]');
-  var website = document.querySelector('#submitShopForm input[type="url"]');
-  var instagram = document.querySelector('#submitShopForm input[placeholder="@yourshop"]');
-  var shopType = document.querySelector('#submitShopForm select');
+// ═══ ADMIN ═══
+var _currentAdminSubmission = null;
 
-  if (!name) { showToast('Please enter your shop name 👻'); return; }
-  if (!email) { showToast('Please enter your email 👻'); return; }
+async function loadAdminSubmissions() {
+  var list = document.getElementById('adminSubmissionsList');
+  var countEl = document.getElementById('adminPendingCount');
+  if (!list || !window.supabase) return;
+  list.innerHTML = '<div style="color:#555;font-size:13px;font-family:-apple-system,sans-serif;text-align:center;padding:40px;">Loading...</div>';
+  var { data, error } = await window.supabase.from('submissions').select('*').eq('status','pending').order('created_at',{ascending:false});
+  if (error) { list.innerHTML = '<div style="color:#e8431a;padding:20px;font-family:-apple-system,sans-serif;">Error: ' + error.message + '</div>'; return; }
+  if (countEl) countEl.textContent = data ? data.length : 0;
+  if (!data || data.length === 0) { list.innerHTML = '<div style="color:#555;font-size:13px;font-family:-apple-system,sans-serif;text-align:center;padding:40px;">No pending submissions 🎃</div>'; return; }
+  list.innerHTML = data.map(function(s) {
+    var typeEmoji = s.type === 'haunt' ? '🎃' : s.type === 'event' ? '☠️' : '🕯️';
+    var date = new Date(s.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    return '<div onclick="openAdminModal(&quot;' + s.id + '&quot;)" style="background:#141414;border:1px solid #2a2a2a;border-radius:14px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:12px;">' +
+      '<span style="font-size:28px;">' + typeEmoji + '</span>' +
+      '<div style="flex:1;">' +
+        '<div style="font-family:Oswald,sans-serif;font-size:15px;font-weight:700;color:#fff;">' + (s.name||'Unnamed') + '</div>' +
+        '<div style="font-size:11px;color:#888;font-family:-apple-system,sans-serif;">' + (s.city||'') + ' · ' + date + '</div>' +
+        '<div style="font-size:11px;color:#e8431a;font-family:Oswald,sans-serif;text-transform:uppercase;">' + (s.type||'') + '</div>' +
+      '</div>' +
+      '<div style="font-size:20px;color:#555;">›</div>' +
+    '</div>';
+  }).join('');
+}
 
-  var submission = {
-    type: 'shop',
-    name: name,
-    category: 'Spooky Retail',
-    description: desc ? desc.value.trim() : '',
-    city: city ? city.value.trim() : '',
-    zip: zip ? zip.value.trim() : '',
-    address: address ? address.value.trim() : '',
-    hours: hours ? hours.value.trim() : '',
-    website: website ? website.value.trim() : '',
-    instagram: instagram ? instagram.value.trim() : '',
-    contact_name: contactName,
-    contact_email: email,
-    notes: shopType ? shopType.value : '',
-    status: 'pending'
+function openAdminModal(id) {
+  window.supabase.from('submissions').select('*').eq('id',id).single().then(function(res) {
+    _currentAdminSubmission = res.data;
+    var s = res.data;
+    if (!s) return;
+    var fields = [['Type',s.type],['Name',s.name],['Category',s.category],['Description',s.description],['Address',s.address],['City',s.city],['Zip',s.zip],['Hours',s.hours],['Start Date',s.start_date],['End Date',s.end_date],['Price',s.price],['Admission',s.admission_type],['Haunt Type',s.haunt_type],['Website',s.website],['Ticket URL',s.ticket_url],['Instagram',s.instagram],['Contact Name',s.contact_name],['Contact Email',s.contact_email],['Notes',s.notes]];
+    document.getElementById('adminModalContent').innerHTML = fields.filter(function(f){return f[1];}).map(function(f) {
+      return '<div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #1e1e1e;"><div style="font-size:10px;color:#666;font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;">' + f[0] + '</div><div style="font-size:13px;color:#fff;font-family:-apple-system,sans-serif;">' + f[1] + '</div></div>';
+    }).join('');
+    document.getElementById('adminModal').style.display = 'block';
+  });
+}
+
+function closeAdminModal() {
+  document.getElementById('adminModal').style.display = 'none';
+  _currentAdminSubmission = null;
+}
+
+async function approveSubmission() {
+  var s = _currentAdminSubmission;
+  if (!s) return;
+  var event = {
+    name: s.name,
+    category: s.category || (s.type==='haunt' ? 'Haunts' : s.type==='shop' ? 'Spooky Retail' : 'Conventions'),
+    description: s.description,
+    location: [s.address, s.city].filter(Boolean).join(', '),
+    city: s.city,
+    start_date: s.start_date || null,
+    end_date: s.end_date || null,
+    price: s.price || (s.admission_type==='free' ? 'Free' : ''),
+    price_type: s.admission_type || 'paid',
+    website: s.website || '',
+    ticket_url: s.ticket_url || '',
+    image_url: '',
+    featured: false,
+    status: 'active'
   };
-
   try {
-    var { error } = await window.supabase.from('submissions').insert([submission]);
-    if (error) throw error;
-    showToast('Submitted! We review within 24 hours 🎃');
-    showSubmitForm('choice');
-  } catch(e) {
-    console.error('Submission error:', e);
-    showToast('Something went wrong. Please try again 👻');
-  }
+    var { error: e1 } = await window.supabase.from('events').insert([event]);
+    if (e1) throw e1;
+    var { error: e2 } = await window.supabase.from('submissions').update({status:'approved'}).eq('id',s.id);
+    if (e2) throw e2;
+    closeAdminModal();
+    showToast('Approved and live! 🎃');
+    loadAdminSubmissions();
+  } catch(e) { showToast('Error: ' + e.message); }
+}
+
+async function rejectSubmission() {
+  var s = _currentAdminSubmission;
+  if (!s) return;
+  try {
+    await window.supabase.from('submissions').update({status:'rejected'}).eq('id',s.id);
+    closeAdminModal();
+    showToast('Rejected.');
+    loadAdminSubmissions();
+  } catch(e) { showToast('Error: ' + e.message); }
 }
 
 // ═══ SAVE ═══
@@ -6702,8 +6739,8 @@ function toggleSave(btn) { fsSave(btn); }
 async function loadHomeStrips() {
   if (!window.supabase) return;
   var todayStr = new Date().toISOString().split('T')[0];
-  var catEmoji = {'Haunts':'🎃','Paranormal':'👁️','Conventions':'☠️','Festivals':'🌕','Markets & Pop Ups':'🛍️','Spooky Retail':'🕯️','Meetups':'🦇','Film & Theater':'🎦','Classes':'⚗️','Bars & Restaurants':'🍸','Alien & UFO':'🛸','Art':'🎨'};
-  var catBg = {'Haunts':'#140a06','Paranormal':'#060a14','Conventions':'#0a0606','Festivals':'#0a0a06','Markets & Pop Ups':'#0a060a','Spooky Retail':'#0a060a','Meetups':'#060a0a','Film & Theater':'#060f06','Classes':'#0a0a14','Bars & Restaurants':'#0a0606','Alien & UFO':'#06060a','Art':'#06060a'};
+  var catEmoji = {'Haunts Map':'🎃','Paranormal':'👁️','Conventions':'☠️','Festivals':'🌕','Shop':'🕯️','Meetups':'🦇','Film':'🎦','Classes':'⚗️','Bars & Restaurants':'🍸','Alien & UFO':'🛸'};
+  var catBg = {'Haunts Map':'#140a06','Paranormal':'#060a14','Conventions':'#0a0606','Festivals':'#0a0a06','Shop':'#0a060a','Meetups':'#060a0a','Film':'#060f06','Classes':'#0a0a14','Bars & Restaurants':'#0a0606','Alien & UFO':'#06060a'};
 
   // Get current search city and radius
   var z = document.getElementById('zipSearch');
@@ -6795,15 +6832,7 @@ window.addEventListener('load', function() {
     if (splash) splash.classList.add('hidden');
     setTimeout(function() { if (splash) splash.style.display = 'none'; }, 500);
   }, 1200);
-  // Wait for Supabase to be ready before loading strips
-  function tryLoadStrips(attempts) {
-    if (window.supabase) {
-      loadHomeStrips();
-    } else if (attempts > 0) {
-      setTimeout(function() { tryLoadStrips(attempts - 1); }, 300);
-    }
-  }
-  setTimeout(function() { tryLoadStrips(10); }, 500);
+  setTimeout(loadHomeStrips, 500);
 });
 
 // ═══ COUNTDOWN ═══

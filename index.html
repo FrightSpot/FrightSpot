@@ -2684,16 +2684,16 @@ window.addEventListener('load', async function() {
   if (session && session.user) {
     window.currentUser = session.user;
     if (typeof updateAuthUI === 'function') updateAuthUI(session.user);
+    // Show admin button if admin
+    setTimeout(function() {
+      var adminBtn = document.getElementById('adminNavBtn');
+      if (adminBtn) adminBtn.style.display = isAdmin() ? 'block' : 'none';
+    }, 300);
   }
 });
 
 // Auth state listener
 window.supabase.auth.onAuthStateChange(function(event, session) {
-  // Show admin button if admin user
-  setTimeout(function() {
-    var adminBtn = document.getElementById('adminNavBtn');
-    if (adminBtn) adminBtn.style.display = isAdmin() ? 'block' : 'none';
-  }, 500);
   if (session && session.user) {
     window.currentUser = session.user;
     if (typeof updateAuthUI === 'function') updateAuthUI(session.user);
@@ -6325,7 +6325,7 @@ var ADMIN_USER_ID = 'cc1bbcf6-951e-42f3-8405-64b556e41950';
 var _currentAdminSubmission = null;
 
 function isAdmin() {
-  return window._currentUser && window._currentUser.id === ADMIN_USER_ID;
+  return window.currentUser && window.currentUser.id === ADMIN_USER_ID;
 }
 
 async function loadAdminSubmissions() {

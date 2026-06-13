@@ -5269,11 +5269,27 @@ async function doLogin() {
   if (!e || !p || !e.value || !p.value) { showToast('Please fill in all fields 👻'); return; }
   var btn = document.querySelector('#panel-login .auth-submit');
   if (btn) { btn.textContent = 'Logging in...'; btn.disabled = true; }
-  var { data, error } = await window.supabase.auth.signInWithPassword({
-    email: e.value.trim(), password: p.value
-  });
-  if (btn) { btn.textContent = 'Log In →'; btn.disabled = false; }
-  if (error) { showToast('❌ ' + (error.message || 'Login failed')); }
+  try {
+    console.log('Attempting login with:', e.value.trim());
+    var { data, error } = await window.supabase.auth.signInWithPassword({
+      email: e.value.trim(), password: p.value
+    });
+    console.log('Login result:', data, error);
+    if (btn) { btn.textContent = 'Log In →'; btn.disabled = false; }
+    if (error) { 
+      console.error('Login error:', error);
+      showToast('❌ ' + (error.message || 'Login failed')); 
+    } else {
+      showToast('Welcome back! 🎃');
+      var modal = document.getElementById('loginModal');
+      if (modal) modal.classList.remove('open');
+      fsShow('home');
+    }
+  } catch(err) {
+    console.error('Login exception:', err);
+    if (btn) { btn.textContent = 'Log In →'; btn.disabled = false; }
+    showToast('❌ ' + err.message);
+  }
 }
 
 async function doSignup() {

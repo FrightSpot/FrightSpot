@@ -3458,10 +3458,13 @@ var currentUser = window.currentUser || null;
           <!-- PHOTO + INSTAGRAM -->
           <div style="background:#141414;border:1px solid #252525;border-radius:14px;padding:16px;margin-bottom:14px;">
             <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Photo & Social</div>
-            <div onclick="showToast('Photo upload coming soon! 📸')" style="height:90px;background:#0a0a0a;border:1px dashed #2a2a2a;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:4px;margin-bottom:12px;">
-              <span style="font-size:24px;">📷</span>
-              <span style="font-size:12px;color:#777;font-family:-apple-system,sans-serif;">Tap to upload a photo</span>
-            </div>
+            <label style="display:block;cursor:pointer;margin-bottom:12px;">
+              <div id="hauntPhotoPreview" style="height:90px;background:#0a0a0a;border:1px dashed #2a2a2a;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
+                <span style="font-size:24px;">📷</span>
+                <span style="font-size:12px;color:#777;font-family:-apple-system,sans-serif;">Tap to upload a photo</span>
+              </div>
+              <input type="file" id="hauntPhoto" accept="image/*" style="display:none;" onchange="previewPhoto(this,'hauntPhotoPreview')" />
+            </label>
             <div>
               <label style="font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;font-family:Oswald,sans-serif;">📸 Instagram Handle</label>
               <input type="text" id="hauntInsta" placeholder="@yourhaunt" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
@@ -3639,10 +3642,13 @@ var currentUser = window.currentUser || null;
           <div style="background:#141414;border:1px solid #252525;border-radius:14px;padding:16px;margin-bottom:14px;">
             <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Photo</div>
             <div style="font-size:11px;color:#666;font-family:-apple-system,sans-serif;margin-bottom:12px;">Free listings get 1 photo. <span style="color:#e8431a;">Featured</span> listings get a gallery of 6.</div>
-            <div onclick="showToast('Photo upload coming soon! 📸')" style="height:90px;background:#0a0a0a;border:1px dashed #2a2a2a;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:4px;">
-              <span style="font-size:24px;">📷</span>
-              <span style="font-size:12px;color:#777;font-family:-apple-system,sans-serif;">Tap to upload a photo</span>
-            </div>
+            <label style="display:block;cursor:pointer;">
+              <div id="eventPhotoPreview" style="height:90px;background:#0a0a0a;border:1px dashed #2a2a2a;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
+                <span style="font-size:24px;">📷</span>
+                <span style="font-size:12px;color:#777;font-family:-apple-system,sans-serif;">Tap to upload a photo</span>
+              </div>
+              <input type="file" id="eventPhoto" accept="image/*" style="display:none;" onchange="previewPhoto(this,'eventPhotoPreview')" />
+            </label>
           </div>
           <!-- UPGRADE TO FEATURED -->
           <div style="background:linear-gradient(160deg,#1a0800,#111);border:1px solid #e8431a;border-radius:14px;padding:16px;margin-bottom:14px;position:relative;overflow:hidden;">
@@ -3682,7 +3688,7 @@ var currentUser = window.currentUser || null;
             <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;">Shop Info</div>
             <div style="margin-bottom:12px;">
               <label style="font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;font-family:Oswald,sans-serif;">Shop Name *</label>
-              <input type="text" placeholder="e.g. The Dark Emporium" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
+              <input type="text" id="shopName" placeholder="e.g. The Dark Emporium" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
             </div>
             <div style="margin-bottom:12px;">
               <label style="font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;font-family:Oswald,sans-serif;">Type of Shop</label>
@@ -3745,10 +3751,13 @@ var currentUser = window.currentUser || null;
           <div style="background:#141414;border:1px solid #252525;border-radius:14px;padding:16px;margin-bottom:14px;">
             <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Photo</div>
             <div style="font-size:11px;color:#666;font-family:-apple-system,sans-serif;margin-bottom:12px;">Free listings get 1 photo. <span style="color:#e8431a;">Featured</span> listings get a gallery of 6.</div>
-            <div onclick="showToast('Photo upload coming soon! 📸')" style="height:90px;background:#0a0a0a;border:1px dashed #2a2a2a;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:4px;">
-              <span style="font-size:24px;">📷</span>
-              <span style="font-size:12px;color:#777;font-family:-apple-system,sans-serif;">Tap to upload a photo</span>
-            </div>
+            <label style="display:block;cursor:pointer;">
+              <div id="shopPhotoPreview" style="height:90px;background:#0a0a0a;border:1px dashed #2a2a2a;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
+                <span style="font-size:24px;">📷</span>
+                <span style="font-size:12px;color:#777;font-family:-apple-system,sans-serif;">Tap to upload a photo</span>
+              </div>
+              <input type="file" id="shopPhoto" accept="image/*" style="display:none;" onchange="previewPhoto(this,'shopPhotoPreview')" />
+            </label>
           </div>
 
           <!-- CONTACT -->
@@ -3756,11 +3765,11 @@ var currentUser = window.currentUser || null;
             <div style="font-family:Oswald,sans-serif;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;">Your Contact Info</div>
             <div style="margin-bottom:12px;">
               <label style="font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;font-family:Oswald,sans-serif;">Your Name *</label>
-              <input type="text" placeholder="First and last name" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
+              <input type="text" id="shopContactName" placeholder="First and last name" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
             </div>
             <div>
               <label style="font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;font-family:Oswald,sans-serif;">Your Email *</label>
-              <input type="email" placeholder="you@email.com" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
+              <input type="email" id="shopContactEmail" placeholder="you@email.com" style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:12px 14px;font-size:14px;color:#fff;font-family:-apple-system,sans-serif;outline:none;box-sizing:border-box;" />
               <div style="font-size:10px;color:#555;margin-top:4px;font-family:-apple-system,sans-serif;">Not shown publicly. We'll email you when your listing goes live.</div>
             </div>
           </div>
@@ -6393,26 +6402,49 @@ async function submitEventListing() {
   }
 }
 
-async function submitShopListing() {
-  var nameEl = document.querySelector('#submitShopForm input[placeholder="e.g. The Dark Emporium"]');
-  var emailEl = document.querySelector('#submitShopForm input[type="email"]');
+function previewPhoto(input, previewId) {
+  var preview = document.getElementById(previewId);
+  if (!preview || !input.files || !input.files[0]) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    preview.style.backgroundImage = 'url(' + e.target.result + ')';
+    preview.style.backgroundSize = 'cover';
+    preview.style.backgroundPosition = 'center';
+    preview.innerHTML = '';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
 
-  if (!nameEl || !nameEl.value.trim()) { showToast('Please enter your shop name 👻'); return; }
-  if (!emailEl || !emailEl.value.trim()) { showToast('Please enter your email 👻'); return; }
+async function submitShopListing() {
+  var name = document.getElementById('shopName') ? document.getElementById('shopName').value.trim() : '';
+  var email = document.getElementById('shopContactEmail') ? document.getElementById('shopContactEmail').value.trim() : '';
+  var contactName = document.getElementById('shopContactName') ? document.getElementById('shopContactName').value.trim() : '';
+  var city = document.querySelector('#submitShopForm input[placeholder="City"]');
+  var desc = document.querySelector('#submitShopForm textarea');
+  var zip = document.querySelector('#submitShopForm input[placeholder="91505"]');
+  var address = document.querySelector('#submitShopForm input[placeholder="Street address"]');
+  var hours = document.querySelector('#submitShopForm input[placeholder="e.g. Mon-Sat 10am-7pm, Sun 12-5pm"]');
+  var website = document.querySelector('#submitShopForm input[type="url"]');
+  var instagram = document.querySelector('#submitShopForm input[placeholder="@yourshop"]');
+  var shopType = document.querySelector('#submitShopForm select');
+
+  if (!name) { showToast('Please enter your shop name 👻'); return; }
+  if (!email) { showToast('Please enter your email 👻'); return; }
 
   var submission = {
     type: 'shop',
-    name: nameEl ? nameEl.value.trim() : '',
+    name: name,
     category: 'Spooky Retail',
-    description: (document.querySelector('#submitShopForm textarea') || {}).value || '',
-    city: (document.querySelector('#submitShopForm input[placeholder="City"]') || {}).value || '',
-    zip: (document.querySelector('#submitShopForm input[placeholder="91505"]') || {}).value || '',
-    address: (document.querySelector('#submitShopForm input[placeholder="Street address"]') || {}).value || '',
-    hours: (document.querySelector('#submitShopForm input[placeholder="e.g. Mon-Sat 10am-7pm, Sun 12-5pm"]') || {}).value || '',
-    website: (document.querySelector('#submitShopForm input[type="url"]') || {}).value || '',
-    instagram: (document.querySelector('#submitShopForm input[placeholder="@yourshop"]') || {}).value || '',
-    contact_name: (document.querySelector('#submitShopForm input[placeholder="First and last name"]') || {}).value || '',
-    contact_email: emailEl ? emailEl.value.trim() : '',
+    description: desc ? desc.value.trim() : '',
+    city: city ? city.value.trim() : '',
+    zip: zip ? zip.value.trim() : '',
+    address: address ? address.value.trim() : '',
+    hours: hours ? hours.value.trim() : '',
+    website: website ? website.value.trim() : '',
+    instagram: instagram ? instagram.value.trim() : '',
+    contact_name: contactName,
+    contact_email: email,
+    notes: shopType ? shopType.value : '',
     status: 'pending'
   };
 
